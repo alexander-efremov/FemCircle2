@@ -14,9 +14,9 @@
       <sourceFolder url="file://$MODULE_DIR$/fem/consts.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/fem/consts.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/fem/utils.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/fem/solver12.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/fem/common.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/fem/solver1.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/fem/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/fem/common.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
