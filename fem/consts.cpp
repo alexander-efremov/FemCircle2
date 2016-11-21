@@ -1,5 +1,4 @@
 #include "consts.h"
-#include <algorithm>
 
 #if defined _WIN32 || defined __CYGWIN__ || defined WIN32
 long timerStart = 0;
@@ -39,10 +38,10 @@ int IDEAL_SQ_SIZE_Y = 0;
 double CENTER_OFFSET_X = 0.;
 double CENTER_OFFSET_Y = 0.;
 double OMEGA = 0.;
-int* G1 = NULL;
-int* G2 = NULL;
-int* G3 = NULL;
-int* G4 = NULL;
+int* G1 = nullptr;
+int* G2 = nullptr;
+int* G3 = nullptr;
+int* G4 = nullptr;
 int CP00 = 0;
 int CP10 = 0;
 int CP11 = 0;

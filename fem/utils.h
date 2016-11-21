@@ -163,7 +163,6 @@ inline double get_l1_norm_vec(int x_len, int y_len, double *data) { // new
     return r / (x_len * y_len);
 }
 
-
 inline double get_l1_norm(double hx, double hy, int x_len, int y_len, double *data) { // old
     double r = 0.;
     for (int i = 0; i < x_len; ++i)
@@ -171,8 +170,6 @@ inline double get_l1_norm(double hx, double hy, int x_len, int y_len, double *da
             r += fabs(data[y_len * i + j]);
     return r * hx * hy;
 }
-
-
 
 inline double get_l1_norm_int_trapezoidal(double hx, double hy, int x_len, int y_len, double *data) {
     double r = 0.;
@@ -184,7 +181,6 @@ inline double get_l1_norm_int_trapezoidal(double hx, double hy, int x_len, int y
                   fabs(data[y_len * (i + 1) + j + 1])) * hx*hy;
     return r;
 }
-
 
 inline double get_l_inf_norm(int x_len, int y_len, double *data) {
     double max = FLT_MIN;
