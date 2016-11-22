@@ -1010,7 +1010,7 @@ inline void get_inner_area(double x, double y, double &x1, double &y1, double &x
     }
 }
 
-double *solve_1(double &tme, int *grid, int *gridPr);
+double *solve_1(int *grid, int *gridPr);
 
 double *calc_error_1(int *grid, double *solution, double tt, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 

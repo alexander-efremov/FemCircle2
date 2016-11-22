@@ -182,6 +182,7 @@ inline double get_l1_norm_int_trapezoidal(double hx, double hy, int x_len, int y
     return r;
 }
 
+
 inline double get_l_inf_norm(int x_len, int y_len, double *data) {
     double max = FLT_MIN;
     for (int i = 0; i < x_len; ++i)

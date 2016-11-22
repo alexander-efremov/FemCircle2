@@ -4,7 +4,7 @@
 #include <fstream>
 #include "gtest/gtest.h"
 #include <algorithm>
-#include <locale>
+#include <omp.h>
 
 class FemFixture : public ::testing::Test {
 protected:
@@ -67,12 +67,78 @@ void init_boundary_arrays_and_cp(int nx, int ny) {
     CP11 = 0;
 }
 
+void run_solver_1(int d) {
+    assert(d >= 50);
+
+    A = 0.;
+    B = 1.;
+    C = 0.;
+    D = 1.;
+    R_SQ = 0.099 * 0.099;
+    INN_DENSITY = 1.;
+    OUT_DENSITY = 0.;
+    R_LVL = 2;
+
+    NX = (int) d;
+    NY = (int) d;
+    NX_1 = NX + 1;
+    NY_1 = NY + 1;
+    HX = (B - A) / NX;
+    HY = (D - C) / NY;
+    IDEAL_SQ_SIZE_X = 64;
+    IDEAL_SQ_SIZE_Y = 64;
+    EPS_GRID = 0.5;
+    RES_EPS = 1.e-9;
+
+    int sz = d;
+    sz = sz * ((int) std::pow(3., R_LVL));
+    NX3 = sz;
+    NY3 = sz;
+    NX3_1 = NX3 + 1;
+    NY3_1 = NY3 + 1;
+    XY = NX3_1 * NY3_1;
+    R = (int) std::pow(3., R_LVL);
+    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
+    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
+
+    CENTER_OFFSET_X = 0.3;
+    CENTER_OFFSET_Y = 0.3;
+
+    U = 1.;
+    V = 1.;
+    TAU = 1.e-3;
+
+    TIME_STEP_CNT = 5;
+
+    APPROX_TYPE = 1;
+
+    init_boundary_arrays_and_cp(NX3_1, NY3_1);
+    print_params();
+
+    int *grid = new int[XY];
+    int *gridPr = new int[XY];
+
+    double *density = solve_1(grid, gridPr);
+    double *exact0 = calc_exact_1(grid, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    double *exactT = calc_exact_1(grid, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+
+    double x0 = get_center_x();
+    double y0 = get_center_y();
+    print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
+    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
+
+    delete[] density;
+    delete[] exact0;
+    delete[] exactT;
+    delete[] grid;
+    delete[] gridPr;
+}
+
 // убрано притягивание сетки
 // убрана рекурсия
 // деревья вместо массивов?
 //
 TEST_F(FemFixture, test1) {
-    double tme = 0.;
     for (int i = 1; i < 2; ++i) {
         double d = 0;
         switch (i) {
@@ -97,69 +163,28 @@ TEST_F(FemFixture, test1) {
             default:
                 return;
         }
-
-        A = 0.;
-        B = 1.;
-        C = 0.;
-        D = 1.;
-        R_SQ = 0.099 * 0.099;
-        INN_DENSITY = 1.;
-        OUT_DENSITY = 0.;
-        R_LVL = 2;
-
-        int sz = (int) d;
-        sz = sz * ((int) std::pow(3., R_LVL));
-
-        NX = (int) d;
-        NY = (int) d;
-        NX_1 = NX + 1;
-        NY_1 = NY + 1;
-        HX = (B - A) / NX;
-        HY = (D - C) / NY;
-        IDEAL_SQ_SIZE_X = 64;
-        IDEAL_SQ_SIZE_Y = 64;
-        EPS_GRID = 0.5;
-        RES_EPS = 1.e-9;
-
-        NX3 = sz;
-        NY3 = sz;
-        NX3_1 = NX3 + 1;
-        NY3_1 = NY3 + 1;
-        R = (int) std::pow(3., R_LVL);
-        HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
-        HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
-
-        CENTER_OFFSET_X = 0.3;
-        CENTER_OFFSET_Y = 0.3;
-
-        U = 1.;
-        V = 1.;
-        TAU = 1.e-3;
-
-        TIME_STEP_CNT = 5;
-        XY = NX3_1 * NY3_1;
-
-        APPROX_TYPE = 2;
-
-        init_boundary_arrays_and_cp(NX3_1, NY3_1);
-        print_params();
-
-        int *grid = new int[XY];
-        int *gridPr = new int[XY];
-
-        double *density = solve_1(tme, grid, gridPr);
-        double *exact0 = calc_exact_1(grid, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
-        double *exactT = calc_exact_1(grid, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
-
-        double x0 = get_center_x();
-        double y0 = get_center_y();
-        print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
-        print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
-
-        delete[] density;
-        delete[] exact0;
-        delete[] exactT;
-        delete[] grid;
-        delete[] gridPr;
+        run_solver_1(d);
     }
+}
+
+TEST_F(FemFixture, openmp) {
+    int nthreads, tid;
+
+/* Fork a team of threads giving them their own copies of variables */
+#pragma omp parallel private(nthreads, tid)
+    {
+
+        /* Obtain thread number */
+        tid = omp_get_thread_num();
+        printf("Hello World from thread = %d\n", tid);
+
+        /* Only master thread does this */
+        if (tid == 0)
+        {
+            nthreads = omp_get_num_threads();
+            printf("Number of threads = %d\n", nthreads);
+        }
+
+    }  /* All threads join master thread and disband */
+
 }
