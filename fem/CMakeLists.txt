@@ -19,7 +19,7 @@ if(OPENMP_FOUND)
 endif()
 
 set(SOURCE_FILES
-        solver1.cpp consts.cpp)
+        solver1.cpp solver2.cpp consts.cpp)
 
 add_library(fem STATIC ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(fem ${OpenMP_CXX_FLAGS})

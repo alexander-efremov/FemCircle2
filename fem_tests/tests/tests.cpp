@@ -134,11 +134,111 @@ void run_solver_1(int d) {
     delete[] gridPr;
 }
 
+void run_solver_2(int d) {
+    assert(d >= 50);
+
+    A = 0.;
+    B = 1.;
+    C = 0.;
+    D = 1.;
+    R_SQ = 0.099 * 0.099;
+    INN_DENSITY = 1.;
+    OUT_DENSITY = 0.;
+    R_LVL = 2;
+
+    NX = (int) d;
+    NY = (int) d;
+    NX_1 = NX + 1;
+    NY_1 = NY + 1;
+    HX = (B - A) / NX;
+    HY = (D - C) / NY;
+    IDEAL_SQ_SIZE_X = 64;
+    IDEAL_SQ_SIZE_Y = 64;
+    EPS_GRID = 0.5;
+    RES_EPS = 1.e-9;
+
+    int sz = d;
+    sz = sz * ((int) std::pow(3., R_LVL));
+    NX3 = sz;
+    NY3 = sz;
+    NX3_1 = NX3 + 1;
+    NY3_1 = NY3 + 1;
+    XY = NX3_1 * NY3_1;
+    R = (int) std::pow(3., R_LVL);
+    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
+    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
+
+    CENTER_OFFSET_X = 0.3;
+    CENTER_OFFSET_Y = 0.3;
+
+    U = 1.;
+    V = 1.;
+    TAU = 1.e-3;
+
+    TIME_STEP_CNT = 5;
+
+    APPROX_TYPE = 1;
+
+    init_boundary_arrays_and_cp(NX3_1, NY3_1);
+    print_params();
+
+    int *grid = new int[XY];
+    int *gridPr = new int[XY];
+
+    double *density = solve_2(grid, gridPr);
+    double *exact0 = calc_exact_2(grid, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    double *exactT = calc_exact_2(grid, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+
+    double x0 = get_center_x();
+    double y0 = get_center_y();
+    print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
+    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
+
+    delete[] density;
+    delete[] exact0;
+    delete[] exactT;
+    delete[] grid;
+    delete[] gridPr;
+}
+
 // убрано притягивание сетки
 // убрана рекурсия
 // деревья вместо массивов?
 //
 TEST_F(FemFixture, test1) {
+    for (int i = 1; i < 2; ++i) {
+        double d = 0;
+        switch (i) {
+            case 0:
+                d = 50.;
+                break;
+            case 1:
+                d = 100.;
+                break;
+            case 2:
+                d = 200.;
+                break;
+            case 3:
+                d = 400.;
+                break;
+            case 4:
+                d = 800.;
+                break;
+            case 5:
+                d = 1600.;
+                break;
+            default:
+                return;
+        }
+        run_solver_1(d);
+    }
+}
+
+// убрано притягивание сетки
+// убрана рекурсия
+// деревья вместо массивов?
+//
+TEST_F(FemFixture, test2) {
     for (int i = 1; i < 2; ++i) {
         double d = 0;
         switch (i) {
