@@ -5,6 +5,12 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <omp.h>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/undirected_graph.hpp>
+#include <boost/graph/graphviz.hpp>
+
+typedef boost::undirected_graph<> Graph;
+typedef boost::undirected_graph<>::vertex_descriptor Vertex;
 
 class FemFixture : public ::testing::Test {
 protected:
@@ -79,8 +85,8 @@ void run_solver_1(int d) {
     OUT_DENSITY = 0.;
     R_LVL = 2;
 
-    NX = (int) d;
-    NY = (int) d;
+    NX = d;
+    NY = d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     HX = (B - A) / NX;
@@ -144,18 +150,25 @@ void run_solver_2(int d) {
     R_SQ = 0.099 * 0.099;
     INN_DENSITY = 1.;
     OUT_DENSITY = 0.;
-    R_LVL = 2;
-
-    NX = (int) d;
-    NY = (int) d;
+    U = 1.;
+    V = 1.;
+    TAU = 1.e-3;
+    TIME_STEP_CNT = 5;
+    APPROX_TYPE = 1;
+    NX = d;
+    NY = d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     HX = (B - A) / NX;
     HY = (D - C) / NY;
     IDEAL_SQ_SIZE_X = 64;
     IDEAL_SQ_SIZE_Y = 64;
-    EPS_GRID = 0.5;
     RES_EPS = 1.e-9;
+
+    R_LVL = 2;
+    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
+    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
+    EPS_GRID = 0.5;
 
     int sz = d;
     sz = sz * ((int) std::pow(3., R_LVL));
@@ -165,19 +178,9 @@ void run_solver_2(int d) {
     NY3_1 = NY3 + 1;
     XY = NX3_1 * NY3_1;
     R = (int) std::pow(3., R_LVL);
-    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
-    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
 
     CENTER_OFFSET_X = 0.3;
     CENTER_OFFSET_Y = 0.3;
-
-    U = 1.;
-    V = 1.;
-    TAU = 1.e-3;
-
-    TIME_STEP_CNT = 5;
-
-    APPROX_TYPE = 1;
 
     init_boundary_arrays_and_cp(NX3_1, NY3_1);
     print_params();
@@ -263,28 +266,68 @@ TEST_F(FemFixture, test2) {
             default:
                 return;
         }
-        run_solver_1(d);
+        run_solver_2(d);
     }
 }
 
 TEST_F(FemFixture, openmp) {
     int nthreads, tid;
-
-/* Fork a team of threads giving them their own copies of variables */
 #pragma omp parallel private(nthreads, tid)
     {
-
-        /* Obtain thread number */
         tid = omp_get_thread_num();
         printf("Hello World from thread = %d\n", tid);
 
-        /* Only master thread does this */
-        if (tid == 0)
-        {
+        if (tid == 0) {
             nthreads = omp_get_num_threads();
             printf("Number of threads = %d\n", nthreads);
         }
+    }
 
-    }  /* All threads join master thread and disband */
+    double d = 100.;
+    NX = (int) d;
+    NY = (int) d;
+    NX_1 = NX + 1;
+    NY_1 = NY + 1;
+    XY = NX_1 * NY_1;
 
+    // тестируем сетку ввиде дерева
+    {
+        NX = 3;
+        NY = 3;
+        NX_1 = NX + 1;
+        NY_1 = NY + 1;
+        XY = NX_1 * NY_1;
+        using namespace boost;
+        typedef adjacency_list<vecS, vecS, bidirectionalS> Graph;
+        Graph g(XY);
+        for (int i = 0; i < NX_1; ++i) {
+            int stride = i*NX_1;
+            for (int j = 0; j < NY_1 - 1; ++j) {
+                add_edge(j + stride, j + stride + 1, g);
+            }
+        }
+        auto es = edges(g);
+        for(auto it = es.first; it != es.second; it++)
+            std::cout << (*it);
+
+        write_graphviz(std::cout, g);
+    }
+
+    Graph g;
+    Vertex v1 = g.add_vertex();
+    Vertex v2 = g.add_vertex();
+    Vertex v3 = g.add_vertex();
+    g.add_edge(v1, v2);
+    g.add_edge(v2, v3);
+
+    for (int i = 0; i < NX_1; ++i) {
+        for (int j = 0; j < NY_1; ++j) {
+            if (i >= 0 && i <= NX_1 - 1 && j >= 0 && j <= NY_1 - 1) {
+                Vertex v1 = g.add_vertex();
+                Vertex v2 = g.add_vertex();
+                Vertex v3 = g.add_vertex();
+                Vertex v4 = g.add_vertex();
+            }
+        }
+    }
 }
