@@ -1,16 +1,11 @@
 #include <utils.h>
+#include <graph_utils.h>
 #include <cmath>
 #include <common.h>
 #include <fstream>
 #include "gtest/gtest.h"
 #include <algorithm>
-#include <omp.h>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/undirected_graph.hpp>
-#include <boost/graph/graphviz.hpp>
 
-typedef boost::undirected_graph<> Graph;
-typedef boost::undirected_graph<>::vertex_descriptor Vertex;
 
 class FemFixture : public ::testing::Test {
 protected:
@@ -270,64 +265,25 @@ TEST_F(FemFixture, test2) {
     }
 }
 
-TEST_F(FemFixture, openmp) {
-    int nthreads, tid;
-#pragma omp parallel private(nthreads, tid)
-    {
-        tid = omp_get_thread_num();
-        printf("Hello World from thread = %d\n", tid);
-
-        if (tid == 0) {
-            nthreads = omp_get_num_threads();
-            printf("Number of threads = %d\n", nthreads);
-        }
-    }
-
-    double d = 100.;
-    NX = (int) d;
-    NY = (int) d;
+TEST_F(FemFixture, graph) {
+    double d = 3.;
+    NX = d;
+    NY = d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
-
-    // тестируем сетку ввиде дерева
-    {
-        NX = 3;
-        NY = 3;
-        NX_1 = NX + 1;
-        NY_1 = NY + 1;
-        XY = NX_1 * NY_1;
-        using namespace boost;
-        typedef adjacency_list<vecS, vecS, bidirectionalS> Graph;
-        Graph g(XY);
-        for (int i = 0; i < NX_1; ++i) {
-            int stride = i*NX_1;
-            for (int j = 0; j < NY_1 - 1; ++j) {
-                add_edge(j + stride, j + stride + 1, g);
-            }
-        }
-        auto es = edges(g);
-        for(auto it = es.first; it != es.second; it++)
-            std::cout << (*it);
-
-        write_graphviz(std::cout, g);
-    }
-
-    Graph g;
-    Vertex v1 = g.add_vertex();
-    Vertex v2 = g.add_vertex();
-    Vertex v3 = g.add_vertex();
-    g.add_edge(v1, v2);
-    g.add_edge(v2, v3);
-
+    Graph g(XY);
     for (int i = 0; i < NX_1; ++i) {
-        for (int j = 0; j < NY_1; ++j) {
-            if (i >= 0 && i <= NX_1 - 1 && j >= 0 && j <= NY_1 - 1) {
-                Vertex v1 = g.add_vertex();
-                Vertex v2 = g.add_vertex();
-                Vertex v3 = g.add_vertex();
-                Vertex v4 = g.add_vertex();
-            }
-        }
+        int stride = i * NX_1;
+        for (int j = 0; j < NY_1 - 1; ++j)
+            add_edge(j + stride, j + stride + 1, g);
     }
+
+    for (int j = 0; j < NY_1 - 1; ++j) {
+        int stride = j * NY_1;
+        for (int i = 0; i < NX_1; i++)
+            add_edge(i + stride, i + stride + NX_1, g);
+    }
+
+    print_graph("grid.dot", g, true);
 }
