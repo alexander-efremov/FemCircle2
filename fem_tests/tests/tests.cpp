@@ -261,9 +261,8 @@ TEST_F(FemFixture, test2) {
     }
 }
 
-
 TEST_F(FemFixture, graph) {
-    double d = 10.;
+    double d = 100.;
     NX = (int) d;
     NY = (int) d;
     NX_1 = NX + 1;
@@ -272,8 +271,7 @@ TEST_F(FemFixture, graph) {
     Graph g(XY, GraphProperty(NX_1, NY_1));
     for (int i = 0; i < NX_1; ++i) {
         int stride = i * NX_1;
-        for (int j = 0; j < NY_1 - 1; ++j)
-        {
+        for (int j = 0; j < NY_1 - 1; ++j) {
             auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), g);
         }
     }
@@ -287,7 +285,8 @@ TEST_F(FemFixture, graph) {
     bool b = is_graph_connected(g);
 
     if (b) std::cout << "\nIs connected graph" << std::endl;
+    else std::cout << "\nIs NOT connected graph" << std::endl;
 
     print_graph("grid.dot", g);
-    generate_png("grid.dot", "graph.png");
+    generate_png("grid.dot", "grid.png");
 }

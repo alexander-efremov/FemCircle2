@@ -8,35 +8,18 @@
 using namespace boost;
 
 struct VertexProperty {
+    bool is_corner;
+    bool is_border;
 };
 
 struct GraphProperty {
     GraphProperty(unsigned int n, unsigned int m);
 
-    unsigned int n;
-    unsigned int m;
+    unsigned int nx;
+    unsigned int ny;
 };
 
 typedef adjacency_list<vecS, vecS, undirectedS, VertexProperty, no_property, GraphProperty> Graph;
-
-
-class VertexPropertyWriter {
-public:
-    VertexPropertyWriter(int nx_1, int ny_1) : _nx_1(nx_1), _ny_1(ny_1) {}
-
-    template<class T>
-    void operator()(std::ostream &out, const T &v) const {
-
-        int x = v % _ny_1;
-        int y = v / _nx_1;
-        y = _ny_1-y;
-        out << " [pos=\"" << x << "," << y << "!\"]";
-    }
-
-private:
-    int _nx_1;
-    int _ny_1;
-};
 
 bool is_graph_connected(Graph g);
 

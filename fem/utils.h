@@ -322,4 +322,13 @@ inline void print_line_along_y(const char *filename, int ox_len, int oy_len,
     fclose(file);
 }
 
+inline bool is_corner_node(int i, int j, int nx, int ny) {
+    return (i == 0 && j == 0) || (i == 0 && j == ny - 1) || (i == nx - 1 && j == 0) || (i == nx - 1 && j == nx - 1);
+}
+
+inline bool is_border_node(int i, int j, int nx, int ny) {
+    if (is_corner_node(i, j, nx, ny)) return false;
+    return (i > 0 && j == 0) || (i == 0 && j > 0) || (i == nx - 1 && j > 0) || (i > 0 && j == nx - 1);
+}
+
 #endif //FEM_CIRCLE_UTILS_H

@@ -96,13 +96,13 @@ This failure is expected, and shouldn't have a trace.
 [0;32m[ RUN      ] [mSCOPED_TRACETest.WorksInLoop
 (expected to fail)
 gtest_output_test_.cc:#: Failure
-Value of: n
+Value of: nx
   Actual: 1
 Expected: 2
 Google Test trace:
 gtest_output_test_.cc:#: i = 1
 gtest_output_test_.cc:#: Failure
-Value of: n
+Value of: nx
   Actual: 2
 Expected: 1
 Google Test trace:
@@ -111,26 +111,26 @@ gtest_output_test_.cc:#: i = 2
 [0;32m[ RUN      ] [mSCOPED_TRACETest.WorksInSubroutine
 (expected to fail)
 gtest_output_test_.cc:#: Failure
-Value of: n
+Value of: nx
   Actual: 1
 Expected: 2
 Google Test trace:
-gtest_output_test_.cc:#: n = 1
+gtest_output_test_.cc:#: nx = 1
 gtest_output_test_.cc:#: Failure
-Value of: n
+Value of: nx
   Actual: 2
 Expected: 1
 Google Test trace:
-gtest_output_test_.cc:#: n = 2
+gtest_output_test_.cc:#: nx = 2
 [0;31m[  FAILED  ] [mSCOPED_TRACETest.WorksInSubroutine
 [0;32m[ RUN      ] [mSCOPED_TRACETest.CanBeNested
 (expected to fail)
 gtest_output_test_.cc:#: Failure
-Value of: n
+Value of: nx
   Actual: 2
 Expected: 1
 Google Test trace:
-gtest_output_test_.cc:#: n = 2
+gtest_output_test_.cc:#: nx = 2
 gtest_output_test_.cc:#: 
 [0;31m[  FAILED  ] [mSCOPED_TRACETest.CanBeNested
 [0;32m[ RUN      ] [mSCOPED_TRACETest.CanBeRepeated
