@@ -20,3 +20,4 @@ Demonstration: [Simulation](https://youtu.be/F00h8x3HHhQ)
  - Set up MinGW location in CLion. 
  - Click File->Settings->Build,Execution,Deployment->Toolchains and set up MinGW location:
   https://yadi.sk/i/4CTZCvzOzD792
+ - Install Gephi to visualize a graph.
