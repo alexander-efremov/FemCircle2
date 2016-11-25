@@ -1,11 +1,7 @@
 #include <utils.h>
-#include <graph_utils.h>
-#include <cmath>
+#include <graphs.h>
 #include <common.h>
-#include <fstream>
 #include "gtest/gtest.h"
-#include <algorithm>
-
 
 class FemFixture : public ::testing::Test {
 protected:
@@ -92,15 +88,15 @@ void run_solver_1(int d) {
     RES_EPS = 1.e-9;
 
     int sz = d;
-    sz = sz * ((int) std::pow(3., R_LVL));
+    sz = sz * ((int) std::pow(3., (double) R_LVL));
     NX3 = sz;
     NY3 = sz;
     NX3_1 = NX3 + 1;
     NY3_1 = NY3 + 1;
     XY = NX3_1 * NY3_1;
-    R = (int) std::pow(3., R_LVL);
-    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
-    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
+    R = (int) std::pow(3., (double) R_LVL);
+    HX_SMALLEST = (B - A) / (NX * std::pow(3., (double) R_LVL));
+    HY_SMALLEST = (D - C) / (NY * std::pow(3., (double) R_LVL));
 
     CENTER_OFFSET_X = 0.3;
     CENTER_OFFSET_Y = 0.3;
@@ -161,18 +157,18 @@ void run_solver_2(int d) {
     RES_EPS = 1.e-9;
 
     R_LVL = 2;
-    HX_SMALLEST = (B - A) / (NX * std::pow(3., R_LVL));
-    HY_SMALLEST = (D - C) / (NY * std::pow(3., R_LVL));
+    HX_SMALLEST = (B - A) / (NX * std::pow(3., (double) R_LVL));
+    HY_SMALLEST = (D - C) / (NY * std::pow(3., (double) R_LVL));
     EPS_GRID = 0.5;
 
     int sz = d;
-    sz = sz * ((int) std::pow(3., R_LVL));
+    sz = sz * ((int) std::pow(3., (double) R_LVL));
     NX3 = sz;
     NY3 = sz;
     NX3_1 = NX3 + 1;
     NY3_1 = NY3 + 1;
     XY = NX3_1 * NY3_1;
-    R = (int) std::pow(3., R_LVL);
+    R = (int) std::pow(3., (double) R_LVL);
 
     CENTER_OFFSET_X = 0.3;
     CENTER_OFFSET_Y = 0.3;
@@ -265,25 +261,33 @@ TEST_F(FemFixture, test2) {
     }
 }
 
+
 TEST_F(FemFixture, graph) {
-    double d = 3.;
-    NX = d;
-    NY = d;
+    double d = 10.;
+    NX = (int) d;
+    NY = (int) d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
-    Graph g(XY);
+    Graph g(XY, GraphProperty(NX_1, NY_1));
     for (int i = 0; i < NX_1; ++i) {
         int stride = i * NX_1;
         for (int j = 0; j < NY_1 - 1; ++j)
-            add_edge(j + stride, j + stride + 1, g);
+        {
+            auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), g);
+        }
     }
 
-    for (int j = 0; j < NY_1 - 1; ++j) {
-        int stride = j * NY_1;
-        for (int i = 0; i < NX_1; i++)
+    for (size_t j = 0; j < NY_1 - 1; ++j) {
+        size_t stride = j * NY_1;
+        for (size_t i = 0; i < NX_1; i++)
             add_edge(i + stride, i + stride + NX_1, g);
     }
 
-    print_graph("grid.dot", g, true);
+    bool b = is_graph_connected(g);
+
+    if (b) std::cout << "\nIs connected graph" << std::endl;
+
+    print_graph("grid.dot", g);
+    generate_png("grid.dot", "graph.png");
 }

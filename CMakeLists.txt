@@ -8,5 +8,3 @@ include_directories(fem)
 
 add_subdirectory(fem)
 add_subdirectory(fem_tests)
-
-target_link_libraries(fem_circle fem)

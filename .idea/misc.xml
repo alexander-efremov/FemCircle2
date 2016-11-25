@@ -2,10 +2,17 @@
 <project version="4">
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/graph" />
+    </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/graph/lib" />
+    </libraryRoots>
     <excludeRoots>
       <file path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles" />
       <file path="$PROJECT_DIR$/fem/libs" />
       <file path="$PROJECT_DIR$/libs" />
     </excludeRoots>
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.0 (C:\Program Files\Python 3.5\python.exe)" project-jdk-type="Python SDK" />
 </project>
