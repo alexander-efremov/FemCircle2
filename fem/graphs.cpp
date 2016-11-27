@@ -12,12 +12,6 @@ bool is_graph_connected(const GraphDouble &g) {
     return component_count == 1;
 }
 
-bool is_graph_connected(const GraphInt &g) {
-    std::vector<int> component(num_vertices(g));
-    int component_count = connected_components(g, &component[0]);
-    return component_count == 1;
-}
-
 void generate_png(const char *dotFilepath, const char *pngFilename) {
     char cmd[256] = {0};
     // добавить функцию чтобы можно было путь этот задавать
@@ -51,28 +45,6 @@ private:
     GraphDouble _g;
 };
 
-class VertexPropertyWriterInt {
-public:
-    VertexPropertyWriterInt(const GraphInt &g) : _g(g) {}
-
-    template<class T1>
-    void operator()(std::ostream &out, const T1 &v) const {
-        auto t = _g.m_property.get();
-        int x = v % t->nx;
-        int y = v / t->ny;
-        out << " ["
-            << " shape=point"
-            << " xlabel=\"(" << x << "," << y << ")\""
-            << "pos=\"" << x << "," << t->ny - y << "!\""
-            << (is_corner_node(x, y, t->nx, t->ny) ? " fillcolor=\"red\" style=\"filled\"" : "")
-            << (is_border_node(x, y, t->nx, t->ny) ? " fillcolor=\"blue\" style=\"filled\"" : "")
-            << "]";
-    }
-
-private:
-    GraphInt _g;
-};
-
 struct GraphPropertyWriter {
     void operator()(std::ostream &out) const {
         out << "node [shape=point, width=.15, height=.15  style=\"filled\", fillcolor=\"grey\"]" << std::endl;
@@ -86,68 +58,46 @@ void print_graph(const char *filename, const GraphDouble &g) {
     write_graphviz(out, g, VertexPropertyWriterDouble(g), default_writer(), GraphPropertyWriter());
     out.close();
 }
-
-void print_graph(const char *filename, const GraphInt &g) {
-    std::ofstream out;
-    out.open(filename);
-    write_graphviz(out, g, VertexPropertyWriterInt(g), default_writer(), GraphPropertyWriter());
-    out.close();
-}
-
 // nx = NX_1, ny = NY_1
 
-GraphDouble* create_graph_as_grid(int nx, int ny, double defaultValue) {
-    assert(nx > 0);
-    assert(ny > 0);
+GraphDouble *create_graph_as_grid(
+        unsigned int nx_1,
+        unsigned int ny_1,
+        double a,
+        double b,
+        double c,
+        double d,
+        double v,
+        double u,
+        double tau,
+        double defaultValue) {
+    assert(nx_1 > 0);
+    assert(ny_1 > 0);
 
-    GraphDouble *g = new GraphDouble(nx * ny, GraphProperty(nx, ny));
-    for (int i = 0; i < nx; ++i) {
-        int stride = i * nx;
-        for (int j = 0; j < ny - 1; ++j) {
+    GraphDouble *g = new GraphDouble(nx_1 * ny_1, GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau));
+    for (int i = 0; i < nx_1; ++i) {
+        int stride = i * nx_1;
+        for (int j = 0; j < ny_1 - 1; ++j) {
             auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), *g);
             g->m_vertices[e.first.m_source].m_property.m_value = defaultValue;
         }
     }
 
-    for (size_t j = 0; j < ny - 1; ++j) {
-        size_t stride = j * ny;
-        for (size_t i = 0; i < nx; i++)
-            add_edge(i + stride, i + stride + nx, *g);
-    }
-    return g;
-}
-
-GraphInt* create_graph_as_grid(int nx, int ny, int defaultValue) {
-    assert(nx > 0);
-    assert(ny > 0);
-
-    GraphInt *g = new GraphInt(nx * ny, GraphProperty(nx, ny));
-    for (int i = 0; i < nx; ++i) {
-        int stride = i * nx;
-        for (int j = 0; j < ny - 1; ++j) {
-            auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), *g);
-            g->m_vertices[e.first.m_source].m_property.m_value = defaultValue;
-        }
-    }
-
-    for (size_t j = 0; j < ny - 1; ++j) {
-        size_t stride = j * ny;
-        for (size_t i = 0; i < nx; i++)
-            add_edge(i + stride, i + stride + nx, *g);
+    for (int j = 0; j < ny_1 - 1; ++j) {
+        int stride = j * ny_1;
+        for (int i = 0; i < nx_1; i++)
+            add_edge((unsigned long long int) (i + stride), (unsigned long long int) (i + stride + nx_1), *g);
     }
     return g;
 }
 
 double calc_graph_sum(const GraphDouble &a, int ox_len, int oy_len, bool isAbs) {
     double res = 0.;
-    for (int i = 0; i < ox_len; i++)
-    {
-        for (int j = 0; j < oy_len; j++)
-        {
+    for (int i = 0; i < ox_len; i++) {
+        for (int j = 0; j < oy_len; j++) {
             double t = a.m_vertices[i * oy_len + j].m_property.m_value;
             res += isAbs ? fabs(t) : t;
         }
     }
     return res;
 }
-
