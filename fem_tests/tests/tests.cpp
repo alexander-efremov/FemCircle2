@@ -213,14 +213,9 @@ void run_solver_2(int d) {
     //init_boundary_arrays_and_cp(NX3_1, NY3_1);
     print_params();
 
-    GraphInt* grid = create_graph_as_grid(NX_1, NY_1, -1);
-    GraphInt& gridRef = *grid;
-    GraphInt* gridPr = create_graph_as_grid(NX_1, NY_1, -1);
-    GraphInt& gridPrRef = *grid;
-
-    GraphDouble* density = solve_2(gridRef, gridPrRef);
-    GraphDouble* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
-    GraphDouble* exactT = calc_exact_2(gridRef, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    GraphDouble* density = solve_2();
+//    GraphDouble* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+//    GraphDouble* exactT = calc_exact_2(gridRef, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
 
 //    double x0 = get_center_x();
 //    double y0 = get_center_y();
@@ -228,10 +223,8 @@ void run_solver_2(int d) {
 //    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
 
     delete density;
-    delete exact0;
-    delete exactT;
-    delete grid;
-    delete gridPr;
+//    delete exact0;
+//    delete exactT;
 }
 
 // убрано притягивание сетки

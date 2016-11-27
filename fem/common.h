@@ -1017,7 +1017,7 @@ double *calc_error_1(int *grid, double *solution, double tt, int nx3_1, int ny3_
 
 double *calc_exact_1(int *grid, double t, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 
-GraphDouble* solve_2(const GraphInt& grid, const GraphInt& gridPr);
+GraphDouble* solve_2();
 
 GraphDouble* calc_error_2(const GraphInt& grid, const GraphInt& solution, double tt, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 

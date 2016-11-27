@@ -17,9 +17,9 @@
   <component name="ChangeListManager">
     <list default="true" id="88c6cf85-5bb3-471f-bccc-1bf7ae36cb16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.cpp" afterPath="$PROJECT_DIR$/fem/graphs.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.h" afterPath="$PROJECT_DIR$/fem/graphs.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/common.h" afterPath="$PROJECT_DIR$/fem/common.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/solver2.cpp" afterPath="$PROJECT_DIR$/fem/solver2.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" afterPath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
     </list>
     <ignored path="fem_circle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +42,8 @@
       <file leaf-file-name="tests.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fem_tests/tests/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="118" column="25" lean-forward="false" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
+            <state relative-caret-position="232">
+              <caret line="215" column="32" lean-forward="false" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -51,24 +51,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solver2.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="solver2.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="970" column="46" lean-forward="false" selection-start-line="970" selection-start-column="46" selection-end-line="970" selection-end-column="46" />
+            <state relative-caret-position="260">
+              <caret line="972" column="46" lean-forward="true" selection-start-line="972" selection-start-column="46" selection-end-line="972" selection-end-column="46" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graphs.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fem/graphs.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="141" column="13" lean-forward="true" selection-start-line="141" selection-start-column="13" selection-end-line="141" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -96,8 +86,8 @@
       <file leaf-file-name="common.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fem/common.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="788" column="0" lean-forward="false" selection-start-line="788" selection-start-column="0" selection-end-line="788" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="1019" column="21" lean-forward="false" selection-start-line="1019" selection-start-column="21" selection-end-line="1019" selection-end-column="21" />
               <folding>
                 <element signature="e#57#76#0" expanded="true" />
               </folding>
@@ -154,6 +144,7 @@
       <find>connected_components</find>
       <find>gtest</find>
       <find>make_de</find>
+      <find>print_surface_0</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,14 +175,14 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/fem_tests/tests/graphviz.py" />
         <option value="$PROJECT_DIR$/fem/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/fem/common.h" />
-        <option value="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
         <option value="$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/fem/utils.h" />
         <option value="$PROJECT_DIR$/fem/solver1.cpp" />
-        <option value="$PROJECT_DIR$/fem/solver2.cpp" />
         <option value="$PROJECT_DIR$/fem/graphs.h" />
         <option value="$PROJECT_DIR$/fem/graphs.cpp" />
+        <option value="$PROJECT_DIR$/fem/common.h" />
+        <option value="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
+        <option value="$PROJECT_DIR$/fem/solver2.cpp" />
       </list>
     </option>
   </component>
@@ -573,11 +564,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.143898" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33038673" sideWeight="0.48869047" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33038673" sideWeight="0.48869047" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3176856" sideWeight="0.49285713" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2592179" sideWeight="0.5113095" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48066297" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48066297" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -806,16 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fem/common.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="788" column="0" lean-forward="false" selection-start-line="788" selection-start-column="0" selection-end-line="788" selection-end-column="0" />
-          <folding>
-            <element signature="e#57#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fem/utils.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -837,27 +818,7 @@
         <state relative-caret-position="164">
           <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding>
-            <element signature="e#67#108#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fem_tests/tests/tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="118" column="25" lean-forward="false" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="970" column="46" lean-forward="false" selection-start-line="970" selection-start-column="46" selection-end-line="970" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
+            <element signature="e#67#108#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -867,6 +828,36 @@
         <state relative-caret-position="164">
           <caret line="141" column="13" lean-forward="true" selection-start-line="141" selection-start-column="13" selection-end-line="141" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="1019" column="21" lean-forward="false" selection-start-line="1019" selection-start-column="21" selection-end-line="1019" selection-end-column="21" />
+          <folding>
+            <element signature="e#57#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem_tests/tests/tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="215" column="32" lean-forward="false" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="972" column="46" lean-forward="true" selection-start-line="972" selection-start-column="46" selection-end-line="972" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
