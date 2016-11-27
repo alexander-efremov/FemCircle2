@@ -268,7 +268,7 @@ TEST_F(FemFixture, graph) {
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
 
-    GraphDouble *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, 1);
+    GraphDouble *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, 1);
     GraphDouble &gr = *g;
     bool b = is_graph_connected(gr);
 
