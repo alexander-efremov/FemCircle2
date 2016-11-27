@@ -257,6 +257,25 @@ inline double calc_array_sum(double *a, int ox_len, int oy_len, bool isAbs) {
     return res;
 }
 
+inline double calc_array_sum(int *grid, double *a, int ox_len, int oy_len, bool isAbs) {
+    double res = 0;
+    for (int i = 0; i < ox_len; i++)
+    {
+        for (int j = 0; j < oy_len; j++)
+        {
+            int lev = grid[i * oy_len + j];
+
+            if (lev >= 0) {
+                if (isAbs)
+                    res += fabs(a[i * oy_len + j]);
+                else
+                    res += a[i * oy_len + j];
+            }
+        }
+    }
+    return res;
+}
+
 inline double *calc_array_extrems(double *a, int ox_len, int oy_len) {
     double *res = new double[2];
 

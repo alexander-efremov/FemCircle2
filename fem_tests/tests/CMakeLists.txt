@@ -8,8 +8,7 @@ set(BOOST_ROOT "C:\\boost_1_62_0" )
 link_directories(${GVZ_LIB_PATH})
 
 set(CPP_SOURCES tests.cpp)
-set(PY_SOURCES graphviz.py)
-add_executable(runBasicFemTests ${CPP_SOURCES} ${PY_SOURCES})
+add_executable(runBasicFemTests ${CPP_SOURCES})
 
 find_package( OpenMP REQUIRED)
 if(OPENMP_FOUND)

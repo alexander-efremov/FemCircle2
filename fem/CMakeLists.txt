@@ -21,8 +21,6 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
-
-
 set(SOURCE_FILES graphs.cpp solver1.cpp solver2.cpp consts.cpp)
 
 add_library(fem STATIC ${SOURCE_FILES} ${HEADER_FILES})

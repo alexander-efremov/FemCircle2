@@ -43,6 +43,7 @@ void print_params() {
     printf("EPS_GRID = %e\n", EPS_GRID);
     printf("RES_EPS = %e\n", RES_EPS);
     printf("APPROX_TYPE = %d\n", APPROX_TYPE);
+    fflush(stdout);
 }
 
 void init_boundary_arrays_and_cp(int nx, int ny) {
@@ -131,6 +132,42 @@ void run_solver_1(int d) {
     delete[] gridPr;
 }
 
+
+
+// убрано притягивание сетки
+// убрана рекурсия
+// деревья вместо массивов?
+//
+TEST_F(FemFixture, test1) {
+    for (int i = 1; i < 2; ++i) {
+        double d = 0;
+        switch (i) {
+            case 0:
+                d = 50.;
+                break;
+            case 1:
+                d = 100.;
+                break;
+            case 2:
+                d = 200.;
+                break;
+            case 3:
+                d = 400.;
+                break;
+            case 4:
+                d = 800.;
+                break;
+            case 5:
+                d = 1600.;
+                break;
+            default:
+                return;
+        }
+        run_solver_1(d);
+    }
+}
+
+
 void run_solver_2(int d) {
     assert(d >= 50);
 
@@ -173,59 +210,28 @@ void run_solver_2(int d) {
     CENTER_OFFSET_X = 0.3;
     CENTER_OFFSET_Y = 0.3;
 
-    init_boundary_arrays_and_cp(NX3_1, NY3_1);
+    //init_boundary_arrays_and_cp(NX3_1, NY3_1);
     print_params();
 
-    int *grid = new int[XY];
-    int *gridPr = new int[XY];
+    GraphInt* grid = create_graph_as_grid(NX_1, NY_1, -1);
+    GraphInt& gridRef = *grid;
+    GraphInt* gridPr = create_graph_as_grid(NX_1, NY_1, -1);
+    GraphInt& gridPrRef = *grid;
 
-    double *density = solve_2(grid, gridPr);
-    double *exact0 = calc_exact_2(grid, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
-    double *exactT = calc_exact_2(grid, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    GraphDouble* density = solve_2(gridRef, gridPrRef);
+    GraphDouble* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    GraphDouble* exactT = calc_exact_2(gridRef, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
 
-    double x0 = get_center_x();
-    double y0 = get_center_y();
-    print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
-    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
+//    double x0 = get_center_x();
+//    double y0 = get_center_y();
+//    print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
+//    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
 
-    delete[] density;
-    delete[] exact0;
-    delete[] exactT;
-    delete[] grid;
-    delete[] gridPr;
-}
-
-// убрано притягивание сетки
-// убрана рекурсия
-// деревья вместо массивов?
-//
-TEST_F(FemFixture, test1) {
-    for (int i = 1; i < 2; ++i) {
-        double d = 0;
-        switch (i) {
-            case 0:
-                d = 50.;
-                break;
-            case 1:
-                d = 100.;
-                break;
-            case 2:
-                d = 200.;
-                break;
-            case 3:
-                d = 400.;
-                break;
-            case 4:
-                d = 800.;
-                break;
-            case 5:
-                d = 1600.;
-                break;
-            default:
-                return;
-        }
-        run_solver_1(d);
-    }
+    delete density;
+    delete exact0;
+    delete exactT;
+    delete grid;
+    delete gridPr;
 }
 
 // убрано притягивание сетки
@@ -262,31 +268,22 @@ TEST_F(FemFixture, test2) {
 }
 
 TEST_F(FemFixture, graph) {
-    double d = 100.;
+    double d = 10.;
     NX = (int) d;
     NY = (int) d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
-    Graph g(XY, GraphProperty(NX_1, NY_1));
-    for (int i = 0; i < NX_1; ++i) {
-        int stride = i * NX_1;
-        for (int j = 0; j < NY_1 - 1; ++j) {
-            auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), g);
-        }
-    }
 
-    for (size_t j = 0; j < NY_1 - 1; ++j) {
-        size_t stride = j * NY_1;
-        for (size_t i = 0; i < NX_1; i++)
-            add_edge(i + stride, i + stride + NX_1, g);
-    }
-
-    bool b = is_graph_connected(g);
+    GraphInt* g = create_graph_as_grid(NX_1, NY_1, 1);
+    GraphInt &gr = *g;
+    bool b = is_graph_connected(gr);
 
     if (b) std::cout << "\nIs connected graph" << std::endl;
     else std::cout << "\nIs NOT connected graph" << std::endl;
 
-    print_graph("grid.dot", g);
+    print_graph("grid.dot", gr);
     generate_png("grid.dot", "grid.png");
+
+    delete g;
 }

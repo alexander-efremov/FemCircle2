@@ -7,24 +7,30 @@
 
 using namespace boost;
 
-struct VertexProperty {
-    bool is_corner;
-    bool is_border;
+struct VertexPropertyDouble {
+    double m_value;
+};
+
+struct VertexPropertyInt {
+    int m_value;
 };
 
 struct GraphProperty {
-    GraphProperty(unsigned int n, unsigned int m);
-
+    GraphProperty(unsigned int nx, unsigned int ny) : nx(nx), ny(ny) {}
     unsigned int nx;
     unsigned int ny;
 };
 
-typedef adjacency_list<vecS, vecS, undirectedS, VertexProperty, no_property, GraphProperty> Graph;
+typedef adjacency_list<vecS, vecS, undirectedS, VertexPropertyDouble, no_property, GraphProperty> GraphDouble;
+typedef adjacency_list<vecS, vecS, undirectedS, VertexPropertyInt, no_property, GraphProperty> GraphInt;
 
-bool is_graph_connected(Graph g);
-
+GraphDouble* create_graph_as_grid(int nx, int ny, double defaultValue = -1.);
+GraphInt* create_graph_as_grid(int nx, int ny, int defaultValue = -1);
+bool is_graph_connected(const GraphDouble &g);
+bool is_graph_connected(const GraphInt &g);
+void print_graph(const char *filename, const GraphDouble &g);
+void print_graph(const char *filename, const GraphInt &g);
+double calc_graph_sum(const GraphDouble &a, int ox_len, int oy_len, bool isAbs);
 void generate_png(const char *dotFilepath, const char *pngFilename);
-
-void print_graph(const char *filename, Graph g);
 
 #endif // FEM_CIRCLE_GRAPH_UTILS_H
