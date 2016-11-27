@@ -139,15 +139,13 @@ GraphInt* create_graph_as_grid(int nx, int ny, int defaultValue) {
 }
 
 double calc_graph_sum(const GraphDouble &a, int ox_len, int oy_len, bool isAbs) {
-    double res = 0;
+    double res = 0.;
     for (int i = 0; i < ox_len; i++)
     {
         for (int j = 0; j < oy_len; j++)
         {
-            if (isAbs)
-                res += fabs(a.m_vertices[i * oy_len + j].m_property.m_value);
-            else
-                res += a.m_vertices[i * oy_len + j].m_property.m_value;
+            double t = a.m_vertices[i * oy_len + j].m_property.m_value;
+            res += isAbs ? fabs(t) : t;
         }
     }
     return res;

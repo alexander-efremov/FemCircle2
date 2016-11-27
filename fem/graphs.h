@@ -9,6 +9,7 @@ using namespace boost;
 
 struct VertexPropertyDouble {
     double m_value;
+    int m_level = 0;
 };
 
 struct VertexPropertyInt {
