@@ -213,9 +213,9 @@ void run_solver_2(unsigned int d) {
     //init_boundary_arrays_and_cp(NX3_1, NY3_1);
     print_params();
 
-    GraphDouble *density = solve_2();
-//    GraphDouble* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
-//    GraphDouble* exactT = calc_exact_2(gridRef, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+    Graph *density = solve_2();
+//    Graph* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
+//    Graph* exactT = calc_exact_2(gridRef, TAU * TIME_STEP_CNT, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
 
 //    double x0 = get_center_x();
 //    double y0 = get_center_y();
@@ -233,25 +233,25 @@ void run_solver_2(unsigned int d) {
 //
 TEST_F(FemFixture, test2) {
     for (int i = 1; i < 2; ++i) {
-        double d = 0;
+        unsigned int d = 0;
         switch (i) {
             case 0:
-                d = 50.;
+                d = 50;
                 break;
             case 1:
-                d = 100.;
+                d = 100;
                 break;
             case 2:
-                d = 200.;
+                d = 200;
                 break;
             case 3:
-                d = 400.;
+                d = 400;
                 break;
             case 4:
-                d = 800.;
+                d = 800;
                 break;
             case 5:
-                d = 1600.;
+                d = 1600;
                 break;
             default:
                 return;
@@ -268,8 +268,8 @@ TEST_F(FemFixture, graph) {
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
 
-    GraphDouble *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, 1);
-    GraphDouble &gr = *g;
+    Graph *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, 1);
+    Graph &gr = *g;
     bool b = is_graph_connected(gr);
 
     if (b) std::cout << "\nIs connected graph" << std::endl;

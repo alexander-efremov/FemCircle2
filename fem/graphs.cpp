@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool is_graph_connected(const GraphDouble &g) {
+bool is_graph_connected(const Graph &g) {
     std::vector<int> component(num_vertices(g));
     int component_count = connected_components(g, &component[0]);
     return component_count == 1;
@@ -25,7 +25,7 @@ void generate_png(const char *dotFilepath, const char *pngFilename) {
 
 class VertexPropertyWriterDouble {
 public:
-    VertexPropertyWriterDouble(const GraphDouble &g) : _g(g) {}
+    VertexPropertyWriterDouble(const Graph &g) : _g(g) {}
 
     template<class T1>
     void operator()(std::ostream &out, const T1 &v) const {
@@ -42,7 +42,7 @@ public:
     }
 
 private:
-    GraphDouble _g;
+    Graph _g;
 };
 
 struct GraphPropertyWriter {
@@ -52,7 +52,7 @@ struct GraphPropertyWriter {
     }
 };
 
-void print_graph(const char *filename, const GraphDouble &g) {
+void print_graph(const char *filename, const Graph &g) {
     std::ofstream out;
     out.open(filename);
     write_graphviz(out, g, VertexPropertyWriterDouble(g), default_writer(), GraphPropertyWriter());
@@ -60,7 +60,7 @@ void print_graph(const char *filename, const GraphDouble &g) {
 }
 // nx = NX_1, ny = NY_1
 
-GraphDouble *create_graph_as_grid(
+Graph *create_graph_as_grid(
         unsigned int nx_1,
         unsigned int ny_1,
         double a,
@@ -77,7 +77,7 @@ GraphDouble *create_graph_as_grid(
     assert(nx_1 > 0);
     assert(ny_1 > 0);
 
-    GraphDouble *g = new GraphDouble(nx_1 * ny_1,
+    Graph *g = new Graph(nx_1 * ny_1,
                                      GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_smallest, hy_smallest));
     for (int i = 0; i < nx_1; ++i) {
         int stride = i * nx_1;
@@ -96,7 +96,7 @@ GraphDouble *create_graph_as_grid(
     return g;
 }
 
-double calc_graph_sum(const GraphDouble &g, bool isAbs) {
+double calc_graph_sum(const Graph &g, bool isAbs) {
     double res = 0.;
     GraphProperty *gp = g.m_property.get();
     int nx = gp->nx;

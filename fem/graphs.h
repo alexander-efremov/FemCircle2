@@ -31,9 +31,9 @@ struct GraphProperty {
     double hy_smallest;
 };
 
-typedef adjacency_list<vecS, vecS, undirectedS, VertexPropertyDouble, no_property, GraphProperty> GraphDouble;
+typedef adjacency_list<vecS, vecS, undirectedS, VertexPropertyDouble, no_property, GraphProperty> Graph;
 
-GraphDouble *create_graph_as_grid(
+Graph *create_graph_as_grid(
         unsigned int nx_1,
         unsigned int ny_1,
         double a,
@@ -48,11 +48,11 @@ GraphDouble *create_graph_as_grid(
         double hy_smallest,
         double defaultValue = -1.);
 
-bool is_graph_connected(const GraphDouble &g);
+bool is_graph_connected(const Graph &g);
 
-void print_graph(const char *filename, const GraphDouble &g);
+void print_graph(const char *filename, const Graph &g);
 
-double calc_graph_sum(const GraphDouble &g, bool isAbs);
+double calc_graph_sum(const Graph &g, bool isAbs);
 
 void generate_png(const char *dotFilepath, const char *pngFilename);
 

@@ -1017,10 +1017,10 @@ double *calc_error_1(int *grid, double *solution, double tt, int nx3_1, int ny3_
 
 double *calc_exact_1(int *grid, double t, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 
-GraphDouble* solve_2();
+Graph* solve_2();
 
-GraphDouble* calc_error_2(const GraphDouble& solution, double tt, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
+Graph* calc_error_2(const Graph& solution, double tt, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 
-GraphDouble* calc_exact_2(const GraphDouble& grid, double t, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
+Graph* calc_exact_2(const Graph& grid, double t, int nx3_1, int ny3_1, double hx_smallest, double hy_smallest, int max_lvl);
 
 #endif //FEM_CIRCLE_COMMON_H
