@@ -65,7 +65,7 @@ void init_boundary_arrays_and_cp(int nx, int ny) {
     CP11 = 0;
 }
 
-void run_solver_1(int d) {
+void run_solver_1(unsigned int d) {
     assert(d >= 50);
 
     A = 0.;
@@ -163,12 +163,12 @@ TEST_F(FemFixture, test1) {
             default:
                 return;
         }
-        run_solver_1(d);
+        run_solver_1((unsigned int) d);
     }
 }
 
 
-void run_solver_2(int d) {
+void run_solver_2(unsigned int d) {
     assert(d >= 50);
 
     A = 0.;
@@ -262,8 +262,8 @@ TEST_F(FemFixture, test2) {
 
 TEST_F(FemFixture, graph) {
     double d = 10.;
-    NX = (int) d;
-    NY = (int) d;
+    NX = (unsigned int) d;
+    NY = (unsigned int) d;
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
