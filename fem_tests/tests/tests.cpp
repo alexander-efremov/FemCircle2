@@ -2,10 +2,7 @@
 #include <graphs.h>
 #include <common.h>
 #include "gtest/gtest.h"
-#include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
-#include <boost/pending/indirect_cmp.hpp>
-#include <boost/range/irange.hpp>
 
 #include <iostream>
 
@@ -307,9 +304,9 @@ TEST_F(FemFixture, graph) {
 using namespace boost;
 
 template<typename TGraph>
-class bfs_visitor : public default_bfs_visitor {
+class bfs_solver_visitor : public default_bfs_visitor {
 public:
-    bfs_visitor(TGraph& g) : _g(g) {}
+    bfs_solver_visitor(TGraph& g) : _g(g) {}
 
     template<typename Vertex>
     void discover_vertex(Vertex u, const TGraph &g) const {
@@ -330,7 +327,7 @@ TEST_F(FemFixture, graph_bfs) {
     XY = NX_1 * NY_1;
     auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, 1);
     auto &gr = *g;
-    breadth_first_search(gr, vertex(0, gr), visitor(bfs_visitor<Graph>(gr)));
+    breadth_first_search(gr, vertex(0, gr), visitor(bfs_solver_visitor<Graph>(gr)));
     print_graph("graph_bfs.dot", gr);
     generate_png("graph_bfs.dot", "graph_bfs.png");
     delete g;
