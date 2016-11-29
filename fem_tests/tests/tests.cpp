@@ -2,6 +2,13 @@
 #include <graphs.h>
 #include <common.h>
 #include "gtest/gtest.h"
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/breadth_first_search.hpp>
+#include <boost/pending/indirect_cmp.hpp>
+#include <boost/range/irange.hpp>
+
+#include <iostream>
+
 
 class FemFixture : public ::testing::Test {
 protected:
@@ -37,6 +44,24 @@ void print_params() {
     printf("NX3_1 = %d\n", NX3_1);
     printf("NY3 = %d\n", NY3);
     printf("NY3_1 = %d\n", NY3_1);
+    printf("XY = %d\n", XY);
+    printf("R_LVL = %d\n", R_LVL);
+    printf("R = %d\n", R);
+    printf("EPS_GRID = %e\n", EPS_GRID);
+    printf("RES_EPS = %e\n", RES_EPS);
+    printf("APPROX_TYPE = %d\n", APPROX_TYPE);
+    fflush(stdout);
+}
+
+void print_params_1() {
+    printf("\nNXxNY = %dx%d\n", NX, NY);
+    printf("(U, V) = (%le, %le)\n", U, V);
+    printf("(HX, HY) = (%le, %le)\n", HX, HY);
+    printf("TAU = %le\n", TAU);
+    printf("TIME_STEP_CNT = %d\n", TIME_STEP_CNT);
+    printf("INTEGR_TYPE = %d\n", INTEGR_TYPE);
+    printf("IDEAL_SQ_SIZE = %dx%d\n", IDEAL_SQ_SIZE_X, IDEAL_SQ_SIZE_Y);
+    printf("CENTER_OFFSET = %le, %le\n", CENTER_OFFSET_X, CENTER_OFFSET_Y);
     printf("XY = %d\n", XY);
     printf("R_LVL = %d\n", R_LVL);
     printf("R = %d\n", R);
@@ -132,8 +157,6 @@ void run_solver_1(unsigned int d) {
     delete[] gridPr;
 }
 
-
-
 // убрано притягивание сетки
 // убрана рекурсия
 // деревья вместо массивов?
@@ -211,7 +234,7 @@ void run_solver_2(unsigned int d) {
     CENTER_OFFSET_Y = 0.3;
 
     //init_boundary_arrays_and_cp(NX3_1, NY3_1);
-    print_params();
+    print_params_1();
 
     Graph *density = solve_2();
 //    Graph* exact0 = calc_exact_2(gridRef, 0, NX3_1, NY3_1, HX_SMALLEST, HY_SMALLEST, R_LVL);
@@ -268,7 +291,7 @@ TEST_F(FemFixture, graph) {
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
 
-    Graph *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, 1);
+    Graph *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, 1);
     Graph &gr = *g;
     bool b = is_graph_connected(gr);
 
@@ -278,5 +301,37 @@ TEST_F(FemFixture, graph) {
     print_graph("grid.dot", gr);
     generate_png("grid.dot", "grid.png");
 
+    delete g;
+}
+
+using namespace boost;
+
+template<typename TGraph>
+class bfs_visitor : public default_bfs_visitor {
+public:
+    bfs_visitor(TGraph& g) : _g(g) {}
+
+    template<typename Vertex>
+    void discover_vertex(Vertex u, const TGraph &g) const {
+        _g.m_vertices[u].m_property.m_value = 99;
+    }
+private:
+    TGraph& _g;
+};
+
+
+TEST_F(FemFixture, graph_bfs) {
+    using namespace boost;
+    double d = 10.;
+    NX = (unsigned int) d;
+    NY = (unsigned int) d;
+    NX_1 = NX + 1;
+    NY_1 = NY + 1;
+    XY = NX_1 * NY_1;
+    auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, 1);
+    auto &gr = *g;
+    breadth_first_search(gr, vertex(0, gr), visitor(bfs_visitor<Graph>(gr)));
+    print_graph("graph_bfs.dot", gr);
+    generate_png("graph_bfs.dot", "graph_bfs.png");
     delete g;
 }

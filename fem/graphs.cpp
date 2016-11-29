@@ -23,9 +23,9 @@ void generate_png(const char *dotFilepath, const char *pngFilename) {
     system(cmd);
 }
 
-class VertexPropertyWriterDouble {
+class VertexPropertyWriter {
 public:
-    VertexPropertyWriterDouble(const Graph &g) : _g(g) {}
+    VertexPropertyWriter(const Graph &g) : _g(g) {}
 
     template<class T1>
     void operator()(std::ostream &out, const T1 &v) const {
@@ -34,7 +34,7 @@ public:
         int y = v / t->ny;
         out << " ["
             << " shape=point"
-            << " xlabel=\"(" << x << "," << y << ")\""
+            << " xlabel=\"(" << x << "," << y << "," << _g.m_vertices[v].m_property.m_value <<")\""
             << "pos=\"" << x << "," << t->ny - y << "!\""
             << (is_corner_node(x, y, t->nx, t->ny) ? " fillcolor=\"red\" style=\"filled\"" : "")
             << (is_border_node(x, y, t->nx, t->ny) ? " fillcolor=\"blue\" style=\"filled\"" : "")
@@ -55,7 +55,7 @@ struct GraphPropertyWriter {
 void print_graph(const char *filename, const Graph &g) {
     std::ofstream out;
     out.open(filename);
-    write_graphviz(out, g, VertexPropertyWriterDouble(g), default_writer(), GraphPropertyWriter());
+    write_graphviz(out, g, VertexPropertyWriter(g), default_writer(), GraphPropertyWriter());
     out.close();
 }
 // nx = NX_1, ny = NY_1
@@ -71,14 +71,15 @@ Graph *create_graph_as_grid(
         double u,
         double tau,
         int r_lvl,
-        double hx_smallest,
-        double hy_smallest,
+        double hx_min,
+        double hy_min,
+        double hx,
+        double hy,
         double defaultValue) {
     assert(nx_1 > 0);
     assert(ny_1 > 0);
 
-    Graph *g = new Graph(nx_1 * ny_1,
-                                     GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_smallest, hy_smallest));
+    Graph *g = new Graph(nx_1 * ny_1, GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_min, hy_min, hx, hy));
     for (int i = 0; i < nx_1; ++i) {
         int stride = i * nx_1;
         for (int j = 0; j < ny_1 - 1; ++j) {
