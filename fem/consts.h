@@ -36,8 +36,8 @@ extern double DBL_MIN_TRIM; // trim number to zero if it less than DBL_MIN_TRIM
 extern double RES_EPS; // EPS value for residual
 extern double EPS; // EPS value
 extern int INTEGR_TYPE; // Type of integration 1 = midpoint, 2 - trapezium
-extern int IDEAL_SQ_SIZE_X; // Size of ideal square by x
-extern int IDEAL_SQ_SIZE_Y; // Size of ideal square by y
+extern unsigned int IDEAL_SQ_SIZE_X; // Size of ideal square by x
+extern unsigned int IDEAL_SQ_SIZE_Y; // Size of ideal square by y
 extern double CENTER_OFFSET_X; // Offset of center of circle by x
 extern double CENTER_OFFSET_Y; // Offset of center of circle by y
 extern double OMEGA; // angle rate

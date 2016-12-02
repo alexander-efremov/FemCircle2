@@ -75,11 +75,15 @@ Graph *create_graph_as_grid(
         double hy_min,
         double hx,
         double hy,
+        unsigned int ideal_square_size_nx,
+        unsigned int ideal_square_size_ny,
+        unsigned int current_tl,
         double defaultValue) {
     assert(nx_1 > 0);
     assert(ny_1 > 0);
 
-    Graph *g = new Graph(nx_1 * ny_1, GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_min, hy_min, hx, hy));
+    Graph *g = new Graph(nx_1 * ny_1, GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_min, hy_min, hx, hy,
+                                                    ideal_square_size_nx,ideal_square_size_ny, current_tl));
     for (int i = 0; i < nx_1; ++i) {
         int stride = i * nx_1;
         for (int j = 0; j < ny_1 - 1; ++j) {

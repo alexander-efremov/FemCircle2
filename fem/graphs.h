@@ -14,13 +14,18 @@ struct VertexPropertyDouble {
 
 struct GraphProperty {
     GraphProperty(unsigned int nx, unsigned int ny, double a, double b, double c, double d,
-                  double v, double u, double tau, int r_lvl, double hx_min, double hy_min, double hx, double hy) : nx(
+                  double v, double u, double tau, int r_lvl, double hx_min, double hy_min, double hx, double hy,
+                  unsigned int ideal_square_size_nx, unsigned int ideal_square_size_ny,unsigned int current_tl) : nx(
             nx), ny(ny), a(a), b(b), c(c), d(d), v(v), u(u), tau(tau),
             r_lvl(r_lvl),
             hx_min(hx_min),
             hy_min(hy_min),
             hx(hx),
-            hy(hy) {}
+            hy(hy),
+            ideal_square_size_nx(ideal_square_size_nx),
+            ideal_square_size_ny(ideal_square_size_ny),
+            current_tl(current_tl)
+    {}
 
     unsigned int nx;
     unsigned int ny;
@@ -36,6 +41,9 @@ struct GraphProperty {
     double hy_min;
     double hx;
     double hy;
+    unsigned int ideal_square_size_nx;
+    unsigned int ideal_square_size_ny;
+    unsigned int current_tl;
 };
 
 typedef adjacency_list<vecS, vecS, undirectedS, VertexPropertyDouble, no_property, GraphProperty> Graph;
@@ -55,6 +63,9 @@ Graph *create_graph_as_grid(
         double hy_min,
         double hx,
         double hy,
+        unsigned int ideal_square_size_nx,
+        unsigned int ideal_square_size_ny,
+        unsigned int current_tl,
         double defaultValue = -1.);
 
 bool is_graph_connected(const Graph &g);

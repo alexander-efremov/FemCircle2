@@ -288,7 +288,7 @@ TEST_F(FemFixture, graph) {
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
 
-    Graph *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, 1);
+    Graph *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, IDEAL_SQ_SIZE_X, IDEAL_SQ_SIZE_Y, 0, 1);
     Graph &gr = *g;
     bool b = is_graph_connected(gr);
 
@@ -325,7 +325,7 @@ TEST_F(FemFixture, graph_bfs) {
     NX_1 = NX + 1;
     NY_1 = NY + 1;
     XY = NX_1 * NY_1;
-    auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, 1);
+    auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, IDEAL_SQ_SIZE_X, IDEAL_SQ_SIZE_Y, 1);
     auto &gr = *g;
     breadth_first_search(gr, vertex(0, gr), visitor(bfs_solver_visitor<Graph>(gr)));
     print_graph("graph_bfs.dot", gr);
