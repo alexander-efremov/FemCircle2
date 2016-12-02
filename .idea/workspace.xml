@@ -15,14 +15,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88c6cf85-5bb3-471f-bccc-1bf7ae36cb16" name="Default" comment="&#10;f">
+    <list default="true" id="88c6cf85-5bb3-471f-bccc-1bf7ae36cb16" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/consts.cpp" afterPath="$PROJECT_DIR$/fem/consts.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/consts.h" afterPath="$PROJECT_DIR$/fem/consts.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.cpp" afterPath="$PROJECT_DIR$/fem/graphs.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.h" afterPath="$PROJECT_DIR$/fem/graphs.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/solver2.cpp" afterPath="$PROJECT_DIR$/fem/solver2.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" afterPath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
     </list>
     <ignored path="fem_circle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,15 +40,15 @@
       <file leaf-file-name="solver2.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="902" column="24" lean-forward="false" selection-start-line="902" selection-start-column="24" selection-end-line="902" selection-end-column="24" />
+            <state relative-caret-position="593">
+              <caret line="904" column="14" lean-forward="false" selection-start-line="904" selection-start-column="14" selection-end-line="904" selection-end-column="14" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
                 <element signature="e#34605#34622#0" expanded="true" />
                 <element signature="e#34744#34761#0" expanded="true" />
-                <marker date="1480698973559" expanded="false" signature="17620:25230" ph="{...}" />
-                <marker date="1480698973559" expanded="false" signature="25387:32946" ph="{...}" />
-                <marker date="1480698973559" expanded="true" signature="39349:40483" ph="..." />
+                <marker date="1480699297994" expanded="false" signature="17620:25230" ph="{...}" />
+                <marker date="1480699297994" expanded="false" signature="25387:32946" ph="{...}" />
+                <marker date="1480699297994" expanded="true" signature="39353:40487" ph="..." />
               </folding>
             </state>
           </provider>
@@ -895,15 +890,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="902" column="24" lean-forward="false" selection-start-line="902" selection-start-column="24" selection-end-line="902" selection-end-column="24" />
+        <state relative-caret-position="593">
+          <caret line="904" column="14" lean-forward="false" selection-start-line="904" selection-start-column="14" selection-end-line="904" selection-end-column="14" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
             <element signature="e#34605#34622#0" expanded="true" />
             <element signature="e#34744#34761#0" expanded="true" />
-            <marker date="1480698973559" expanded="false" signature="17620:25230" ph="{...}" />
-            <marker date="1480698973559" expanded="false" signature="25387:32946" ph="{...}" />
-            <marker date="1480698973559" expanded="true" signature="39349:40483" ph="..." />
+            <marker date="1480699297994" expanded="false" signature="17620:25230" ph="{...}" />
+            <marker date="1480699297994" expanded="false" signature="25387:32946" ph="{...}" />
+            <marker date="1480699297994" expanded="true" signature="39353:40487" ph="..." />
           </folding>
         </state>
       </provider>
