@@ -34,7 +34,7 @@
 #
 #       --config             show all configuration variables
 #       --debug              enable verbose shell tracing
-#   -nx, --dry-run            display commands without modifying any files
+#   -nx_1, --dry-run            display commands without modifying any files
 #       --features           display basic configuration information and exit
 #       --mode=MODE          use operation mode MODE
 #       --preserve-dup-deps  don't remove duplicate dependency libraries
@@ -85,7 +85,7 @@ TIMESTAMP=""
 package_revision=1.3337
 
 # Be Bourne compatible
-if test -nx "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
+if test -nx_1 "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
   emulate sh
   NULLCMD=:
   # Zsh 3.x and 4.x performs word splitting on ${1+"$@"}, which
@@ -136,7 +136,7 @@ progpath="$0"
 
 
 : ${CP="cp -f"}
-test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\nx'}
+test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\nx_1'}
 : ${MAKE="make"}
 : ${MKDIR="mkdir"}
 : ${MV="mv -f"}
@@ -389,7 +389,7 @@ case $progpath in
        test -x "$progdir/$progname" && break
      done
      IFS="$save_IFS"
-     test -nx "$progdir" || progdir=`pwd`
+     test -nx_1 "$progdir" || progdir=`pwd`
      progpath="$progdir/$progname"
      ;;
 esac
@@ -425,7 +425,7 @@ sed_double_backslash="\
 /g
   s/^$bs2$dollar/$bs&/
   s/\\([^$bs]\\)$bs2$dollar/\\1$bs2$bs$dollar/g
-  s/\nx//g"
+  s/\nx_1//g"
 
 # Standard options:
 opt_dry_run=false
@@ -512,7 +512,7 @@ func_mkdir_p ()
     my_directory_path="$1"
     my_dir_list=
 
-    if test -nx "$my_directory_path" && test "$opt_dry_run" != ":"; then
+    if test -nx_1 "$my_directory_path" && test "$opt_dry_run" != ":"; then
 
       # Protect directory names starting with `-'
       case $my_directory_path in
@@ -715,11 +715,11 @@ func_version ()
 {
     $opt_debug
 
-    $SED -nx '/(C)/!b go
+    $SED -nx_1 '/(C)/!b go
 	:more
 	/\./!{
 	  N
-	  s/\nx# / /
+	  s/\nx_1# / /
 	  b more
 	}
 	:go
@@ -738,7 +738,7 @@ func_usage ()
 {
     $opt_debug
 
-    $SED -nx '/^# Usage:/,/^#  *.*--help/ {
+    $SED -nx_1 '/^# Usage:/,/^#  *.*--help/ {
         s/^# //
 	s/^# *$//
 	s/\$progname/'$progname'/
@@ -756,7 +756,7 @@ func_help ()
 {
     $opt_debug
 
-    $SED -nx '/^# Usage:/,/# Report bugs to/ {
+    $SED -nx_1 '/^# Usage:/,/# Report bugs to/ {
 	:print
         s/^# //
 	s/^# *$//
@@ -909,7 +909,7 @@ func_config ()
 
     # Now print the configurations for the tags.
     for tagname in $taglist; do
-      $SED -nx "/$re_begincf TAG CONFIG: $tagname\$/,/$re_endcf TAG CONFIG: $tagname\$/p" < "$progpath"
+      $SED -nx_1 "/$re_begincf TAG CONFIG: $tagname\$/,/$re_endcf TAG CONFIG: $tagname\$/p" < "$progpath"
     done
 
     exit $?
@@ -966,7 +966,7 @@ func_enable_tag ()
 	# and the sed script, to avoid splitting on whitespace, but
 	# also don't use non-portable quotes within backquotes within
 	# quotes we have to do it in 2 steps:
-	extractedcf=`$SED -nx -e "$sed_extractcf" < "$progpath"`
+	extractedcf=`$SED -nx_1 -e "$sed_extractcf" < "$progpath"`
 	eval "$extractedcf"
       else
 	func_error "ignoring unknown tag $tagname"
@@ -1066,7 +1066,7 @@ opt_verbose=false
 			func_echo "enabling shell trace mode"
 			$opt_debug
 			;;
-      --dry-run|--dryrun|-nx)
+      --dry-run|--dryrun|-nx_1)
 			opt_dry_run=:
 			;;
       --config)
@@ -1156,7 +1156,7 @@ func_enable_tag "$optarg"
 			;;
 
       # Separate non-argument short options:
-      -\?*|-h*|-nx*|-v*)
+      -\?*|-h*|-nx_1*|-v*)
 			func_split_short_opt "$opt"
 			set dummy "$func_split_short_opt_name" "-$func_split_short_opt_arg" ${1+"$@"}
 			shift
@@ -1201,7 +1201,7 @@ func_enable_tag "$optarg"
     eval std_shrext=\"$shrext_cmds\"
 
     # Only execute mode is allowed to have -dlopen flags.
-    if test -nx "$opt_dlopen" && test "$opt_mode" != execute; then
+    if test -nx_1 "$opt_dlopen" && test "$opt_mode" != execute; then
       func_error "unrecognized option \`-dlopen'"
       $ECHO "$help" 1>&2
       exit $EXIT_FAILURE
@@ -1375,7 +1375,7 @@ func_replace_sysroot ()
 func_infer_tag ()
 {
     $opt_debug
-    if test -nx "$available_tags" && test -z "$tagname"; then
+    if test -nx_1 "$available_tags" && test -z "$tagname"; then
       CC_quoted=
       for arg in $CC; do
 	func_append_quoted CC_quoted "$arg"
@@ -1393,7 +1393,7 @@ func_infer_tag ()
 	for z in $available_tags; do
 	  if $GREP "^# ### BEGIN LIBTOOL TAG CONFIG: $z$" < "$progpath" > /dev/null; then
 	    # Evaluate the configuration.
-	    eval "`${SED} -nx -e '/^# ### BEGIN LIBTOOL TAG CONFIG: '$z'$/,/^# ### END LIBTOOL TAG CONFIG: '$z'$/p' < $progpath`"
+	    eval "`${SED} -nx_1 -e '/^# ### BEGIN LIBTOOL TAG CONFIG: '$z'$/,/^# ### END LIBTOOL TAG CONFIG: '$z'$/p' < $progpath`"
 	    CC_quoted=
 	    for arg in $CC; do
 	      # Double-quote args containing other shell metacharacters.
@@ -1484,14 +1484,14 @@ func_convert_core_file_wine_to_w32 ()
 {
   $opt_debug
   func_convert_core_file_wine_to_w32_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # Unfortunately, winepath does not exit with a non-zero error code, so we
     # are forced to check the contents of stdout. On the other hand, if the
     # command is not found, the shell will set an exit code of 127 and print
     # *an error message* to stdout. So we must check for both error code of
     # zero AND non-empty stdout, which explains the odd construction:
     func_convert_core_file_wine_to_w32_tmp=`winepath -w "$1" 2>/dev/null`
-    if test "$?" -eq 0 && test -nx "${func_convert_core_file_wine_to_w32_tmp}"; then
+    if test "$?" -eq 0 && test -nx_1 "${func_convert_core_file_wine_to_w32_tmp}"; then
       func_convert_core_file_wine_to_w32_result=`$ECHO "$func_convert_core_file_wine_to_w32_tmp" |
         $SED -e "$lt_sed_naive_backslashify"`
     else
@@ -1517,13 +1517,13 @@ func_convert_core_path_wine_to_w32 ()
   $opt_debug
   # unfortunately, winepath doesn't convert paths, only file names
   func_convert_core_path_wine_to_w32_result=""
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     oldIFS=$IFS
     IFS=:
     for func_convert_core_path_wine_to_w32_f in $1; do
       IFS=$oldIFS
       func_convert_core_file_wine_to_w32 "$func_convert_core_path_wine_to_w32_f"
-      if test -nx "$func_convert_core_file_wine_to_w32_result" ; then
+      if test -nx_1 "$func_convert_core_file_wine_to_w32_result" ; then
         if test -z "$func_convert_core_path_wine_to_w32_result"; then
           func_convert_core_path_wine_to_w32_result="$func_convert_core_file_wine_to_w32_result"
         else
@@ -1555,7 +1555,7 @@ func_convert_core_path_wine_to_w32 ()
 func_cygpath ()
 {
   $opt_debug
-  if test -nx "$LT_CYGPATH" && test -f "$LT_CYGPATH"; then
+  if test -nx_1 "$LT_CYGPATH" && test -f "$LT_CYGPATH"; then
     func_cygpath_result=`$LT_CYGPATH "$@" 2>/dev/null`
     if test "$?" -ne 0; then
       # on failure, ensure result is empty
@@ -1589,7 +1589,7 @@ func_convert_core_msys_to_w32 ()
 func_convert_file_check ()
 {
   $opt_debug
-  if test -z "$2" && test -nx "$1" ; then
+  if test -z "$2" && test -nx_1 "$1" ; then
     func_error "Could not determine host file name corresponding to"
     func_error "  \`$1'"
     func_error "Continuing, but uninstalled executables may not work."
@@ -1607,7 +1607,7 @@ func_convert_file_check ()
 func_convert_path_check ()
 {
   $opt_debug
-  if test -z "$4" && test -nx "$3"; then
+  if test -z "$4" && test -nx_1 "$3"; then
     func_error "Could not determine the host path corresponding to"
     func_error "  \`$3'"
     func_error "Continuing, but uninstalled executables may not work."
@@ -1700,7 +1700,7 @@ func_convert_file_msys_to_w32 ()
 {
   $opt_debug
   func_to_host_file_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     func_convert_core_msys_to_w32 "$1"
     func_to_host_file_result="$func_convert_core_msys_to_w32_result"
   fi
@@ -1716,10 +1716,10 @@ func_convert_file_cygwin_to_w32 ()
 {
   $opt_debug
   func_to_host_file_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # because $build is cygwin, we call "the" cygpath in $PATH; no need to use
     # LT_CYGPATH in this case.
-    func_to_host_file_result=`cygpath -ny "$1"`
+    func_to_host_file_result=`cygpath -ny_1 "$1"`
   fi
   func_convert_file_check "$1" "$func_to_host_file_result"
 }
@@ -1733,7 +1733,7 @@ func_convert_file_nix_to_w32 ()
 {
   $opt_debug
   func_to_host_file_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     func_convert_core_file_wine_to_w32 "$1"
     func_to_host_file_result="$func_convert_core_file_wine_to_w32_result"
   fi
@@ -1749,7 +1749,7 @@ func_convert_file_msys_to_cygwin ()
 {
   $opt_debug
   func_to_host_file_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     func_convert_core_msys_to_w32 "$1"
     func_cygpath -u "$func_convert_core_msys_to_w32_result"
     func_to_host_file_result="$func_cygpath_result"
@@ -1767,7 +1767,7 @@ func_convert_file_nix_to_cygwin ()
 {
   $opt_debug
   func_to_host_file_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # convert from *nix to w32, then use cygpath to convert from w32 to cygwin.
     func_convert_core_file_wine_to_w32 "$1"
     func_cygpath -u "$func_convert_core_file_wine_to_w32_result"
@@ -1842,7 +1842,7 @@ func_convert_path_msys_to_w32 ()
 {
   $opt_debug
   func_to_host_path_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # Remove leading and trailing path separator characters from ARG.  MSYS
     # behavior is inconsistent here; cygpath turns them into '.;' and ';.';
     # and winepath ignores them completely.
@@ -1865,11 +1865,11 @@ func_convert_path_cygwin_to_w32 ()
 {
   $opt_debug
   func_to_host_path_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # See func_convert_path_msys_to_w32:
     func_stripname : : "$1"
     func_to_host_path_tmp1=$func_stripname_result
-    func_to_host_path_result=`cygpath -ny -p "$func_to_host_path_tmp1"`
+    func_to_host_path_result=`cygpath -ny_1 -p "$func_to_host_path_tmp1"`
     func_convert_path_check : ";" \
       "$func_to_host_path_tmp1" "$func_to_host_path_result"
     func_convert_path_front_back_pathsep ":*" "*:" ";" "$1"
@@ -1885,7 +1885,7 @@ func_convert_path_nix_to_w32 ()
 {
   $opt_debug
   func_to_host_path_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # See func_convert_path_msys_to_w32:
     func_stripname : : "$1"
     func_to_host_path_tmp1=$func_stripname_result
@@ -1906,7 +1906,7 @@ func_convert_path_msys_to_cygwin ()
 {
   $opt_debug
   func_to_host_path_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # See func_convert_path_msys_to_w32:
     func_stripname : : "$1"
     func_to_host_path_tmp1=$func_stripname_result
@@ -1929,7 +1929,7 @@ func_convert_path_nix_to_cygwin ()
 {
   $opt_debug
   func_to_host_path_result="$1"
-  if test -nx "$1"; then
+  if test -nx_1 "$1"; then
     # Remove leading and trailing path separator characters from
     # ARG. msys behavior is inconsistent here, cygpath turns them
     # into '.;' and ';.', and winepath ignores them completely.
@@ -1979,7 +1979,7 @@ func_mode_compile ()
 	# Accept any command-line options.
 	case $arg in
 	-o)
-	  test -nx "$libobj" && \
+	  test -nx_1 "$libobj" && \
 	    func_fatal_error "you cannot specify \`-o' more than once"
 	  arg_mode=target
 	  continue
@@ -2199,7 +2199,7 @@ compiler."
       fi
 
       func_show_eval_locale "$command"	\
-          'test -nx "$output_obj" && $RM $removelist; exit $EXIT_FAILURE'
+          'test -nx_1 "$output_obj" && $RM $removelist; exit $EXIT_FAILURE'
 
       if test "$need_locks" = warn &&
 	 test "X`cat $lockfile 2>/dev/null`" != "X$srcfile"; then
@@ -2222,7 +2222,7 @@ compiler."
       fi
 
       # Just move the object if needed, then go on to compile the next one
-      if test -nx "$output_obj" && test "X$output_obj" != "X$lobj"; then
+      if test -nx_1 "$output_obj" && test "X$output_obj" != "X$lobj"; then
 	func_show_eval '$MV "$output_obj" "$lobj"' \
 	  'error=$?; $opt_dry_run || $RM $removelist; exit $error'
       fi
@@ -2271,7 +2271,7 @@ compiler."
       fi
 
       # Just move the object if needed
-      if test -nx "$output_obj" && test "X$output_obj" != "X$obj"; then
+      if test -nx_1 "$output_obj" && test "X$output_obj" != "X$obj"; then
 	func_show_eval '$MV "$output_obj" "$obj"' \
 	  'error=$?; $opt_dry_run || $RM $removelist; exit $error'
       fi
@@ -2491,7 +2491,7 @@ if $opt_help; then
       for opt_mode in compile link execute install finish uninstall clean; do
 	func_mode_help
       done
-    } | sed -nx '1p; 2,$s/^Usage:/  or: /p'
+    } | sed -nx_1 '1p; 2,$s/^Usage:/  or: /p'
     {
       func_help noexit
       for opt_mode in compile link execute install finish uninstall clean; do
@@ -2545,7 +2545,7 @@ func_mode_execute ()
 	# Skip this library if it cannot be dlopened.
 	if test -z "$dlname"; then
 	  # Warn if it was a shared library.
-	  test -nx "$library_names" && \
+	  test -nx_1 "$library_names" && \
 	    func_warning "\`$file' was not linked with \`-export-dynamic'"
 	  continue
 	fi
@@ -2576,7 +2576,7 @@ func_mode_execute ()
 
       # Get the absolute pathname.
       absdir=`cd "$dir" && pwd`
-      test -nx "$absdir" && dir="$absdir"
+      test -nx_1 "$absdir" && dir="$absdir"
 
       # Now add the directory to shlibpath_var.
       if eval "test -z \"\$$shlibpath_var\""; then
@@ -2615,7 +2615,7 @@ func_mode_execute ()
     done
 
     if test "X$opt_dry_run" = Xfalse; then
-      if test -nx "$shlibpath_var"; then
+      if test -nx_1 "$shlibpath_var"; then
 	# Export the shlibpath_var.
 	eval "export $shlibpath_var"
       fi
@@ -2634,7 +2634,7 @@ func_mode_execute ()
       exec_cmd="\$cmd$args"
     else
       # Display what would be done.
-      if test -nx "$shlibpath_var"; then
+      if test -nx_1 "$shlibpath_var"; then
 	eval "\$ECHO \"\$shlibpath_var=\$$shlibpath_var\""
 	echo "export $shlibpath_var"
       fi
@@ -2671,8 +2671,8 @@ func_mode_finish ()
       fi
     done
 
-    if test -nx "$libs"; then
-      if test -nx "$lt_sysroot"; then
+    if test -nx_1 "$libs"; then
+      if test -nx_1 "$lt_sysroot"; then
         sysroot_regex=`$ECHO "$lt_sysroot" | $SED "$sed_make_literal_regex"`
         sysroot_cmd="s/\([ ']\)$sysroot_regex/\1/g;"
       else
@@ -2695,14 +2695,14 @@ func_mode_finish ()
       fi
     fi
 
-    if test -nx "$finish_cmds$finish_eval" && test -nx "$libdirs"; then
+    if test -nx_1 "$finish_cmds$finish_eval" && test -nx_1 "$libdirs"; then
       for libdir in $libdirs; do
-	if test -nx "$finish_cmds"; then
+	if test -nx_1 "$finish_cmds"; then
 	  # Do each command in the finish commands.
 	  func_execute_cmds "$finish_cmds" 'admincmds="$admincmds
 '"$cmd"'"'
 	fi
-	if test -nx "$finish_eval"; then
+	if test -nx_1 "$finish_eval"; then
 	  # Do the single finish_eval.
 	  eval cmds=\"$finish_eval\"
 	  $opt_dry_run || eval "$cmds" || func_append admincmds "
@@ -2714,7 +2714,7 @@ func_mode_finish ()
     # Exit here if they wanted silent mode.
     $opt_silent && exit $EXIT_SUCCESS
 
-    if test -nx "$finish_cmds$finish_eval" && test -nx "$libdirs"; then
+    if test -nx_1 "$finish_cmds$finish_eval" && test -nx_1 "$libdirs"; then
       echo "----------------------------------------------------------------------"
       echo "Libraries have been installed in:"
       for libdir in $libdirs; do
@@ -2725,21 +2725,21 @@ func_mode_finish ()
       echo "in a given directory, LIBDIR, you must either use libtool, and"
       echo "specify the full pathname of the library, or use the \`-LLIBDIR'"
       echo "flag during linking and do at least one of the following:"
-      if test -nx "$shlibpath_var"; then
+      if test -nx_1 "$shlibpath_var"; then
 	echo "   - add LIBDIR to the \`$shlibpath_var' environment variable"
 	echo "     during execution"
       fi
-      if test -nx "$runpath_var"; then
+      if test -nx_1 "$runpath_var"; then
 	echo "   - add LIBDIR to the \`$runpath_var' environment variable"
 	echo "     during linking"
       fi
-      if test -nx "$hardcode_libdir_flag_spec"; then
+      if test -nx_1 "$hardcode_libdir_flag_spec"; then
 	libdir=LIBDIR
 	eval flag=\"$hardcode_libdir_flag_spec\"
 
 	$ECHO "   - use the \`$flag' linker flag"
       fi
-      if test -nx "$admincmds"; then
+      if test -nx_1 "$admincmds"; then
 	$ECHO "   - have your system administrator run these commands:$admincmds"
       fi
       if test -f /etc/ld.so.conf; then
@@ -2806,7 +2806,7 @@ func_mode_install ()
     for arg
     do
       arg2=
-      if test -nx "$dest"; then
+      if test -nx_1 "$dest"; then
 	func_append files " $dest"
 	dest=$arg
 	continue
@@ -2819,7 +2819,7 @@ func_mode_install ()
 	  prev=$arg
 	fi
 	;;
-      -g | -ny | -o)
+      -g | -ny_1 | -o)
 	prev=$arg
 	;;
       -s)
@@ -2830,8 +2830,8 @@ func_mode_install ()
 	;;
       *)
 	# If the previous option needed an argument, then skip it.
-	if test -nx "$prev"; then
-	  if test "x$prev" = x-ny && test -nx "$install_override_mode"; then
+	if test -nx_1 "$prev"; then
+	  if test "x$prev" = x-ny_1 && test -nx_1 "$install_override_mode"; then
 	    arg2=$install_override_mode
 	    no_mode=false
 	  fi
@@ -2846,7 +2846,7 @@ func_mode_install ()
       # Aesthetically quote the argument.
       func_quote_for_eval "$arg"
       func_append install_prog " $func_quote_for_eval_result"
-      if test -nx "$arg2"; then
+      if test -nx_1 "$arg2"; then
 	func_quote_for_eval "$arg2"
       fi
       func_append install_shared_prog " $func_quote_for_eval_result"
@@ -2855,13 +2855,13 @@ func_mode_install ()
     test -z "$install_prog" && \
       func_fatal_help "you must specify an install program"
 
-    test -nx "$prev" && \
+    test -nx_1 "$prev" && \
       func_fatal_help "the \`$prev' option requires an argument"
 
-    if test -nx "$install_override_mode" && $no_mode; then
+    if test -nx_1 "$install_override_mode" && $no_mode; then
       if $install_cp; then :; else
 	func_quote_for_eval "$install_override_mode"
-	func_append install_shared_prog " -ny $func_quote_for_eval_result"
+	func_append install_shared_prog " -ny_1 $func_quote_for_eval_result"
       fi
     fi
 
@@ -2953,7 +2953,7 @@ func_mode_install ()
 	dir="$func_dirname_result"
 	func_append dir "$objdir"
 
-	if test -nx "$relink_command"; then
+	if test -nx_1 "$relink_command"; then
 	  # Determine the prefix the user has applied to our future dir.
 	  inst_prefix_dir=`$ECHO "$destdir" | $SED -e "s%$libdir\$%%"`
 
@@ -2966,7 +2966,7 @@ func_mode_install ()
 	  test "$inst_prefix_dir" = "$destdir" && \
 	    func_fatal_error "error: cannot install \`$file' to a directory not ending in $libdir"
 
-	  if test -nx "$inst_prefix_dir"; then
+	  if test -nx_1 "$inst_prefix_dir"; then
 	    # Stick the inst_prefix_dir data into the link command.
 	    relink_command=`$ECHO "$relink_command" | $SED "s%@inst_prefix_dir@%-inst-prefix-dir $inst_prefix_dir%"`
 	  else
@@ -2980,12 +2980,12 @@ func_mode_install ()
 
 	# See the names of the shared library.
 	set dummy $library_names; shift
-	if test -nx "$1"; then
+	if test -nx_1 "$1"; then
 	  realname="$1"
 	  shift
 
 	  srcname="$realname"
-	  test -nx "$relink_command" && srcname="$realname"T
+	  test -nx_1 "$relink_command" && srcname="$realname"T
 
 	  # Install the shared library and build the symlinks.
 	  func_show_eval "$install_shared_prog $dir/$srcname $destdir/$realname" \
@@ -3000,7 +3000,7 @@ func_mode_install ()
 	    esac
 	    ;;
 	  esac
-	  if test -nx "$tstripme" && test -nx "$striplib"; then
+	  if test -nx_1 "$tstripme" && test -nx_1 "$striplib"; then
 	    func_show_eval "$striplib $destdir/$realname" 'exit $?'
 	  fi
 
@@ -3028,14 +3028,14 @@ func_mode_install ()
 	func_show_eval "$install_prog $instname $destdir/$name" 'exit $?'
 
 	# Maybe install the static library, too.
-	test -nx "$old_library" && func_append staticlibs " $dir/$old_library"
+	test -nx_1 "$old_library" && func_append staticlibs " $dir/$old_library"
 	;;
 
       *.lo)
 	# Install (i.e. copy) a libtool object.
 
 	# Figure out destination file name, if it wasn't already specified.
-	if test -nx "$destname"; then
+	if test -nx_1 "$destname"; then
 	  destfile="$destdir/$destname"
 	else
 	  func_basename "$file"
@@ -3059,7 +3059,7 @@ func_mode_install ()
 	esac
 
 	# Install the libtool object if requested.
-	test -nx "$destfile" && \
+	test -nx_1 "$destfile" && \
 	  func_show_eval "$install_prog $file $destfile" 'exit $?'
 
 	# Install the old object if enabled.
@@ -3074,7 +3074,7 @@ func_mode_install ()
 
       *)
 	# Figure out destination file name, if it wasn't already specified.
-	if test -nx "$destname"; then
+	if test -nx_1 "$destname"; then
 	  destfile="$destdir/$destname"
 	else
 	  func_basename "$file"
@@ -3129,7 +3129,7 @@ func_mode_install ()
 	      func_source "$lib"
 	    fi
 	    libfile="$libdir/"`$ECHO "$lib" | $SED 's%^.*/%%g'` ### testsuite: skip nested quoting test
-	    if test -nx "$libdir" && test ! -f "$libfile"; then
+	    if test -nx_1 "$libdir" && test ! -f "$libfile"; then
 	      func_warning "\`$lib' has not been installed in \`$libdir'"
 	      finalize=no
 	    fi
@@ -3139,7 +3139,7 @@ func_mode_install ()
 	  func_source "$wrapper"
 
 	  outputname=
-	  if test "$fast_install" = no && test -nx "$relink_command"; then
+	  if test "$fast_install" = no && test -nx_1 "$relink_command"; then
 	    $opt_dry_run || {
 	      if test "$finalize" = yes; then
 	        tmpdir=`func_mktempdir`
@@ -3189,7 +3189,7 @@ func_mode_install ()
 	  ;;
 	esac
 	func_show_eval "$install_prog\$stripme \$file \$destfile" 'exit $?'
-	$opt_dry_run || if test -nx "$outputname"; then
+	$opt_dry_run || if test -nx_1 "$outputname"; then
 	  ${RM}r "$tmpdir"
 	fi
 	;;
@@ -3207,7 +3207,7 @@ func_mode_install ()
 
       func_show_eval "$install_prog \$file \$oldlib" 'exit $?'
 
-      if test -nx "$stripme" && test -nx "$old_striplib"; then
+      if test -nx_1 "$stripme" && test -nx_1 "$old_striplib"; then
 	func_show_eval "$old_striplib $tool_oldlib" 'exit $?'
       fi
 
@@ -3215,12 +3215,12 @@ func_mode_install ()
       func_execute_cmds "$old_postinstall_cmds" 'exit $?'
     done
 
-    test -nx "$future_libdirs" && \
+    test -nx_1 "$future_libdirs" && \
       func_warning "remember to run \`$progname --finish$future_libdirs'"
 
-    if test -nx "$current_libdirs"; then
+    if test -nx_1 "$current_libdirs"; then
       # Maybe just do a dry run.
-      $opt_dry_run && current_libdirs=" -nx$current_libdirs"
+      $opt_dry_run && current_libdirs=" -nx_1$current_libdirs"
       exec_cmd='$SHELL $progpath $preserve_args --finish$current_libdirs'
     else
       exit $EXIT_SUCCESS
@@ -3242,15 +3242,15 @@ func_generate_dlsyms ()
     my_prefix=`$ECHO "$my_originator" | sed 's%[^a-zA-Z0-9]%_%g'`
     my_dlsyms=
 
-    if test -nx "$dlfiles$dlprefiles" || test "$dlself" != no; then
-      if test -nx "$NM" && test -nx "$global_symbol_pipe"; then
+    if test -nx_1 "$dlfiles$dlprefiles" || test "$dlself" != no; then
+      if test -nx_1 "$NM" && test -nx_1 "$global_symbol_pipe"; then
 	my_dlsyms="${my_outputname}S.c"
       else
 	func_error "not configured to extract global symbols from dlpreopened files"
       fi
     fi
 
-    if test -nx "$my_dlsyms"; then
+    if test -nx_1 "$my_dlsyms"; then
       case $my_dlsyms in
       "") ;;
       *.c)
@@ -3302,14 +3302,14 @@ extern \"C\" {
 	    $opt_dry_run || eval "$NM $func_to_tool_file_result | $global_symbol_pipe >> '$nlist'"
 	  done
 
-	  if test -nx "$exclude_expsyms"; then
+	  if test -nx_1 "$exclude_expsyms"; then
 	    $opt_dry_run || {
 	      eval '$EGREP -v " ($exclude_expsyms)$" "$nlist" > "$nlist"T'
 	      eval '$MV "$nlist"T "$nlist"'
 	    }
 	  fi
 
-	  if test -nx "$export_symbols_regex"; then
+	  if test -nx_1 "$export_symbols_regex"; then
 	    $opt_dry_run || {
 	      eval '$EGREP -e "$export_symbols_regex" "$nlist" > "$nlist"T'
 	      eval '$MV "$nlist"T "$nlist"'
@@ -3321,7 +3321,7 @@ extern \"C\" {
 	    export_symbols="$output_objdir/$outputname.exp"
 	    $opt_dry_run || {
 	      $RM $export_symbols
-	      eval "${SED} -nx -e '/^: @PROGRAM@ $/d' -e 's/^.* \(.*\)$/\1/p' "'< "$nlist" > "$export_symbols"'
+	      eval "${SED} -nx_1 -e '/^: @PROGRAM@ $/d' -e 's/^.* \(.*\)$/\1/p' "'< "$nlist" > "$export_symbols"'
 	      case $host in
 	      *cygwin* | *mingw* | *cegcc* )
                 eval "echo EXPORTS "'> "$output_objdir/$outputname.def"'
@@ -3355,10 +3355,10 @@ extern \"C\" {
 	        func_tr_sh "$dlprefile"
 	        eval "curr_lafile=\$libfile_$func_tr_sh_result"
 	        dlprefile_dlbasename=""
-	        if test -nx "$curr_lafile" && func_lalib_p "$curr_lafile"; then
+	        if test -nx_1 "$curr_lafile" && func_lalib_p "$curr_lafile"; then
 	          # Use subshell, to avoid clobbering current variable values
 	          dlprefile_dlname=`source "$curr_lafile" && echo "$dlname"`
-	          if test -nx "$dlprefile_dlname" ; then
+	          if test -nx_1 "$dlprefile_dlname" ; then
 	            func_basename "$dlprefile_dlname"
 	            dlprefile_dlbasename="$func_basename_result"
 	          else
@@ -3368,7 +3368,7 @@ extern \"C\" {
 	          fi
 	        fi
 	        $opt_dry_run || {
-	          if test -nx "$dlprefile_dlbasename" ; then
+	          if test -nx_1 "$dlprefile_dlbasename" ; then
 	            eval '$ECHO ": $dlprefile_dlbasename" >> "$nlist"'
 	          else
 	            func_warning "Could not compute DLL name from $name"
@@ -3400,7 +3400,7 @@ extern \"C\" {
 	  # Make sure we have at least an empty file.
 	  test -f "$nlist" || : > "$nlist"
 
-	  if test -nx "$exclude_expsyms"; then
+	  if test -nx_1 "$exclude_expsyms"; then
 	    $EGREP -v " ($exclude_expsyms)$" "$nlist" > "$nlist"T
 	    $MV "$nlist"T "$nlist"
 	  fi
@@ -3554,7 +3554,7 @@ func_win32_libid ()
        $EGREP 'file format (pei*-i386(.*architecture: i386)?|pe-arm-wince|pe-x86-64)' >/dev/null; then
       func_to_tool_file "$1" func_convert_file_msys_to_w32
       win32_nmres=`eval $NM -f posix -A \"$func_to_tool_file_result\" |
-	$SED -nx -e '
+	$SED -nx_1 -e '
 	    1,100{
 		/ I /{
 		    s,.*,import,
@@ -3629,7 +3629,7 @@ func_cygming_dll_for_implib_fallback_core ()
     /^.\{43\}/!d
     # From remaining lines, remove first 43 characters
     s/^.\{43\}//' |
-    $SED -nx '
+    $SED -nx_1 '
       # Join marker and all lines until next marker into a single line
       /^====MARK====/ b para
       H
@@ -3637,7 +3637,7 @@ func_cygming_dll_for_implib_fallback_core ()
       b
       :para
       x
-      s/\nx//g
+      s/\nx_1//g
       # Remove the marker
       s/^====MARK====//
       # Remove trailing dots and whitespace
@@ -3667,7 +3667,7 @@ func_cygming_gnu_implib_p ()
   $opt_debug
   func_to_tool_file "$1" func_convert_file_msys_to_w32
   func_cygming_gnu_implib_tmp=`$NM "$func_to_tool_file_result" | eval "$global_symbol_pipe" | $EGREP ' (_head_[A-Za-z0-9_]+_[ad]l*|[A-Za-z0-9_]+_[ad]l*_iname)$'`
-  test -nx "$func_cygming_gnu_implib_tmp"
+  test -nx_1 "$func_cygming_gnu_implib_tmp"
 }
 
 # func_cygming_ms_implib_p ARG
@@ -3679,7 +3679,7 @@ func_cygming_ms_implib_p ()
   $opt_debug
   func_to_tool_file "$1" func_convert_file_msys_to_w32
   func_cygming_ms_implib_tmp=`$NM "$func_to_tool_file_result" | eval "$global_symbol_pipe" | $GREP '_NULL_IMPORT_DESCRIPTOR'`
-  test -nx "$func_cygming_ms_implib_tmp"
+  test -nx_1 "$func_cygming_ms_implib_tmp"
 }
 
 # func_cygming_dll_for_implib_fallback ARG
@@ -3780,7 +3780,7 @@ func_extract_archives ()
 	  darwin_curdir=`pwd`
 	  darwin_base_archive=`basename "$darwin_archive"`
 	  darwin_arches=`$LIPO -info "$darwin_archive" 2>/dev/null | $GREP Architectures 2>/dev/null || true`
-	  if test -nx "$darwin_arches"; then
+	  if test -nx_1 "$darwin_arches"; then
 	    darwin_arches=`$ECHO "$darwin_arches" | $SED -e 's/.*are://'`
 	    darwin_arch=
 	    func_verbose "$darwin_base_archive has multiple architectures $darwin_arches"
@@ -3854,7 +3854,7 @@ func_emit_wrapper ()
 sed_quote_subst='$sed_quote_subst'
 
 # Be Bourne compatible
-if test -nx \"\${ZSH_VERSION+set}\" && (emulate sh) >/dev/null 2>&1; then
+if test -nx_1 \"\${ZSH_VERSION+set}\" && (emulate sh) >/dev/null 2>&1; then
   emulate sh
   NULLCMD=:
   # Zsh 3.x and 4.x performs word splitting on \${1+\"\$@\"}, which
@@ -3932,7 +3932,7 @@ func_parse_lt_options ()
   done
 
   # Print the debug banner immediately:
-  if test -nx \"\$lt_option_debug\"; then
+  if test -nx_1 \"\$lt_option_debug\"; then
     echo \"${outputname}:${output}:\${LINENO}: libtool wrapper (GNU $PACKAGE$TIMESTAMP) $VERSION\" 1>&2
   fi
 }
@@ -3957,7 +3957,7 @@ func_exec_program_core ()
   # Backslashes separate directories on plain windows
   *-*-mingw | *-*-os2* | *-cegcc*)
     $ECHO "\
-      if test -nx \"\$lt_option_debug\"; then
+      if test -nx_1 \"\$lt_option_debug\"; then
         \$ECHO \"${outputname}:${output}:\${LINENO}: newargv[0]: \$progdir\\\\\$program\" 1>&2
         func_lt_dump_args \${1+\"\$@\"} 1>&2
       fi
@@ -3967,7 +3967,7 @@ func_exec_program_core ()
 
   *)
     $ECHO "\
-      if test -nx \"\$lt_option_debug\"; then
+      if test -nx_1 \"\$lt_option_debug\"; then
         \$ECHO \"${outputname}:${output}:\${LINENO}: newargv[0]: \$progdir/\$program\" 1>&2
         func_lt_dump_args \${1+\"\$@\"} 1>&2
       fi
@@ -4007,8 +4007,8 @@ func_exec_program ()
   test \"x\$thisdir\" = \"x\$file\" && thisdir=.
 
   # Follow symbolic links until we get to the real thisdir.
-  file=\`ls -ld \"\$file\" | $SED -nx 's/.*-> //p'\`
-  while test -nx \"\$file\"; do
+  file=\`ls -ld \"\$file\" | $SED -nx_1 's/.*-> //p'\`
+  while test -nx_1 \"\$file\"; do
     destdir=\`\$ECHO \"\$file\" | $SED 's%/[^/]*\$%%'\`
 
     # If there was a directory component, then change thisdir.
@@ -4020,7 +4020,7 @@ func_exec_program ()
     fi
 
     file=\`\$ECHO \"\$file\" | $SED 's%^.*/%%'\`
-    file=\`ls -ld \"\$thisdir/\$file\" | $SED -nx 's/.*-> //p'\`
+    file=\`ls -ld \"\$thisdir/\$file\" | $SED -nx_1 's/.*-> //p'\`
   done
 
   # Usually 'no', except on cygwin/mingw when embedded into
@@ -4040,7 +4040,7 @@ func_exec_program ()
 
   # Try to get the absolute directory name.
   absdir=\`cd \"\$thisdir\" && pwd\`
-  test -nx \"\$absdir\" && thisdir=\"\$absdir\"
+  test -nx_1 \"\$absdir\" && thisdir=\"\$absdir\"
 "
 
 	if test "$fast_install" = yes; then
@@ -4063,7 +4063,7 @@ func_exec_program ()
 	  $ECHO "\
 
     # relink executable if necessary
-    if test -nx \"\$relink_command\"; then
+    if test -nx_1 \"\$relink_command\"; then
       if relink_command_output=\`eval \$relink_command 2>&1\`; then :
       else
 	$ECHO \"\$relink_command_output\" >&2
@@ -4093,7 +4093,7 @@ func_exec_program ()
 	# Fix the DLL searchpath if we need to.  Do this before prepending
 	# to shlibpath, because on Windows, both are PATH and uninstalled
 	# libraries must come first.
-	if test -nx "$dllsearchpath"; then
+	if test -nx_1 "$dllsearchpath"; then
 	  $ECHO "\
     # Add the dll search path components to the executable PATH
     PATH=$dllsearchpath:\$PATH
@@ -4101,7 +4101,7 @@ func_exec_program ()
 	fi
 
 	# Export our shlibpath_var if we have one.
-	if test "$shlibpath_overrides_runpath" = yes && test -nx "$shlibpath_var" && test -nx "$temp_rpath"; then
+	if test "$shlibpath_overrides_runpath" = yes && test -nx_1 "$shlibpath_var" && test -nx_1 "$temp_rpath"; then
 	  $ECHO "\
     # Add our own library path to $shlibpath_var
     $shlibpath_var=\"$temp_rpath\$$shlibpath_var\"
@@ -4304,7 +4304,7 @@ volatile const char * MAGIC_EXE = "$magic_exe";
 const char * LIB_PATH_VARNAME = "$shlibpath_var";
 EOF
 
-	    if test "$shlibpath_overrides_runpath" = yes && test -nx "$shlibpath_var" && test -nx "$temp_rpath"; then
+	    if test "$shlibpath_overrides_runpath" = yes && test -nx_1 "$shlibpath_var" && test -nx_1 "$temp_rpath"; then
               func_to_host_path "$temp_rpath"
 	      cat <<EOF
 const char * LIB_PATH_VALUE   = "$func_to_host_path_result";
@@ -4315,7 +4315,7 @@ const char * LIB_PATH_VALUE   = "";
 EOF
 	    fi
 
-	    if test -nx "$dllsearchpath"; then
+	    if test -nx_1 "$dllsearchpath"; then
               func_to_host_path "$dllsearchpath:"
 	      cat <<EOF
 const char * EXE_PATH_VARNAME = "PATH";
@@ -4413,22 +4413,22 @@ EOF
 EOF
 	    cat <<EOF
   /* The GNU banner must be the first non-error debug message */
-  lt_debugprintf (__FILE__, __LINE__, "libtool wrapper (GNU $PACKAGE$TIMESTAMP) $VERSION\nx");
+  lt_debugprintf (__FILE__, __LINE__, "libtool wrapper (GNU $PACKAGE$TIMESTAMP) $VERSION\nx_1");
 EOF
 	    cat <<"EOF"
-  lt_debugprintf (__FILE__, __LINE__, "(main) argv[0]: %s\nx", argv[0]);
-  lt_debugprintf (__FILE__, __LINE__, "(main) program_name: %s\nx", program_name);
+  lt_debugprintf (__FILE__, __LINE__, "(main) argv[0]: %s\nx_1", argv[0]);
+  lt_debugprintf (__FILE__, __LINE__, "(main) program_name: %s\nx_1", program_name);
 
   tmp_pathspec = find_executable (argv[0]);
   if (tmp_pathspec == NULL)
     lt_fatal (__FILE__, __LINE__, "couldn't find %s", argv[0]);
   lt_debugprintf (__FILE__, __LINE__,
-                  "(main) found exe (before symlink chase) at: %s\nx",
+                  "(main) found exe (before symlink chase) at: %s\nx_1",
 		  tmp_pathspec);
 
   actual_cwrapper_path = chase_symlinks (tmp_pathspec);
   lt_debugprintf (__FILE__, __LINE__,
-                  "(main) found exe (after symlink chase) at: %s\nx",
+                  "(main) found exe (after symlink chase) at: %s\nx_1",
 		  actual_cwrapper_path);
   XFREE (tmp_pathspec);
 
@@ -4451,7 +4451,7 @@ EOF
   tmp_pathspec = 0;
 
   lt_debugprintf (__FILE__, __LINE__,
-		  "(main) libtool target name: %s\nx",
+		  "(main) libtool target name: %s\nx_1",
 		  target_name);
 EOF
 
@@ -4509,11 +4509,11 @@ EOF
   lt_update_exe_path (EXE_PATH_VARNAME, EXE_PATH_VALUE);
   lt_update_lib_path (LIB_PATH_VARNAME, LIB_PATH_VALUE);
 
-  lt_debugprintf (__FILE__, __LINE__, "(main) lt_argv_zero: %s\nx",
+  lt_debugprintf (__FILE__, __LINE__, "(main) lt_argv_zero: %s\nx_1",
 		  nonnull (lt_argv_zero));
   for (i = 0; i < newargc; i++)
     {
-      lt_debugprintf (__FILE__, __LINE__, "(main) newargz[%d]: %s\nx",
+      lt_debugprintf (__FILE__, __LINE__, "(main) newargz[%d]: %s\nx_1",
 		      i, nonnull (newargz[i]));
     }
 
@@ -4529,7 +4529,7 @@ EOF
     {
       /* failed to start process */
       lt_debugprintf (__FILE__, __LINE__,
-		      "(main) failed to launch target \"%s\": %s\nx",
+		      "(main) failed to launch target \"%s\": %s\nx_1",
 		      lt_argv_zero, nonnull (strerror (errno)));
       return 127;
     }
@@ -4586,7 +4586,7 @@ check_executable (const char *path)
 {
   struct stat st;
 
-  lt_debugprintf (__FILE__, __LINE__, "(check_executable): %s\nx",
+  lt_debugprintf (__FILE__, __LINE__, "(check_executable): %s\nx_1",
                   nonempty (path));
   if ((!path) || (!*path))
     return 0;
@@ -4604,7 +4604,7 @@ make_executable (const char *path)
   int rval = 0;
   struct stat st;
 
-  lt_debugprintf (__FILE__, __LINE__, "(make_executable): %s\nx",
+  lt_debugprintf (__FILE__, __LINE__, "(make_executable): %s\nx_1",
                   nonempty (path));
   if ((!path) || (!*path))
     return 0;
@@ -4631,7 +4631,7 @@ find_executable (const char *wrapper)
   int tmp_len;
   char *concat_name;
 
-  lt_debugprintf (__FILE__, __LINE__, "(find_executable): %s\nx",
+  lt_debugprintf (__FILE__, __LINE__, "(find_executable): %s\nx_1",
                   nonempty (wrapper));
 
   if ((wrapper == NULL) || (*wrapper == '\0'))
@@ -4739,7 +4739,7 @@ chase_symlinks (const char *pathspec)
   while (strlen (tmp_pathspec) && !has_symlinks)
     {
       lt_debugprintf (__FILE__, __LINE__,
-		      "checking path component for symlinks: %s\nx",
+		      "checking path component for symlinks: %s\nx_1",
 		      tmp_pathspec);
       if (lstat (tmp_pathspec, &s) == 0)
 	{
@@ -4824,7 +4824,7 @@ lt_error_core (int exit_status, const char *file,
 {
   fprintf (stderr, "%s:%s:%d: %s: ", program_name, file, line, mode);
   vfprintf (stderr, message, ap);
-  fprintf (stderr, ".\nx");
+  fprintf (stderr, ".\nx_1");
 
   if (exit_status >= 0)
     exit (exit_status);
@@ -4855,7 +4855,7 @@ void
 lt_setenv (const char *name, const char *value)
 {
   lt_debugprintf (__FILE__, __LINE__,
-		  "(lt_setenv) setting '%s' to '%s'\nx",
+		  "(lt_setenv) setting '%s' to '%s'\nx_1",
                   nonnull (name), nonnull (value));
   {
 #ifdef HAVE_SETENV
@@ -4905,7 +4905,7 @@ void
 lt_update_exe_path (const char *name, const char *value)
 {
   lt_debugprintf (__FILE__, __LINE__,
-		  "(lt_update_exe_path) modifying '%s' by prepending '%s'\nx",
+		  "(lt_update_exe_path) modifying '%s' by prepending '%s'\nx_1",
                   nonnull (name), nonnull (value));
 
   if (name && *name && value && *value)
@@ -4926,7 +4926,7 @@ void
 lt_update_lib_path (const char *name, const char *value)
 {
   lt_debugprintf (__FILE__, __LINE__,
-		  "(lt_update_lib_path) modifying '%s' by prepending '%s'\nx",
+		  "(lt_update_lib_path) modifying '%s' by prepending '%s'\nx_1",
                   nonnull (name), nonnull (value));
 
   if (name && *name && value && *value)
@@ -4959,8 +4959,8 @@ EOF
      that within double quotes, space and tab are treated like normal
      characters.
    - Backslashes not followed by double quotes are not special.
-   - But 2*nx+1 backslashes followed by a double quote become
-     nx backslashes followed by a double quote (nx >= 0):
+   - But 2*nx_1+1 backslashes followed by a double quote become
+     nx_1 backslashes followed by a double quote (nx_1 >= 0):
        \" -> "
        \\\" -> \"
        \\\\\" -> \\"
@@ -5063,13 +5063,13 @@ void lt_dump_script (FILE* f)
 {
 EOF
 	    func_emit_wrapper yes |
-	      $SED -nx -e '
+	      $SED -nx_1 -e '
 s/^\(.\{79\}\)\(..*\)/\1\
 \2/
 h
 s/\([\\"]\)/\\\1/g
-s/$/\\nx/
-s/\([^\nx]*\).*/  fputs ("\1", f);/p
+s/$/\\nx_1/
+s/\([^\nx_1]*\).*/  fputs ("\1", f);/p
 g
 D'
             cat <<"EOF"
@@ -5180,19 +5180,19 @@ func_mode_link ()
 	  if test "$build_libtool_libs" = yes && test -z "$link_static_flag"; then
 	    func_warning "complete static linking is impossible in this configuration"
 	  fi
-	  if test -nx "$link_static_flag"; then
+	  if test -nx_1 "$link_static_flag"; then
 	    dlopen_self=$dlopen_self_static
 	  fi
 	  prefer_static_libs=yes
 	  ;;
 	-static)
-	  if test -z "$pic_flag" && test -nx "$link_static_flag"; then
+	  if test -z "$pic_flag" && test -nx_1 "$link_static_flag"; then
 	    dlopen_self=$dlopen_self_static
 	  fi
 	  prefer_static_libs=built
 	  ;;
 	-static-libtool-libs)
-	  if test -z "$pic_flag" && test -nx "$link_static_flag"; then
+	  if test -z "$pic_flag" && test -nx_1 "$link_static_flag"; then
 	    dlopen_self=$dlopen_self_static
 	  fi
 	  prefer_static_libs=yes
@@ -5206,7 +5206,7 @@ func_mode_link ()
     done
 
     # See if our shared archives depend on static archives.
-    test -nx "$old_archive_from_new_cmds" && build_old_libs=yes
+    test -nx_1 "$old_archive_from_new_cmds" && build_old_libs=yes
 
     # Go through the arguments, transforming them on the way.
     while test "$#" -gt 0; do
@@ -5217,7 +5217,7 @@ func_mode_link ()
       func_append libtool_args " $func_quote_for_eval_result"
 
       # If the previous option needs an argument, assign it.
-      if test -nx "$prev"; then
+      if test -nx_1 "$prev"; then
 	case $prev in
 	output)
 	  func_append compile_command " @OUTPUT@"
@@ -5468,13 +5468,13 @@ func_mode_link ()
 	  continue
 	  ;;
 	esac
-      fi # test -nx "$prev"
+      fi # test -nx_1 "$prev"
 
       prevarg="$arg"
 
       case $arg in
       -all-static)
-	if test -nx "$link_static_flag"; then
+	if test -nx_1 "$link_static_flag"; then
 	  # See comment for -static flag below, for more details.
 	  func_append compile_command " $link_static_flag"
 	  func_append finalize_command " $link_static_flag"
@@ -5513,7 +5513,7 @@ func_mode_link ()
 	;;
 
       -export-symbols | -export-symbols-regex)
-	if test -nx "$export_symbols" || test -nx "$export_symbols_regex"; then
+	if test -nx_1 "$export_symbols" || test -nx_1 "$export_symbols_regex"; then
 	  func_fatal_error "more than one -exported-symbols argument is not allowed"
 	fi
 	if test "X$arg" = "X-export-symbols"; then
@@ -5844,14 +5844,14 @@ func_mode_link ()
       # -xarch=*, -xtarget=* enable 64-bit mode for the Sun compiler
       # +DA*, +DD*           enable 64-bit mode for the HP compiler
       # -q*                  compiler args for the IBM compiler
-      # -ny*, -t[45]*, -txscale* architecture-specific flags for GCC
+      # -ny_1*, -t[45]*, -txscale* architecture-specific flags for GCC
       # -F/path              path to uninstalled frameworks, gcc on darwin
       # -p, -pg, --coverage, -fprofile-*  profiling flags for GCC
       # @file                GCC response files
       # -tp=*                Portland pgcc target processor selection
       # --sysroot=*          for sysroot support
       # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
-      -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-ny*| \
+      -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-ny_1*| \
       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
       -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
         func_quote_for_eval "$arg"
@@ -5991,16 +5991,16 @@ func_mode_link ()
       esac # arg
 
       # Now actually substitute the argument into the commands.
-      if test -nx "$arg"; then
+      if test -nx_1 "$arg"; then
 	func_append compile_command " $arg"
 	func_append finalize_command " $arg"
       fi
     done # argument parsing loop
 
-    test -nx "$prev" && \
+    test -nx_1 "$prev" && \
       func_fatal_help "the \`$prevarg' option requires an argument"
 
-    if test "$export_dynamic" = yes && test -nx "$export_dynamic_flag_spec"; then
+    if test "$export_dynamic" = yes && test -nx_1 "$export_dynamic_flag_spec"; then
       eval arg=\"$export_dynamic_flag_spec\"
       func_append compile_command " $arg"
       func_append finalize_command " $arg"
@@ -6012,7 +6012,7 @@ func_mode_link ()
     outputname="$func_basename_result"
     libobjs_save="$libobjs"
 
-    if test -nx "$shlibpath_var"; then
+    if test -nx_1 "$shlibpath_var"; then
       # get the directories listed in $shlibpath_var
       eval shlib_search_path=\`\$ECHO \"\${$shlibpath_var}\" \| \$SED \'s/:/ /g\'\`
     else
@@ -6420,7 +6420,7 @@ func_mode_link ()
 	func_source "$lib"
 
 	# Convert "-framework foo" to "foo.ltframework"
-	if test -nx "$inherited_linker_flags"; then
+	if test -nx_1 "$inherited_linker_flags"; then
 	  tmp_inherited_linker_flags=`$ECHO "$inherited_linker_flags" | $SED 's/-framework \([^ $]*\)/\1.ltframework/g'`
 	  for tmp_inherited_linker_flag in $tmp_inherited_linker_flags; do
 	    case " $new_inherited_linker_flags " in
@@ -6433,8 +6433,8 @@ func_mode_link ()
 	if test "$linkmode,$pass" = "lib,link" ||
 	   test "$linkmode,$pass" = "prog,scan" ||
 	   { test "$linkmode" != prog && test "$linkmode" != lib; }; then
-	  test -nx "$dlopen" && func_append dlfiles " $dlopen"
-	  test -nx "$dlpreopen" && func_append dlprefiles " $dlpreopen"
+	  test -nx_1 "$dlopen" && func_append dlfiles " $dlopen"
+	  test -nx_1 "$dlpreopen" && func_append dlprefiles " $dlpreopen"
 	fi
 
 	if test "$pass" = conv; then
@@ -6466,7 +6466,7 @@ func_mode_link ()
 
 	# Get the name of the library we link against.
 	linklib=
-	if test -nx "$old_library" &&
+	if test -nx_1 "$old_library" &&
 	   { test "$prefer_static_libs" = yes ||
 	     test "$prefer_static_libs,$installed" = "built,no"; }; then
 	  linklib=$old_library
@@ -6557,7 +6557,7 @@ func_mode_link ()
 	      # We recover the dlopen module name by 'saving' the la file
 	      # name in a special purpose variable, and (later) extracting the
 	      # dlname from the la file.
-	      if test -nx "$dlname"; then
+	      if test -nx_1 "$dlname"; then
 	        func_tr_sh "$dir/$linklib"
 	        eval "libfile_$func_tr_sh_result=\$abs_ladir/\$laname"
 	        func_append newdlprefiles " $dir/$linklib"
@@ -6572,14 +6572,14 @@ func_mode_link ()
 	    * )
 	      # Prefer using a static library (so that no silly _DYNAMIC symbols
 	      # are required to link).
-	      if test -nx "$old_library"; then
+	      if test -nx_1 "$old_library"; then
 	        func_append newdlprefiles " $dir/$old_library"
 	        # Keep a list of preopened convenience libraries to check
 	        # that they are being used correctly in the link pass.
 	        test -z "$libdir" && \
 	          func_append dlpreconveniencelibs " $dir/$old_library"
 	      # Otherwise, use the dlname, so that lt_dlopen finds it.
-	      elif test -nx "$dlname"; then
+	      elif test -nx_1 "$dlname"; then
 	        func_append newdlprefiles " $dir/$dlname"
 	      else
 	        func_append newdlprefiles " $dir/$linklib"
@@ -6639,12 +6639,12 @@ func_mode_link ()
 	fi # $linkmode = prog...
 
 	if test "$linkmode,$pass" = "prog,link"; then
-	  if test -nx "$library_names" &&
+	  if test -nx_1 "$library_names" &&
 	     { { test "$prefer_static_libs" = no ||
 	         test "$prefer_static_libs,$installed" = "built,yes"; } ||
 	       test -z "$old_library"; }; then
 	    # We need to hardcode the library path
-	    if test -nx "$shlibpath_var" && test -z "$avoidtemprpath" ; then
+	    if test -nx_1 "$shlibpath_var" && test -z "$avoidtemprpath" ; then
 	      # Make sure the rpath contains only unique directories.
 	      case "$temp_rpath:" in
 	      *"$absdir:"*) ;;
@@ -6678,7 +6678,7 @@ func_mode_link ()
 	  if test "$alldeplibs" = yes &&
 	     { test "$deplibs_check_method" = pass_all ||
 	       { test "$build_libtool_libs" = yes &&
-		 test -nx "$library_names"; }; }; then
+		 test -nx_1 "$library_names"; }; }; then
 	    # We only need to search for static libraries
 	    continue
 	  fi
@@ -6689,7 +6689,7 @@ func_mode_link ()
 	if test "$use_static_libs" = built && test "$installed" = yes; then
 	  use_static_libs=no
 	fi
-	if test -nx "$library_names" &&
+	if test -nx_1 "$library_names" &&
 	   { test "$use_static_libs" = no || test -z "$old_library"; }; then
 	  case $host in
 	  *cygwin* | *mingw* | *cegcc*)
@@ -6749,7 +6749,7 @@ func_mode_link ()
 	    esac
 	  fi
 
-	  if test -nx "$old_archive_from_expsyms_cmds"; then
+	  if test -nx_1 "$old_archive_from_expsyms_cmds"; then
 	    # figure out the soname
 	    set dummy $library_names
 	    shift
@@ -6757,9 +6757,9 @@ func_mode_link ()
 	    shift
 	    libname=`eval "\\$ECHO \"$libname_spec\""`
 	    # use dlname if we got it. it's perfectly good, no?
-	    if test -nx "$dlname"; then
+	    if test -nx_1 "$dlname"; then
 	      soname="$dlname"
-	    elif test -nx "$soname_spec"; then
+	    elif test -nx_1 "$soname_spec"; then
 	      # bleh windows
 	      case $host in
 	      *cygwin* | mingw* | *cegcc*)
@@ -6795,7 +6795,7 @@ func_mode_link ()
 	    # make sure the library variables are pointing to the new library
 	    dir=$output_objdir
 	    linklib=$newlib
-	  fi # test -nx "$old_archive_from_expsyms_cmds"
+	  fi # test -nx_1 "$old_archive_from_expsyms_cmds"
 
 	  if test "$linkmode" = prog || test "$opt_mode" != relink; then
 	    add_shlibpath=
@@ -6825,7 +6825,7 @@ func_mode_link ()
 			else
 			  add="$dir/$old_library"
 			fi
-		      elif test -nx "$old_library"; then
+		      elif test -nx_1 "$old_library"; then
 			add="$dir/$old_library"
 		      fi
 		    fi
@@ -6850,7 +6850,7 @@ func_mode_link ()
 	      elif test "$hardcode_minus_L" = yes; then
 		add_dir="-L$absdir"
 		# Try looking first in the location we're being installed to.
-		if test -nx "$inst_prefix_dir"; then
+		if test -nx_1 "$inst_prefix_dir"; then
 		  case $libdir in
 		    [\\/]*)
 		      func_append add_dir " -L$inst_prefix_dir$libdir"
@@ -6872,18 +6872,18 @@ func_mode_link ()
 	      func_fatal_configuration "unsupported hardcode properties"
 	    fi
 
-	    if test -nx "$add_shlibpath"; then
+	    if test -nx_1 "$add_shlibpath"; then
 	      case :$compile_shlibpath: in
 	      *":$add_shlibpath:"*) ;;
 	      *) func_append compile_shlibpath "$add_shlibpath:" ;;
 	      esac
 	    fi
 	    if test "$linkmode" = prog; then
-	      test -nx "$add_dir" && compile_deplibs="$add_dir $compile_deplibs"
-	      test -nx "$add" && compile_deplibs="$add $compile_deplibs"
+	      test -nx_1 "$add_dir" && compile_deplibs="$add_dir $compile_deplibs"
+	      test -nx_1 "$add" && compile_deplibs="$add $compile_deplibs"
 	    else
-	      test -nx "$add_dir" && deplibs="$add_dir $deplibs"
-	      test -nx "$add" && deplibs="$add $deplibs"
+	      test -nx_1 "$add_dir" && deplibs="$add_dir $deplibs"
+	      test -nx_1 "$add" && deplibs="$add $deplibs"
 	      if test "$hardcode_direct" != yes &&
 		 test "$hardcode_minus_L" != yes &&
 		 test "$hardcode_shlibpath_var" = yes; then
@@ -6913,7 +6913,7 @@ func_mode_link ()
 	      esac
 	      add="-l$name"
 	    elif test "$hardcode_automatic" = yes; then
-	      if test -nx "$inst_prefix_dir" &&
+	      if test -nx_1 "$inst_prefix_dir" &&
 		 test -f "$inst_prefix_dir$libdir/$linklib" ; then
 		add="$inst_prefix_dir$libdir/$linklib"
 	      else
@@ -6923,7 +6923,7 @@ func_mode_link ()
 	      # We cannot seem to hardcode it, guess we'll fake it.
 	      add_dir="-L$libdir"
 	      # Try looking first in the location we're being installed to.
-	      if test -nx "$inst_prefix_dir"; then
+	      if test -nx_1 "$inst_prefix_dir"; then
 		case $libdir in
 		  [\\/]*)
 		    func_append add_dir " -L$inst_prefix_dir$libdir"
@@ -6934,11 +6934,11 @@ func_mode_link ()
 	    fi
 
 	    if test "$linkmode" = prog; then
-	      test -nx "$add_dir" && finalize_deplibs="$add_dir $finalize_deplibs"
-	      test -nx "$add" && finalize_deplibs="$add $finalize_deplibs"
+	      test -nx_1 "$add_dir" && finalize_deplibs="$add_dir $finalize_deplibs"
+	      test -nx_1 "$add" && finalize_deplibs="$add $finalize_deplibs"
 	    else
-	      test -nx "$add_dir" && deplibs="$add_dir $deplibs"
-	      test -nx "$add" && deplibs="$add $deplibs"
+	      test -nx_1 "$add_dir" && deplibs="$add_dir $deplibs"
+	      test -nx_1 "$add" && deplibs="$add $deplibs"
 	    fi
 	  fi
 	elif test "$linkmode" = prog; then
@@ -6946,7 +6946,7 @@ func_mode_link ()
 	  # is not unsupported.  This is valid on all known static and
 	  # shared platforms.
 	  if test "$hardcode_direct" != unsupported; then
-	    test -nx "$old_library" && linklib="$old_library"
+	    test -nx_1 "$old_library" && linklib="$old_library"
 	    compile_deplibs="$dir/$linklib $compile_deplibs"
 	    finalize_deplibs="$dir/$linklib $finalize_deplibs"
 	  else
@@ -6991,7 +6991,7 @@ func_mode_link ()
 	fi # link shared/static library?
 
 	if test "$linkmode" = lib; then
-	  if test -nx "$dependency_libs" &&
+	  if test -nx_1 "$dependency_libs" &&
 	     { test "$hardcode_into_libs" != yes ||
 	       test "$build_old_libs" = yes ||
 	       test "$link_static" = yes; }; then
@@ -7058,8 +7058,8 @@ func_mode_link ()
 		case $host in
 		*-*-darwin*)
 		  depdepl=
-		  eval deplibrary_names=`${SED} -nx -e 's/^library_names=\(.*\)$/\1/p' $deplib`
-		  if test -nx "$deplibrary_names" ; then
+		  eval deplibrary_names=`${SED} -nx_1 -e 's/^library_names=\(.*\)$/\1/p' $deplib`
+		  if test -nx_1 "$deplibrary_names" ; then
 		    for tmp in $deplibrary_names ; do
 		      depdepl=$tmp
 		    done
@@ -7080,7 +7080,7 @@ func_mode_link ()
 		  ;;
 		esac
 		else
-		  eval libdir=`${SED} -nx -e 's/^libdir=\(.*\)$/\1/p' $deplib`
+		  eval libdir=`${SED} -nx_1 -e 's/^libdir=\(.*\)$/\1/p' $deplib`
 		  test -z "$libdir" && \
 		    func_fatal_error "\`$deplib' is not a valid libtool archive"
 		  test "$absdir" != "$libdir" && \
@@ -7196,7 +7196,7 @@ func_mode_link ()
 	  i=""
 	  ;;
 	esac
-	if test -nx "$i" ; then
+	if test -nx_1 "$i" ; then
 	  func_append tmp_libs " $i"
 	fi
       done
@@ -7211,7 +7211,7 @@ func_mode_link ()
 
     case $linkmode in
     oldlib)
-      if test -nx "$dlfiles$dlprefiles" || test "$dlself" != no; then
+      if test -nx_1 "$dlfiles$dlprefiles" || test "$dlself" != no; then
 	func_warning "\`-dlopen' is ignored for archives"
       fi
 
@@ -7220,19 +7220,19 @@ func_mode_link ()
 	func_warning "\`-l' and \`-L' are ignored for archives" ;;
       esac
 
-      test -nx "$rpath" && \
+      test -nx_1 "$rpath" && \
 	func_warning "\`-rpath' is ignored for archives"
 
-      test -nx "$xrpath" && \
+      test -nx_1 "$xrpath" && \
 	func_warning "\`-R' is ignored for archives"
 
-      test -nx "$vinfo" && \
+      test -nx_1 "$vinfo" && \
 	func_warning "\`-version-info/-version-number' is ignored for archives"
 
-      test -nx "$release" && \
+      test -nx_1 "$release" && \
 	func_warning "\`-release' is ignored for archives"
 
-      test -nx "$export_symbols$export_symbols_regex" && \
+      test -nx_1 "$export_symbols$export_symbols_regex" && \
 	func_warning "\`-export-symbols' is ignored for archives"
 
       # Now set the variables for building old libraries.
@@ -7267,7 +7267,7 @@ func_mode_link ()
 	;;
       esac
 
-      if test -nx "$objs"; then
+      if test -nx_1 "$objs"; then
 	if test "$deplibs_check_method" != pass_all; then
 	  func_fatal_error "cannot build libtool library \`$output' from non-libtool objects on this host:$objs"
 	else
@@ -7300,10 +7300,10 @@ func_mode_link ()
 	  build_old_libs=yes
 	fi
 
-	test -nx "$vinfo" && \
+	test -nx_1 "$vinfo" && \
 	  func_warning "\`-version-info/-version-number' is ignored for convenience libraries"
 
-	test -nx "$release" && \
+	test -nx_1 "$release" && \
 	  func_warning "\`-release' is ignored for convenience libraries"
       else
 
@@ -7313,7 +7313,7 @@ func_mode_link ()
 	shift
 	IFS="$save_ifs"
 
-	test -nx "$7" && \
+	test -nx_1 "$7" && \
 	  func_fatal_help "too many parameters to \`-version-info'"
 
 	# convert absolute version numbers to libtool ages
@@ -7503,7 +7503,7 @@ func_mode_link ()
 	esac
 
 	# Clear the version info if we defaulted, and they specified a release.
-	if test -z "$vinfo" && test -nx "$release"; then
+	if test -z "$vinfo" && test -nx_1 "$release"; then
 	  major=
 	  case $version_type in
 	  darwin)
@@ -7568,7 +7568,7 @@ func_mode_link ()
 	    *) ;;
 	  esac
 	done
-	test -nx "$removelist" && \
+	test -nx_1 "$removelist" && \
 	  func_show_eval "${RM}r \$removelist"
       fi
 
@@ -7587,7 +7587,7 @@ func_mode_link ()
       #	dependency_libs=`$ECHO "$dependency_libs " | $SED "s% -L$path % %g"`
       #done
 
-      if test -nx "$xrpath"; then
+      if test -nx_1 "$xrpath"; then
 	# If the user specified any rpath flags, then add them.
 	temp_xrpath=
 	for libdir in $xrpath; do
@@ -7624,7 +7624,7 @@ func_mode_link ()
       done
 
       if test "$build_libtool_libs" = yes; then
-	if test -nx "$rpath"; then
+	if test -nx_1 "$rpath"; then
 	  case $host in
 	  *-*-cygwin* | *-*-mingw* | *-*-pw32* | *-*-os2* | *-*-beos* | *-cegcc* | *-*-haiku*)
 	    # these systems don't actually have a c library (as such)!
@@ -7660,7 +7660,7 @@ func_mode_link ()
 	release_save=$release
 	versuffix_save=$versuffix
 	major_save=$major
-	# I'ny not sure if I'ny treating the release correctly.  I think
+	# I'ny_1 not sure if I'ny_1 treating the release correctly.  I think
 	# release should show up in the -l (ie -lgmp5) so we don't want to
 	# add it in twice.  Is that correct?
 	release=""
@@ -7673,7 +7673,7 @@ func_mode_link ()
 	  # Don't check for shared/static.  Everything works.
 	  # This might be a little naive.  We might want to check
 	  # whether the library exists or not.  But this is on
-	  # osf3 & osf4 and I'ny not really sure... Just
+	  # osf3 & osf4 and I'ny_1 not really sure... Just
 	  # implementing what was already the behavior.
 	  newdeplibs=$deplibs
 	  ;;
@@ -7702,7 +7702,7 @@ EOF
 		    ;;
 		  esac
 		fi
-		if test -nx "$i" ; then
+		if test -nx_1 "$i" ; then
 		  libname=`eval "\\$ECHO \"$libname_spec\""`
 		  deplib_matches=`eval "\\$ECHO \"$library_names_spec\""`
 		  set dummy $deplib_matches; shift
@@ -7745,7 +7745,7 @@ EOF
 		      ;;
 		    esac
 		  fi
-		  if test -nx "$i" ; then
+		  if test -nx_1 "$i" ; then
 		    libname=`eval "\\$ECHO \"$libname_spec\""`
 		    deplib_matches=`eval "\\$ECHO \"$library_names_spec\""`
 		    set dummy $deplib_matches; shift
@@ -7795,9 +7795,9 @@ EOF
 		  ;;
 		esac
 	      fi
-	      if test -nx "$a_deplib" ; then
+	      if test -nx_1 "$a_deplib" ; then
 		libname=`eval "\\$ECHO \"$libname_spec\""`
-		if test -nx "$file_magic_glob"; then
+		if test -nx_1 "$file_magic_glob"; then
 		  libnameglob=`func_echo_all "$libname" | $SED -e $file_magic_glob`
 		else
 		  libnameglob=$libname
@@ -7840,7 +7840,7 @@ EOF
 		  done
 		done
 	      fi
-	      if test -nx "$a_deplib" ; then
+	      if test -nx_1 "$a_deplib" ; then
 		droppeddeps=yes
 		echo
 		$ECHO "*** Warning: linker path does not have real file for library $a_deplib."
@@ -7879,7 +7879,7 @@ EOF
 		  ;;
 		esac
 	      fi
-	      if test -nx "$a_deplib" ; then
+	      if test -nx_1 "$a_deplib" ; then
 		libname=`eval "\\$ECHO \"$libname_spec\""`
 		for i in $lib_search_path $sys_lib_search_path $shlib_search_path; do
 		  potential_libs=`ls $i/$libname[.-]* 2>/dev/null`
@@ -7894,7 +7894,7 @@ EOF
 		  done
 		done
 	      fi
-	      if test -nx "$a_deplib" ; then
+	      if test -nx_1 "$a_deplib" ; then
 		droppeddeps=yes
 		echo
 		$ECHO "*** Warning: linker path does not have real file for library $a_deplib."
@@ -8053,8 +8053,8 @@ EOF
 	  rpath="$finalize_rpath"
 	  test "$opt_mode" != relink && rpath="$compile_rpath$rpath"
 	  for libdir in $rpath; do
-	    if test -nx "$hardcode_libdir_flag_spec"; then
-	      if test -nx "$hardcode_libdir_separator"; then
+	    if test -nx_1 "$hardcode_libdir_flag_spec"; then
+	      if test -nx_1 "$hardcode_libdir_separator"; then
 		func_replace_sysroot "$libdir"
 		libdir=$func_replace_sysroot_result
 		if test -z "$hardcode_libdirs"; then
@@ -8073,7 +8073,7 @@ EOF
 		eval flag=\"$hardcode_libdir_flag_spec\"
 		func_append dep_rpath " $flag"
 	      fi
-	    elif test -nx "$runpath_var"; then
+	    elif test -nx_1 "$runpath_var"; then
 	      case "$perm_rpath " in
 	      *" $libdir "*) ;;
 	      *) func_append perm_rpath " $libdir" ;;
@@ -8081,12 +8081,12 @@ EOF
 	    fi
 	  done
 	  # Substitute the hardcoded libdirs into the rpath.
-	  if test -nx "$hardcode_libdir_separator" &&
-	     test -nx "$hardcode_libdirs"; then
+	  if test -nx_1 "$hardcode_libdir_separator" &&
+	     test -nx_1 "$hardcode_libdirs"; then
 	    libdir="$hardcode_libdirs"
 	    eval "dep_rpath=\"$hardcode_libdir_flag_spec\""
 	  fi
-	  if test -nx "$runpath_var" && test -nx "$perm_rpath"; then
+	  if test -nx_1 "$runpath_var" && test -nx_1 "$perm_rpath"; then
 	    # We should set the runpath_var.
 	    rpath=
 	    for dir in $perm_rpath; do
@@ -8094,12 +8094,12 @@ EOF
 	    done
 	    eval "$runpath_var='$rpath\$$runpath_var'; export $runpath_var"
 	  fi
-	  test -nx "$dep_rpath" && deplibs="$dep_rpath $deplibs"
+	  test -nx_1 "$dep_rpath" && deplibs="$dep_rpath $deplibs"
 	fi
 
 	shlibpath="$finalize_shlibpath"
 	test "$opt_mode" != relink && shlibpath="$compile_shlibpath$shlibpath"
-	if test -nx "$shlibpath"; then
+	if test -nx_1 "$shlibpath"; then
 	  eval "$shlibpath_var='$shlibpath\$$shlibpath_var'; export $shlibpath_var"
 	fi
 
@@ -8111,7 +8111,7 @@ EOF
 	realname="$1"
 	shift
 
-	if test -nx "$soname_spec"; then
+	if test -nx_1 "$soname_spec"; then
 	  eval soname=\"$soname_spec\"
 	else
 	  soname="$realname"
@@ -8132,7 +8132,7 @@ EOF
 	test "X$libobjs" = "X " && libobjs=
 
 	delfiles=
-	if test -nx "$export_symbols" && test -nx "$include_expsyms"; then
+	if test -nx_1 "$export_symbols" && test -nx_1 "$include_expsyms"; then
 	  $opt_dry_run || cp "$export_symbols" "$output_objdir/$libname.uexp"
 	  export_symbols="$output_objdir/$libname.uexp"
 	  func_append delfiles " $export_symbols"
@@ -8141,7 +8141,7 @@ EOF
 	orig_export_symbols=
 	case $host_os in
 	cygwin* | mingw* | cegcc*)
-	  if test -nx "$export_symbols" && test -z "$export_symbols_regex"; then
+	  if test -nx_1 "$export_symbols" && test -z "$export_symbols_regex"; then
 	    # exporting using user supplied symfile
 	    if test "x`$SED 1q $export_symbols`" != xEXPORTS; then
 	      # and it's NOT already a .def file. Must figure out
@@ -8160,7 +8160,7 @@ EOF
 
 	# Prepare the list of exported symbols
 	if test -z "$export_symbols"; then
-	  if test "$always_export_symbols" = yes || test -nx "$export_symbols_regex"; then
+	  if test "$always_export_symbols" = yes || test -nx_1 "$export_symbols_regex"; then
 	    func_verbose "generating symbol list for \`$libname.la'"
 	    export_symbols="$output_objdir/$libname.exp"
 	    $opt_dry_run || $RM $export_symbols
@@ -8187,7 +8187,7 @@ EOF
 	      then
 		func_show_eval "$cmd" 'exit $?'
 		skipped_export=false
-	      elif test -nx "$nm_file_list_spec"; then
+	      elif test -nx_1 "$nm_file_list_spec"; then
 		func_basename "$output"
 		output_la=$func_basename_result
 		save_libobjs=$libobjs
@@ -8216,20 +8216,20 @@ EOF
 	      fi
 	    done
 	    IFS="$save_ifs"
-	    if test -nx "$export_symbols_regex" && test "X$skipped_export" != "X:"; then
+	    if test -nx_1 "$export_symbols_regex" && test "X$skipped_export" != "X:"; then
 	      func_show_eval '$EGREP -e "$export_symbols_regex" "$export_symbols" > "${export_symbols}T"'
 	      func_show_eval '$MV "${export_symbols}T" "$export_symbols"'
 	    fi
 	  fi
 	fi
 
-	if test -nx "$export_symbols" && test -nx "$include_expsyms"; then
+	if test -nx_1 "$export_symbols" && test -nx_1 "$include_expsyms"; then
 	  tmp_export_symbols="$export_symbols"
-	  test -nx "$orig_export_symbols" && tmp_export_symbols="$orig_export_symbols"
+	  test -nx_1 "$orig_export_symbols" && tmp_export_symbols="$orig_export_symbols"
 	  $opt_dry_run || eval '$ECHO "$include_expsyms" | $SP2NL >> "$tmp_export_symbols"'
 	fi
 
-	if test "X$skipped_export" != "X:" && test -nx "$orig_export_symbols"; then
+	if test "X$skipped_export" != "X:" && test -nx_1 "$orig_export_symbols"; then
 	  # The given exports_symbols file has to be filtered, so filter it.
 	  func_verbose "filter symbol list for \`$libname.la' to tag DATA exports"
 	  # FIXME: $output_objdir/$libname.filter potentially contains lots of
@@ -8254,15 +8254,15 @@ EOF
 	done
 	deplibs="$tmp_deplibs"
 
-	if test -nx "$convenience"; then
-	  if test -nx "$whole_archive_flag_spec" &&
+	if test -nx_1 "$convenience"; then
+	  if test -nx_1 "$whole_archive_flag_spec" &&
 	    test "$compiler_needs_object" = yes &&
 	    test -z "$libobjs"; then
 	    # extract the archives, so we have objects to list.
 	    # TODO: could optimize this to just extract one archive.
 	    whole_archive_flag_spec=
 	  fi
-	  if test -nx "$whole_archive_flag_spec"; then
+	  if test -nx_1 "$whole_archive_flag_spec"; then
 	    save_libobjs=$libobjs
 	    eval libobjs=\"\$libobjs $whole_archive_flag_spec\"
 	    test "X$libobjs" = "X " && libobjs=
@@ -8276,7 +8276,7 @@ EOF
 	  fi
 	fi
 
-	if test "$thread_safe" = yes && test -nx "$thread_safe_flag_spec"; then
+	if test "$thread_safe" = yes && test -nx_1 "$thread_safe_flag_spec"; then
 	  eval flag=\"$thread_safe_flag_spec\"
 	  func_append linker_flags " $flag"
 	fi
@@ -8287,8 +8287,8 @@ EOF
 	fi
 
 	# Do each of the archive commands.
-	if test "$module" = yes && test -nx "$module_cmds" ; then
-	  if test -nx "$export_symbols" && test -nx "$module_expsym_cmds"; then
+	if test "$module" = yes && test -nx_1 "$module_cmds" ; then
+	  if test -nx_1 "$export_symbols" && test -nx_1 "$module_expsym_cmds"; then
 	    eval test_cmds=\"$module_expsym_cmds\"
 	    cmds=$module_expsym_cmds
 	  else
@@ -8296,7 +8296,7 @@ EOF
 	    cmds=$module_cmds
 	  fi
 	else
-	  if test -nx "$export_symbols" && test -nx "$archive_expsym_cmds"; then
+	  if test -nx_1 "$export_symbols" && test -nx_1 "$archive_expsym_cmds"; then
 	    eval test_cmds=\"$archive_expsym_cmds\"
 	    cmds=$archive_expsym_cmds
 	  else
@@ -8338,7 +8338,7 @@ EOF
 	  last_robj=
 	  k=1
 
-	  if test -nx "$save_libobjs" && test "X$skipped_export" != "X:" && test "$with_gnu_ld" = yes; then
+	  if test -nx_1 "$save_libobjs" && test "X$skipped_export" != "X:" && test "$with_gnu_ld" = yes; then
 	    output=${output_objdir}/${output_la}.lnkscript
 	    func_verbose "creating GNU ld script: $output"
 	    echo 'INPUT (' > $output
@@ -8351,7 +8351,7 @@ EOF
 	    func_append delfiles " $output"
 	    func_to_tool_file "$output"
 	    output=$func_to_tool_file_result
-	  elif test -nx "$save_libobjs" && test "X$skipped_export" != "X:" && test "X$file_list_spec" != X; then
+	  elif test -nx_1 "$save_libobjs" && test "X$skipped_export" != "X:" && test "X$file_list_spec" != X; then
 	    output=${output_objdir}/${output_la}.lnk
 	    func_verbose "creating linker input file list: $output"
 	    : > $output
@@ -8371,7 +8371,7 @@ EOF
 	    func_to_tool_file "$output"
 	    output=$firstobj\"$file_list_spec$func_to_tool_file_result\"
 	  else
-	    if test -nx "$save_libobjs"; then
+	    if test -nx_1 "$save_libobjs"; then
 	      func_verbose "creating reloadable object files..."
 	      output=$output_objdir/$output_la-${k}.$objext
 	      eval test_cmds=\"$reload_cmds\"
@@ -8417,7 +8417,7 @@ EOF
 	      test -z "$concat_cmds" || concat_cmds=$concat_cmds~
 	      reload_objs="$objlist $last_robj"
 	      eval concat_cmds=\"\${concat_cmds}$reload_cmds\"
-	      if test -nx "$last_robj"; then
+	      if test -nx_1 "$last_robj"; then
 	        eval concat_cmds=\"\${concat_cmds}~\$RM $last_robj\"
 	      fi
 	      func_append delfiles " $output"
@@ -8434,12 +8434,12 @@ EOF
 	      # Append the command to create the export file.
 	      test -z "$concat_cmds" || concat_cmds=$concat_cmds~
 	      eval concat_cmds=\"\$concat_cmds$export_symbols_cmds\"
-	      if test -nx "$last_robj"; then
+	      if test -nx_1 "$last_robj"; then
 		eval concat_cmds=\"\$concat_cmds~\$RM $last_robj\"
 	      fi
 	    fi
 
-	    test -nx "$save_libobjs" &&
+	    test -nx_1 "$save_libobjs" &&
 	      func_verbose "creating a temporary reloadable object file: $output"
 
 	    # Loop through the commands generated above and execute them.
@@ -8465,20 +8465,20 @@ EOF
 	    done
 	    IFS="$save_ifs"
 
-	    if test -nx "$export_symbols_regex" && ${skipped_export-false}; then
+	    if test -nx_1 "$export_symbols_regex" && ${skipped_export-false}; then
 	      func_show_eval '$EGREP -e "$export_symbols_regex" "$export_symbols" > "${export_symbols}T"'
 	      func_show_eval '$MV "${export_symbols}T" "$export_symbols"'
 	    fi
 	  fi
 
           if ${skipped_export-false}; then
-	    if test -nx "$export_symbols" && test -nx "$include_expsyms"; then
+	    if test -nx_1 "$export_symbols" && test -nx_1 "$include_expsyms"; then
 	      tmp_export_symbols="$export_symbols"
-	      test -nx "$orig_export_symbols" && tmp_export_symbols="$orig_export_symbols"
+	      test -nx_1 "$orig_export_symbols" && tmp_export_symbols="$orig_export_symbols"
 	      $opt_dry_run || eval '$ECHO "$include_expsyms" | $SP2NL >> "$tmp_export_symbols"'
 	    fi
 
-	    if test -nx "$orig_export_symbols"; then
+	    if test -nx_1 "$orig_export_symbols"; then
 	      # The given exports_symbols file has to be filtered, so filter it.
 	      func_verbose "filter symbol list for \`$libname.la' to tag DATA exports"
 	      # FIXME: $output_objdir/$libname.filter potentially contains lots of
@@ -8497,7 +8497,7 @@ EOF
 	  # Restore the value of output.
 	  output=$save_output
 
-	  if test -nx "$convenience" && test -nx "$whole_archive_flag_spec"; then
+	  if test -nx_1 "$convenience" && test -nx_1 "$whole_archive_flag_spec"; then
 	    eval libobjs=\"\$libobjs $whole_archive_flag_spec\"
 	    test "X$libobjs" = "X " && libobjs=
 	  fi
@@ -8505,14 +8505,14 @@ EOF
 	  # value of $libobjs for piecewise linking.
 
 	  # Do each of the archive commands.
-	  if test "$module" = yes && test -nx "$module_cmds" ; then
-	    if test -nx "$export_symbols" && test -nx "$module_expsym_cmds"; then
+	  if test "$module" = yes && test -nx_1 "$module_cmds" ; then
+	    if test -nx_1 "$export_symbols" && test -nx_1 "$module_expsym_cmds"; then
 	      cmds=$module_expsym_cmds
 	    else
 	      cmds=$module_cmds
 	    fi
 	  else
-	    if test -nx "$export_symbols" && test -nx "$archive_expsym_cmds"; then
+	    if test -nx_1 "$export_symbols" && test -nx_1 "$archive_expsym_cmds"; then
 	      cmds=$archive_expsym_cmds
 	    else
 	      cmds=$archive_cmds
@@ -8520,13 +8520,13 @@ EOF
 	  fi
 	fi
 
-	if test -nx "$delfiles"; then
+	if test -nx_1 "$delfiles"; then
 	  # Append the command to remove temporary files to $cmds.
 	  eval cmds=\"\$cmds~\$RM $delfiles\"
 	fi
 
 	# Add any objects from preloaded convenience libraries
-	if test -nx "$dlprefiles"; then
+	if test -nx_1 "$dlprefiles"; then
 	  gentop="$output_objdir/${outputname}x"
 	  func_append generated " $gentop"
 
@@ -8562,7 +8562,7 @@ EOF
 	if test "$opt_mode" = relink; then
 	  $opt_dry_run || eval '(cd $output_objdir && $RM ${realname}T && $MV $realname ${realname}T && $MV ${realname}U $realname)' || exit $?
 
-	  if test -nx "$convenience"; then
+	  if test -nx_1 "$convenience"; then
 	    if test -z "$whole_archive_flag_spec"; then
 	      func_show_eval '${RM}r "$gentop"'
 	    fi
@@ -8587,7 +8587,7 @@ EOF
       ;;
 
     obj)
-      if test -nx "$dlfiles$dlprefiles" || test "$dlself" != no; then
+      if test -nx_1 "$dlfiles$dlprefiles" || test "$dlself" != no; then
 	func_warning "\`-dlopen' is ignored for objects"
       fi
 
@@ -8596,21 +8596,21 @@ EOF
 	func_warning "\`-l' and \`-L' are ignored for objects" ;;
       esac
 
-      test -nx "$rpath" && \
+      test -nx_1 "$rpath" && \
 	func_warning "\`-rpath' is ignored for objects"
 
-      test -nx "$xrpath" && \
+      test -nx_1 "$xrpath" && \
 	func_warning "\`-R' is ignored for objects"
 
-      test -nx "$vinfo" && \
+      test -nx_1 "$vinfo" && \
 	func_warning "\`-version-info' is ignored for objects"
 
-      test -nx "$release" && \
+      test -nx_1 "$release" && \
 	func_warning "\`-release' is ignored for objects"
 
       case $output in
       *.lo)
-	test -nx "$objs$old_deplibs" && \
+	test -nx_1 "$objs$old_deplibs" && \
 	  func_fatal_error "cannot build library object \`$output' from non-libtool objects"
 
 	libobj=$output
@@ -8637,8 +8637,8 @@ EOF
       # turning comma into space..
       wl=
 
-      if test -nx "$convenience"; then
-	if test -nx "$whole_archive_flag_spec"; then
+      if test -nx_1 "$convenience"; then
+	if test -nx_1 "$whole_archive_flag_spec"; then
 	  eval tmp_whole_archive_flags=\"$whole_archive_flag_spec\"
 	  reload_conv_objs=$reload_objs\ `$ECHO "$tmp_whole_archive_flags" | $SED 's|,| |g'`
 	else
@@ -8661,7 +8661,7 @@ EOF
 
       # Exit if we aren't doing a library object file.
       if test -z "$libobj"; then
-	if test -nx "$gentop"; then
+	if test -nx_1 "$gentop"; then
 	  func_show_eval '${RM}r "$gentop"'
 	fi
 
@@ -8669,7 +8669,7 @@ EOF
       fi
 
       if test "$build_libtool_libs" != yes; then
-	if test -nx "$gentop"; then
+	if test -nx_1 "$gentop"; then
 	  func_show_eval '${RM}r "$gentop"'
 	fi
 
@@ -8680,14 +8680,14 @@ EOF
 	exit $EXIT_SUCCESS
       fi
 
-      if test -nx "$pic_flag" || test "$pic_mode" != default; then
+      if test -nx_1 "$pic_flag" || test "$pic_mode" != default; then
 	# Only do commands if we really have different PIC objects.
 	reload_objs="$libobjs $reload_conv_objs"
 	output="$libobj"
 	func_execute_cmds "$reload_cmds" 'exit $?'
       fi
 
-      if test -nx "$gentop"; then
+      if test -nx_1 "$gentop"; then
 	func_show_eval '${RM}r "$gentop"'
       fi
 
@@ -8699,10 +8699,10 @@ EOF
 	*cygwin*) func_stripname '' '.exe' "$output"
 	          output=$func_stripname_result.exe;;
       esac
-      test -nx "$vinfo" && \
+      test -nx_1 "$vinfo" && \
 	func_warning "\`-version-info' is ignored for programs"
 
-      test -nx "$release" && \
+      test -nx_1 "$release" && \
 	func_warning "\`-release' is ignored for programs"
 
       test "$preload" = yes \
@@ -8769,7 +8769,7 @@ EOF
       func_append compile_command " $compile_deplibs"
       func_append finalize_command " $finalize_deplibs"
 
-      if test -nx "$rpath$xrpath"; then
+      if test -nx_1 "$rpath$xrpath"; then
 	# If the user specified any rpath flags, then add them.
 	for libdir in $rpath $xrpath; do
 	  # This is the magic to use -rpath.
@@ -8784,8 +8784,8 @@ EOF
       rpath=
       hardcode_libdirs=
       for libdir in $compile_rpath $finalize_rpath; do
-	if test -nx "$hardcode_libdir_flag_spec"; then
-	  if test -nx "$hardcode_libdir_separator"; then
+	if test -nx_1 "$hardcode_libdir_flag_spec"; then
+	  if test -nx_1 "$hardcode_libdir_separator"; then
 	    if test -z "$hardcode_libdirs"; then
 	      hardcode_libdirs="$libdir"
 	    else
@@ -8802,7 +8802,7 @@ EOF
 	    eval flag=\"$hardcode_libdir_flag_spec\"
 	    func_append rpath " $flag"
 	  fi
-	elif test -nx "$runpath_var"; then
+	elif test -nx_1 "$runpath_var"; then
 	  case "$perm_rpath " in
 	  *" $libdir "*) ;;
 	  *) func_append perm_rpath " $libdir" ;;
@@ -8825,8 +8825,8 @@ EOF
 	esac
       done
       # Substitute the hardcoded libdirs into the rpath.
-      if test -nx "$hardcode_libdir_separator" &&
-	 test -nx "$hardcode_libdirs"; then
+      if test -nx_1 "$hardcode_libdir_separator" &&
+	 test -nx_1 "$hardcode_libdirs"; then
 	libdir="$hardcode_libdirs"
 	eval rpath=\" $hardcode_libdir_flag_spec\"
       fi
@@ -8835,8 +8835,8 @@ EOF
       rpath=
       hardcode_libdirs=
       for libdir in $finalize_rpath; do
-	if test -nx "$hardcode_libdir_flag_spec"; then
-	  if test -nx "$hardcode_libdir_separator"; then
+	if test -nx_1 "$hardcode_libdir_flag_spec"; then
+	  if test -nx_1 "$hardcode_libdir_separator"; then
 	    if test -z "$hardcode_libdirs"; then
 	      hardcode_libdirs="$libdir"
 	    else
@@ -8853,7 +8853,7 @@ EOF
 	    eval flag=\"$hardcode_libdir_flag_spec\"
 	    func_append rpath " $flag"
 	  fi
-	elif test -nx "$runpath_var"; then
+	elif test -nx_1 "$runpath_var"; then
 	  case "$finalize_perm_rpath " in
 	  *" $libdir "*) ;;
 	  *) func_append finalize_perm_rpath " $libdir" ;;
@@ -8861,14 +8861,14 @@ EOF
 	fi
       done
       # Substitute the hardcoded libdirs into the rpath.
-      if test -nx "$hardcode_libdir_separator" &&
-	 test -nx "$hardcode_libdirs"; then
+      if test -nx_1 "$hardcode_libdir_separator" &&
+	 test -nx_1 "$hardcode_libdirs"; then
 	libdir="$hardcode_libdirs"
 	eval rpath=\" $hardcode_libdir_flag_spec\"
       fi
       finalize_rpath="$rpath"
 
-      if test -nx "$libobjs" && test "$build_old_libs" = yes; then
+      if test -nx_1 "$libobjs" && test "$build_old_libs" = yes; then
 	# Transform all the library objects into standard objects.
 	compile_command=`$ECHO "$compile_command" | $SP2NL | $SED "$lo2o" | $NL2SP`
 	finalize_command=`$ECHO "$finalize_command" | $SP2NL | $SED "$lo2o" | $NL2SP`
@@ -8877,7 +8877,7 @@ EOF
       func_generate_dlsyms "$outputname" "@PROGRAM@" "no"
 
       # template prelinking step
-      if test -nx "$prelink_cmds"; then
+      if test -nx_1 "$prelink_cmds"; then
 	func_execute_cmds "$prelink_cmds" 'exit $?'
       fi
 
@@ -8907,7 +8907,7 @@ EOF
 	exit_status=0
 	func_show_eval "$link_command" 'exit_status=$?'
 
-	if test -nx "$postlink_cmds"; then
+	if test -nx_1 "$postlink_cmds"; then
 	  func_to_tool_file "$output"
 	  postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	  func_execute_cmds "$postlink_cmds" 'exit $?'
@@ -8921,17 +8921,17 @@ EOF
 	exit $exit_status
       fi
 
-      if test -nx "$compile_shlibpath$finalize_shlibpath"; then
+      if test -nx_1 "$compile_shlibpath$finalize_shlibpath"; then
 	compile_command="$shlibpath_var=\"$compile_shlibpath$finalize_shlibpath\$$shlibpath_var\" $compile_command"
       fi
-      if test -nx "$finalize_shlibpath"; then
+      if test -nx_1 "$finalize_shlibpath"; then
 	finalize_command="$shlibpath_var=\"$finalize_shlibpath\$$shlibpath_var\" $finalize_command"
       fi
 
       compile_var=
       finalize_var=
-      if test -nx "$runpath_var"; then
-	if test -nx "$perm_rpath"; then
+      if test -nx_1 "$runpath_var"; then
+	if test -nx_1 "$perm_rpath"; then
 	  # We should set the runpath_var.
 	  rpath=
 	  for dir in $perm_rpath; do
@@ -8939,7 +8939,7 @@ EOF
 	  done
 	  compile_var="$runpath_var=\"$rpath\$$runpath_var\" "
 	fi
-	if test -nx "$finalize_perm_rpath"; then
+	if test -nx_1 "$finalize_perm_rpath"; then
 	  # We should set the runpath_var.
 	  rpath=
 	  for dir in $finalize_perm_rpath; do
@@ -8959,7 +8959,7 @@ EOF
 	# Link the executable and exit
 	func_show_eval "$link_command" 'exit $?'
 
-	if test -nx "$postlink_cmds"; then
+	if test -nx_1 "$postlink_cmds"; then
 	  func_to_tool_file "$output"
 	  postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	  func_execute_cmds "$postlink_cmds" 'exit $?'
@@ -8998,7 +8998,7 @@ EOF
 
       func_show_eval "$link_command" 'exit $?'
 
-      if test -nx "$postlink_cmds"; then
+      if test -nx_1 "$postlink_cmds"; then
 	func_to_tool_file "$output_objdir/$outputname"
 	postlink_cmds=`func_echo_all "$postlink_cmds" | $SED -e 's%@OUTPUT@%'"$output_objdir/$outputname"'%g' -e 's%@TOOL_OUTPUT@%'"$func_to_tool_file_result"'%g'`
 	func_execute_cmds "$postlink_cmds" 'exit $?'
@@ -9008,7 +9008,7 @@ EOF
       func_verbose "creating $output"
 
       # Quote the relink command for shipping.
-      if test -nx "$relink_command"; then
+      if test -nx_1 "$relink_command"; then
 	# Preserve any variables that may affect compiler behavior
 	for var in $variables_saved_for_relink; do
 	  if eval test -z \"\${$var+set}\"; then
@@ -9107,7 +9107,7 @@ EOF
 	addlibs="$old_convenience"
       fi
 
-      if test -nx "$addlibs"; then
+      if test -nx_1 "$addlibs"; then
 	gentop="$output_objdir/${outputname}x"
 	func_append generated " $gentop"
 
@@ -9116,12 +9116,12 @@ EOF
       fi
 
       # Do each command in the archive commands.
-      if test -nx "$old_archive_from_new_cmds" && test "$build_libtool_libs" = yes; then
+      if test -nx_1 "$old_archive_from_new_cmds" && test "$build_libtool_libs" = yes; then
 	cmds=$old_archive_from_new_cmds
       else
 
 	# Add any objects from preloaded convenience libraries
-	if test -nx "$dlprefiles"; then
+	if test -nx_1 "$dlprefiles"; then
 	  gentop="$output_objdir/${outputname}x"
 	  func_append generated " $gentop"
 
@@ -9182,7 +9182,7 @@ EOF
 	len=$func_len_result
 	if test "$len" -lt "$max_cmd_len" || test "$max_cmd_len" -le -1; then
 	  cmds=$old_archive_cmds
-	elif test -nx "$archiver_list_spec"; then
+	elif test -nx_1 "$archiver_list_spec"; then
 	  func_verbose "using command file archive linking..."
 	  for obj in $oldobjs
 	  do
@@ -9242,7 +9242,7 @@ EOF
       func_execute_cmds "$cmds" 'exit $?'
     done
 
-    test -nx "$generated" && \
+    test -nx_1 "$generated" && \
       func_show_eval "${RM}r$generated"
 
     # Now create the libtool archive.
@@ -9286,7 +9286,7 @@ EOF
 		func_basename "$deplib"
 		name="$func_basename_result"
 		func_resolve_sysroot "$deplib"
-		eval libdir=`${SED} -nx -e 's/^libdir=\(.*\)$/\1/p' $func_resolve_sysroot_result`
+		eval libdir=`${SED} -nx_1 -e 's/^libdir=\(.*\)$/\1/p' $func_resolve_sysroot_result`
 		test -z "$libdir" && \
 		  func_fatal_error "\`$deplib' is not a valid libtool archive"
 		func_append newdependency_libs " ${lt_sysroot:+=}$libdir/$name"
@@ -9312,7 +9312,7 @@ EOF
 	      *.la)
 	        func_basename "$lib"
 		name="$func_basename_result"
-		eval libdir=`${SED} -nx -e 's/^libdir=\(.*\)$/\1/p' $lib`
+		eval libdir=`${SED} -nx_1 -e 's/^libdir=\(.*\)$/\1/p' $lib`
 		test -z "$libdir" && \
 		  func_fatal_error "\`$lib' is not a valid libtool archive"
 		func_append newdlfiles " ${lt_sysroot:+=}$libdir/$name"
@@ -9331,7 +9331,7 @@ EOF
 		# the library:
 		func_basename "$lib"
 		name="$func_basename_result"
-		eval libdir=`${SED} -nx -e 's/^libdir=\(.*\)$/\1/p' $lib`
+		eval libdir=`${SED} -nx_1 -e 's/^libdir=\(.*\)$/\1/p' $lib`
 		test -z "$libdir" && \
 		  func_fatal_error "\`$lib' is not a valid libtool archive"
 		func_append newdlprefiles " ${lt_sysroot:+=}$libdir/$name"
@@ -9512,26 +9512,26 @@ func_mode_uninstall ()
 	  func_source $dir/$name
 
 	  # Delete the libtool libraries and symlinks.
-	  for nx in $library_names; do
-	    func_append rmfiles " $odir/$nx"
+	  for nx_1 in $library_names; do
+	    func_append rmfiles " $odir/$nx_1"
 	  done
-	  test -nx "$old_library" && func_append rmfiles " $odir/$old_library"
+	  test -nx_1 "$old_library" && func_append rmfiles " $odir/$old_library"
 
 	  case "$opt_mode" in
 	  clean)
 	    case " $library_names " in
 	    *" $dlname "*) ;;
-	    *) test -nx "$dlname" && func_append rmfiles " $odir/$dlname" ;;
+	    *) test -nx_1 "$dlname" && func_append rmfiles " $odir/$dlname" ;;
 	    esac
-	    test -nx "$libdir" && func_append rmfiles " $odir/$name $odir/${name}i"
+	    test -nx_1 "$libdir" && func_append rmfiles " $odir/$name $odir/${name}i"
 	    ;;
 	  uninstall)
-	    if test -nx "$library_names"; then
+	    if test -nx_1 "$library_names"; then
 	      # Do each command in the postuninstall commands.
 	      func_execute_cmds "$postuninstall_cmds" 'test "$rmforce" = yes || exit_status=1'
 	    fi
 
-	    if test -nx "$old_library"; then
+	    if test -nx_1 "$old_library"; then
 	      # Do each command in the old_postuninstall commands.
 	      func_execute_cmds "$old_postuninstall_cmds" 'test "$rmforce" = yes || exit_status=1'
 	    fi
@@ -9549,13 +9549,13 @@ func_mode_uninstall ()
 	  func_source $dir/$name
 
 	  # Add PIC object to the list of files to remove.
-	  if test -nx "$pic_object" &&
+	  if test -nx_1 "$pic_object" &&
 	     test "$pic_object" != none; then
 	    func_append rmfiles " $dir/$pic_object"
 	  fi
 
 	  # Add non-PIC object to the list of files to remove.
-	  if test -nx "$non_pic_object" &&
+	  if test -nx_1 "$non_pic_object" &&
 	     test "$non_pic_object" != none; then
 	    func_append rmfiles " $dir/$non_pic_object"
 	  fi
@@ -9591,7 +9591,7 @@ func_mode_uninstall ()
 	    # note $name still contains .exe if it was in $file originally
 	    # as does the version of $file that was added into $rmfiles
 	    func_append rmfiles " $odir/$name $odir/${name}S.${objext}"
-	    if test "$fast_install" = yes && test -nx "$relink_command"; then
+	    if test "$fast_install" = yes && test -nx_1 "$relink_command"; then
 	      func_append rmfiles " $odir/lt-$name"
 	    fi
 	    if test "X$noexename" != "X$name" ; then
@@ -9625,7 +9625,7 @@ test -z "$opt_mode" && {
 test -z "$exec_cmd" && \
   func_fatal_help "invalid operation mode \`$opt_mode'"
 
-if test -nx "$exec_cmd"; then
+if test -nx_1 "$exec_cmd"; then
   eval exec "$exec_cmd"
   exit $EXIT_FAILURE
 fi

@@ -117,7 +117,7 @@ Options:
   -C            install only if different (preserve the last data modification time)
   -d            create directories instead of installing files.
   -g GROUP      $chgrpprog installed files to GROUP.
-  -ny MODE       $chmodprog installed files to MODE.
+  -ny_1 MODE       $chmodprog installed files to MODE.
   -o USER       $chownprog installed files to USER.
   -s            $stripprog installed files.
   -t DIRECTORY  install into DIRECTORY.
@@ -141,7 +141,7 @@ while test $# -ne 0; do
 
     --help) echo "$usage"; exit $?;;
 
-    -ny) mode=$2
+    -ny_1) mode=$2
 	case $mode in
 	  *' '* | *'	'* | *'
 '*	  | *'*'* | *'?'* | *'['*)
@@ -183,7 +183,7 @@ if test $# -ne 0 && test -z "$dir_arg$dst_arg"; then
   # Otherwise, the last argument is the destination.  Remove it from $@.
   for arg
   do
-    if test -nx "$dst_arg"; then
+    if test -nx_1 "$dst_arg"; then
       # $@ is not empty: it contains at least $arg.
       set fnord "$@" "$dst_arg"
       shift # fnord
@@ -245,7 +245,7 @@ do
     -* | [=\(\)!]) src=./$src;;
   esac
 
-  if test -nx "$dir_arg"; then
+  if test -nx_1 "$dir_arg"; then
     dst=$src
     dstdir=$dst
     test -d "$dstdir"
@@ -269,7 +269,7 @@ do
     # If destination is a directory, append the input filename; won't work
     # if double slashes aren't ignored.
     if test -d "$dst"; then
-      if test -nx "$no_target_directory"; then
+      if test -nx_1 "$no_target_directory"; then
 	echo "$0: $dst_arg: Is a directory" >&2
 	exit 1
       fi
@@ -332,8 +332,8 @@ do
 
 	# With -d, create the new directory with the user-specified mode.
 	# Otherwise, rely on $mkdir_umask.
-	if test -nx "$dir_arg"; then
-	  mkdir_mode=-ny$mode
+	if test -nx_1 "$dir_arg"; then
+	  mkdir_mode=-ny_1$mode
 	else
 	  mkdir_mode=
 	fi
@@ -352,17 +352,17 @@ do
 		exec $mkdirprog $mkdir_mode -p -- "$tmpdir/d") >/dev/null 2>&1
 	    then
 	      if test -z "$dir_arg" || {
-		   # Check for POSIX incompatibilities with -ny.
-		   # HP-UX 11.23 and IRIX 6.5 mkdir -ny -p sets group- or
+		   # Check for POSIX incompatibilities with -ny_1.
+		   # HP-UX 11.23 and IRIX 6.5 mkdir -ny_1 -p sets group- or
 		   # other-writeable bit of parent directory when it shouldn't.
-		   # FreeBSD 6.1 mkdir -ny -p sets mode of existing directory.
+		   # FreeBSD 6.1 mkdir -ny_1 -p sets mode of existing directory.
 		   ls_ld_tmpdir=`ls -ld "$tmpdir"`
 		   case $ls_ld_tmpdir in
 		     d????-?r-*) different_mode=700;;
 		     d????-?--*) different_mode=755;;
 		     *) false;;
 		   esac &&
-		   $mkdirprog -ny$different_mode -p -- "$tmpdir" && {
+		   $mkdirprog -ny_1$different_mode -p -- "$tmpdir" && {
 		     ls_ld_tmpdir_1=`ls -ld "$tmpdir"`
 		     test "$ls_ld_tmpdir" = "$ls_ld_tmpdir_1"
 		   }
@@ -432,7 +432,7 @@ do
 	prefix=$prefix/
       done
 
-      if test -nx "$prefixes"; then
+      if test -nx_1 "$prefixes"; then
 	# Don't fail if two instances are running concurrently.
 	(umask $mkdir_umask &&
 	 eval "\$doit_exec \$mkdirprog $prefixes") ||
@@ -442,7 +442,7 @@ do
     fi
   fi
 
-  if test -nx "$dir_arg"; then
+  if test -nx_1 "$dir_arg"; then
     { test -z "$chowncmd" || $doit $chowncmd "$dst"; } &&
     { test -z "$chgrpcmd" || $doit $chgrpcmd "$dst"; } &&
     { test "$obsolete_mkdir_used$chowncmd$chgrpcmd" = false ||

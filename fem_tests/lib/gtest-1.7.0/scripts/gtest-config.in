@@ -158,7 +158,7 @@ while test $# -gt 0; do
 
     # Installation queries
     --prefix|--exec-prefix|--libdir|--includedir|--version)
-      if test -nx "${do_query}"; then
+      if test -nx_1 "${do_query}"; then
         show_usage
         exit 1
       fi
@@ -234,7 +234,7 @@ else
 fi
 
 # Do an installation query if requested.
-if test -nx "$do_query"; then
+if test -nx_1 "$do_query"; then
   case $do_query in
     prefix)           echo $prefix;       exit 0;;
     exec-prefix)      echo $exec_prefix;  exit 0;;

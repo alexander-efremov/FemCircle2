@@ -27,17 +27,20 @@ class VertexPropertyWriter {
 public:
     VertexPropertyWriter(const Graph &g) : _g(g) {}
 
-    template<class T1>
-    void operator()(std::ostream &out, const T1 &v) const {
+    template<class T>
+    void operator()(std::ostream &out, const T &v) const {
         auto t = _g.m_property.get();
-        int x = v % t->nx;
-        int y = v / t->ny;
+        int px = v % t->nx_1;
+        int py = v / t->ny_1;
+        int x = _g.m_vertices[v].m_property.m_i;
+        int y = _g.m_vertices[v].m_property.m_j;
+        double value = _g.m_vertices[v].m_property.m_value;
         out << " ["
             << " shape=point"
-            << " xlabel=\"(" << x << "," << y << "," << _g.m_vertices[v].m_property.m_value <<")\""
-            << "pos=\"" << x << "," << t->ny - y << "!\""
-            << (is_corner_node(x, y, t->nx, t->ny) ? " fillcolor=\"red\" style=\"filled\"" : "")
-            << (is_border_node(x, y, t->nx, t->ny) ? " fillcolor=\"blue\" style=\"filled\"" : "")
+            << " xlabel=\"(" << x << "," << y << "," << value <<")\""
+            << "pos=\"" << px << "," << t->ny_1 - py << "!\""
+            << (is_corner_node(px, py, t->nx_1, t->ny_1) ? " fillcolor=\"red\" style=\"filled\"" : "")
+            << (is_border_node(px, py, t->nx_1, t->ny_1) ? " fillcolor=\"blue\" style=\"filled\"" : "")
             << "]";
     }
 
@@ -58,7 +61,6 @@ void print_graph(const char *filename, const Graph &g) {
     write_graphviz(out, g, VertexPropertyWriter(g), default_writer(), GraphPropertyWriter());
     out.close();
 }
-// nx = NX_1, ny = NY_1
 
 Graph *create_graph_as_grid(
         unsigned int nx_1,
@@ -86,10 +88,15 @@ Graph *create_graph_as_grid(
                                                     ideal_square_size_nx,ideal_square_size_ny, current_tl));
     for (int i = 0; i < nx_1; ++i) {
         int stride = i * nx_1;
+        pair<detail::adj_list_gen<boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, VertexPropertyDouble, boost::no_property, GraphProperty>, boost::vecS, boost::vecS, boost::undirectedS, VertexPropertyDouble, boost::no_property, GraphProperty, boost::listS>::config::edge_descriptor, bool> e;
         for (int j = 0; j < ny_1 - 1; ++j) {
-            auto e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), *g);
+            e = add_edge((unsigned long long int) (j + stride), (unsigned long long int) (j + stride + 1), *g);
             g->m_vertices[e.first.m_source].m_property.m_value = defaultValue;
+            g->m_vertices[e.first.m_source].m_property.m_i = i;
+            g->m_vertices[e.first.m_source].m_property.m_j = j;
         }
+        g->m_vertices[e.first.m_target].m_property.m_i = i;
+        g->m_vertices[e.first.m_target].m_property.m_j = ny_1 - 1;
     }
 
     for (int j = 0; j < ny_1 - 1; ++j) {
@@ -104,8 +111,8 @@ Graph *create_graph_as_grid(
 double calc_graph_sum(const Graph &g, bool isAbs) {
     double res = 0.;
     GraphProperty *gp = g.m_property.get();
-    int nx = gp->nx;
-    int ny = gp->ny;
+    int nx = gp->nx_1;
+    int ny = gp->ny_1;
     for (int i = 0; i < nx; i++) {
         for (int j = 0; j < ny; j++) {
             double t = g.m_vertices[i * ny + j].m_property.m_value;

@@ -436,12 +436,12 @@ msvc7)
   # name when reading, but also accumulates all include files in the
   # hold buffer in order to output them again at the end.  This only
   # works with sed implementations that can handle large buffers.
-  sed < "$tmpdepfile" -nx '
+  sed < "$tmpdepfile" -nx_1 '
 /^Note: including file:  *\(.*\)/ {
   s//\1/
   s/\\/\\\\/g
   p
-}' | $cygpath_u | sort -u | sed -nx '
+}' | $cygpath_u | sort -u | sed -nx_1 '
 s/ /\\ /g
 s/\(.*\)/	\1 \\/p
 s/.\(.*\) \\/\1:/
@@ -603,7 +603,7 @@ cpp)
   done
 
   "$@" -E |
-    sed -nx -e '/^# [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' \
+    sed -nx_1 -e '/^# [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' \
        -e '/^#line [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' |
     sed '$ s: \\$::' > "$tmpdepfile"
   rm -f "$depfile"
@@ -649,12 +649,12 @@ msvisualcpp)
     esac
   done
   "$@" -E 2>/dev/null |
-  sed -nx '/^#line [0-9][0-9]* "\([^"]*\)"/ s::\1:p' | $cygpath_u | sort -u > "$tmpdepfile"
+  sed -nx_1 '/^#line [0-9][0-9]* "\([^"]*\)"/ s::\1:p' | $cygpath_u | sort -u > "$tmpdepfile"
   rm -f "$depfile"
   echo "$object : \\" > "$depfile"
-  sed < "$tmpdepfile" -nx -e 's% %\\ %g' -e '/^\(.*\)$/ s::	\1 \\:p' >> "$depfile"
+  sed < "$tmpdepfile" -nx_1 -e 's% %\\ %g' -e '/^\(.*\)$/ s::	\1 \\:p' >> "$depfile"
   echo "	" >> "$depfile"
-  sed < "$tmpdepfile" -nx -e 's% %\\ %g' -e '/^\(.*\)$/ s::\1\::p' >> "$depfile"
+  sed < "$tmpdepfile" -nx_1 -e 's% %\\ %g' -e '/^\(.*\)$/ s::\1\::p' >> "$depfile"
   rm -f "$tmpdepfile"
   ;;
 

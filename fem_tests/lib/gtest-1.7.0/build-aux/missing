@@ -161,7 +161,7 @@ WARNING: \`$1' is $msg.  You should only need it if
          you modified \`acconfig.h' or \`${configure_ac}'.  You might want
          to install the \`Autoconf' and \`GNU m4' packages.  Grab them
          from any GNU archive site."
-    files=`sed -nx 's/^[ ]*A[CM]_CONFIG_HEADER(\([^)]*\)).*/\1/p' ${configure_ac}`
+    files=`sed -nx_1 's/^[ ]*A[CM]_CONFIG_HEADER(\([^)]*\)).*/\1/p' ${configure_ac}`
     test -z "$files" && files="config.h"
     touch_files=
     for f in $files; do
@@ -193,8 +193,8 @@ WARNING: \`$1' is needed, but is $msg.
          You can get \`$1' as part of \`Autoconf' from any GNU
          archive site."
 
-    file=`echo "$*" | sed -nx "$sed_output"`
-    test -z "$file" && file=`echo "$*" | sed -nx "$sed_minuso"`
+    file=`echo "$*" | sed -nx_1 "$sed_output"`
+    test -z "$file" && file=`echo "$*" | sed -nx_1 "$sed_minuso"`
     if test -f "$file"; then
 	touch $file
     else
@@ -268,8 +268,8 @@ WARNING: \`$1' is $msg.  You should only need it if
 	 \`Help2man' package in order for those modifications to take
 	 effect.  You can get \`Help2man' from any GNU archive site."
 
-    file=`echo "$*" | sed -nx "$sed_output"`
-    test -z "$file" && file=`echo "$*" | sed -nx "$sed_minuso"`
+    file=`echo "$*" | sed -nx_1 "$sed_output"`
+    test -z "$file" && file=`echo "$*" | sed -nx_1 "$sed_minuso"`
     if test -f "$file"; then
 	touch $file
     else
@@ -288,12 +288,12 @@ WARNING: \`$1' is $msg.  You should only need it if
          DU, IRIX).  You might want to install the \`Texinfo' package or
          the \`GNU make' package.  Grab either from any GNU archive site."
     # The file to touch is that specified with -o ...
-    file=`echo "$*" | sed -nx "$sed_output"`
-    test -z "$file" && file=`echo "$*" | sed -nx "$sed_minuso"`
+    file=`echo "$*" | sed -nx_1 "$sed_output"`
+    test -z "$file" && file=`echo "$*" | sed -nx_1 "$sed_minuso"`
     if test -z "$file"; then
       # ... or it is the one specified with @setfilename ...
       infile=`echo "$*" | sed 's/.* \([^ ]*\) *$/\1/'`
-      file=`sed -nx '
+      file=`sed -nx_1 '
 	/^@setfilename/{
 	  s/.* \([^ ]*\) *$/\1/
 	  p

@@ -1,5 +1,5 @@
 $$ -*- mode: c++; -*-
-$var nx = 50  $$ Maximum length of Values arguments we want to support.
+$var nx_1 = 50  $$ Maximum length of Values arguments we want to support.
 $var maxtuple = 10  $$ Maximum number of Combine arguments we want to support.
 // Copyright 2008, Google Inc.
 // All rights reserved.
@@ -341,9 +341,9 @@ internal::ParamGenerator<typename Container::value_type> ValuesIn(
 //
 // INSTANTIATE_TEST_CASE_P(FloatingNumbers, BazTest, Values(1, 2, 3.5));
 //
-// Currently, Values() supports from 1 to $nx parameters.
+// Currently, Values() supports from 1 to $nx_1 parameters.
 //
-$range i 1..nx
+$range i 1..nx_1
 $for i [[
 $range j 1..i
 

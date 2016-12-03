@@ -201,7 +201,7 @@ void run_solver_2(unsigned int d) {
     U = 1.;
     V = 1.;
     TAU = 1.e-3;
-    TIME_STEP_CNT = 5;
+    TIME_STEP_CNT = 1;
     APPROX_TYPE = 1;
     NX = d;
     NY = d;
@@ -241,7 +241,8 @@ void run_solver_2(unsigned int d) {
 //    double y0 = get_center_y();
 //    print_surface("exact", NX, NY, HX, HY, 0, A, C, x0, y0, TAU, U, V, exact0);
 //    print_surface("exact", NX, NY, HX, HY, TIME_STEP_CNT, A, C, x0, y0, TAU, U, V, exactT);
-
+    print_graph("grid_sol.dot", *density);
+    generate_png("grid_sol.dot", "grid_sol.png");
     delete density;
 //    delete exact0;
 //    delete exactT;
@@ -301,34 +302,33 @@ TEST_F(FemFixture, graph) {
     delete g;
 }
 
-using namespace boost;
-
-template<typename TGraph>
-class bfs_solver_visitor : public default_bfs_visitor {
-public:
-    bfs_solver_visitor(TGraph& g) : _g(g) {}
-
-    template<typename Vertex>
-    void discover_vertex(Vertex u, const TGraph &g) const {
-        _g.m_vertices[u].m_property.m_value = 99;
-    }
-private:
-    TGraph& _g;
-};
-
-
-TEST_F(FemFixture, graph_bfs) {
-    using namespace boost;
-    double d = 10.;
-    NX = (unsigned int) d;
-    NY = (unsigned int) d;
-    NX_1 = NX + 1;
-    NY_1 = NY + 1;
-    XY = NX_1 * NY_1;
-    auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, IDEAL_SQ_SIZE_X, IDEAL_SQ_SIZE_Y, 1);
-    auto &gr = *g;
-    breadth_first_search(gr, vertex(0, gr), visitor(bfs_solver_visitor<Graph>(gr)));
-    print_graph("graph_bfs.dot", gr);
-    generate_png("graph_bfs.dot", "graph_bfs.png");
-    delete g;
-}
+//using namespace boost;
+//
+//template<typename TGraph>
+//class bfs_solver_visitor : public default_bfs_visitor {
+//public:
+//    bfs_solver_visitor(TGraph& g) : _g(g) {}
+//
+//    template<typename Vertex>
+//    void discover_vertex(Vertex u, const TGraph &g) const {
+//        _g.m_vertices[u].m_property.m_value = 99;
+//    }
+//private:
+//    TGraph& _g;
+//};
+//
+//TEST_F(FemFixture, graph_bfs) {
+//    using namespace boost;
+//    double d = 10.;
+//    NX = (unsigned int) d;
+//    NY = (unsigned int) d;
+//    NX_1 = NX + 1;
+//    NY_1 = NY + 1;
+//    XY = NX_1 * NY_1;
+//    auto *g = create_graph_as_grid(NX_1, NY_1, A, B, C, D, V, U, TAU, R_LVL, HX_SMALLEST, HY_SMALLEST, HX, HY, IDEAL_SQ_SIZE_X, IDEAL_SQ_SIZE_Y, 1);
+//    auto &gr = *g;
+//    breadth_first_search(gr, vertex(0, gr), visitor(bfs_solver_visitor<Graph>(gr)));
+//    print_graph("graph_bfs.dot", gr);
+//    generate_png("graph_bfs.dot", "graph_bfs.png");
+//    delete g;
+//}

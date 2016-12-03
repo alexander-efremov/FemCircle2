@@ -861,7 +861,7 @@ case $basic_machine in
 		basic_machine=v70-nec
 		os=-sysv
 		;;
-	next | ny*-next )
+	next | ny_1*-next )
 		basic_machine=m68k-next
 		case $os in
 		    -nextstep* )

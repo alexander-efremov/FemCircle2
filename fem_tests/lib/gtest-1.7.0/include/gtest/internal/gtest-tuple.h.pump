@@ -1,5 +1,5 @@
 $$ -*- mode: c++; -*-
-$var nx = 10  $$ Maximum number of tuple fields we want to support.
+$var nx_1 = 10  $$ Maximum number of tuple fields we want to support.
 $$ This meta comment fixes auto-indentation in Emacs. }}
 // Copyright 2009 Google Inc.
 // All Rights Reserved.
@@ -48,29 +48,29 @@ $$ This meta comment fixes auto-indentation in Emacs. }}
 # define GTEST_DECLARE_TUPLE_AS_FRIEND_ public:
 #else
 # define GTEST_DECLARE_TUPLE_AS_FRIEND_ \
-    template <GTEST_$(nx)_TYPENAMES_(U)> friend class tuple; \
+    template <GTEST_$(nx_1)_TYPENAMES_(U)> friend class tuple; \
    private:
 #endif
 
 
-$range i 0..nx-1
-$range j 0..nx
-$range k 1..nx
-// GTEST_n_TUPLE_(T) is the type of an nx-tuple.
+$range i 0..nx_1-1
+$range j 0..nx_1
+$range k 1..nx_1
+// GTEST_n_TUPLE_(T) is the type of an nx_1-tuple.
 #define GTEST_0_TUPLE_(T) tuple<>
 
 $for k [[
-$range ny 0..k-1
-$range m2 k..nx-1
-#define GTEST_$(k)_TUPLE_(T) tuple<$for ny, [[T##$ny]]$for m2 [[, void]]>
+$range ny_1 0..k-1
+$range m2 k..nx_1-1
+#define GTEST_$(k)_TUPLE_(T) tuple<$for ny_1, [[T##$ny_1]]$for m2 [[, void]]>
 
 ]]
 
-// GTEST_n_TYPENAMES_(T) declares a list of nx typenames.
+// GTEST_n_TYPENAMES_(T) declares a list of nx_1 typenames.
 
 $for j [[
-$range ny 0..j-1
-#define GTEST_$(j)_TYPENAMES_(T) $for ny, [[typename T##$ny]]
+$range ny_1 0..j-1
+#define GTEST_$(j)_TYPENAMES_(T) $for ny_1, [[typename T##$ny_1]]
 
 
 ]]
@@ -117,8 +117,8 @@ struct TupleElement;
 
 
 $for i [[
-template <GTEST_$(nx)_TYPENAMES_(T)>
-struct TupleElement<true, $i, GTEST_$(nx)_TUPLE_(T) > {
+template <GTEST_$(nx_1)_TYPENAMES_(T)>
+struct TupleElement<true, $i, GTEST_$(nx_1)_TUPLE_(T) > {
   typedef T$i type;
 };
 
@@ -136,21 +136,21 @@ class tuple<> {
 
 
 $for k [[
-$range ny 0..k-1
+$range ny_1 0..k-1
 template <GTEST_$(k)_TYPENAMES_(T)>
-class $if k < nx [[GTEST_$(k)_TUPLE_(T)]] $else [[tuple]] {
+class $if k < nx_1 [[GTEST_$(k)_TUPLE_(T)]] $else [[tuple]] {
  public:
   template <int k> friend class gtest_internal::Get;
 
-  tuple() : $for ny, [[f$(ny)_()]] {}
+  tuple() : $for ny_1, [[f$(ny_1)_()]] {}
 
-  explicit tuple($for ny, [[GTEST_BY_REF_(T$ny) f$ny]]) : [[]]
-$for ny, [[f$(ny)_(f$ny)]] {}
+  explicit tuple($for ny_1, [[GTEST_BY_REF_(T$ny_1) f$ny_1]]) : [[]]
+$for ny_1, [[f$(ny_1)_(f$ny_1)]] {}
 
-  tuple(const tuple& t) : $for ny, [[f$(ny)_(t.f$(ny)_)]] {}
+  tuple(const tuple& t) : $for ny_1, [[f$(ny_1)_(t.f$(ny_1)_)]] {}
 
   template <GTEST_$(k)_TYPENAMES_(U)>
-  tuple(const GTEST_$(k)_TUPLE_(U)& t) : $for ny, [[f$(ny)_(t.f$(ny)_)]] {}
+  tuple(const GTEST_$(k)_TUPLE_(U)& t) : $for ny_1, [[f$(ny_1)_(t.f$(ny_1)_)]] {}
 
 $if k == 2 [[
   template <typename U0, typename U1>
@@ -180,16 +180,16 @@ $if k == 2 [[
   template <GTEST_$(k)_TYPENAMES_(U)>
   tuple& CopyFrom(const GTEST_$(k)_TUPLE_(U)& t) {
 
-$for ny [[
-    f$(ny)_ = t.f$(ny)_;
+$for ny_1 [[
+    f$(ny_1)_ = t.f$(ny_1)_;
 
 ]]
     return *this;
   }
 
 
-$for ny [[
-  T$ny f$(ny)_;
+$for ny_1 [[
+  T$ny_1 f$(ny_1)_;
 
 ]]
 };
@@ -205,11 +205,11 @@ $for ny [[
 inline tuple<> make_tuple() { return tuple<>(); }
 
 $for k [[
-$range ny 0..k-1
+$range ny_1 0..k-1
 
 template <GTEST_$(k)_TYPENAMES_(T)>
-inline GTEST_$(k)_TUPLE_(T) make_tuple($for ny, [[const T$ny& f$ny]]) {
-  return GTEST_$(k)_TUPLE_(T)($for ny, [[f$ny]]);
+inline GTEST_$(k)_TUPLE_(T) make_tuple($for ny_1, [[const T$ny_1& f$ny_1]]) {
+  return GTEST_$(k)_TUPLE_(T)($for ny_1, [[f$ny_1]]);
 }
 
 ]]
@@ -257,15 +257,15 @@ class Get<$i> {
 ]]
 }  // namespace gtest_internal
 
-template <int k, GTEST_$(nx)_TYPENAMES_(T)>
-GTEST_ADD_REF_(GTEST_TUPLE_ELEMENT_(k, GTEST_$(nx)_TUPLE_(T)))
-get(GTEST_$(nx)_TUPLE_(T)& t) {
+template <int k, GTEST_$(nx_1)_TYPENAMES_(T)>
+GTEST_ADD_REF_(GTEST_TUPLE_ELEMENT_(k, GTEST_$(nx_1)_TUPLE_(T)))
+get(GTEST_$(nx_1)_TUPLE_(T)& t) {
   return gtest_internal::Get<k>::Field(t);
 }
 
-template <int k, GTEST_$(nx)_TYPENAMES_(T)>
-GTEST_BY_REF_(GTEST_TUPLE_ELEMENT_(k,  GTEST_$(nx)_TUPLE_(T)))
-get(const GTEST_$(nx)_TUPLE_(T)& t) {
+template <int k, GTEST_$(nx_1)_TYPENAMES_(T)>
+GTEST_BY_REF_(GTEST_TUPLE_ELEMENT_(k,  GTEST_$(nx_1)_TUPLE_(T)))
+get(const GTEST_$(nx_1)_TUPLE_(T)& t) {
   return gtest_internal::Get<k>::ConstField(t);
 }
 
@@ -301,17 +301,17 @@ struct SameSizeTuplePrefixComparator<k, k> {
 
 }  // namespace gtest_internal
 
-template <GTEST_$(nx)_TYPENAMES_(T), GTEST_$(nx)_TYPENAMES_(U)>
-inline bool operator==(const GTEST_$(nx)_TUPLE_(T)& t,
-                       const GTEST_$(nx)_TUPLE_(U)& u) {
+template <GTEST_$(nx_1)_TYPENAMES_(T), GTEST_$(nx_1)_TYPENAMES_(U)>
+inline bool operator==(const GTEST_$(nx_1)_TUPLE_(T)& t,
+                       const GTEST_$(nx_1)_TUPLE_(U)& u) {
   return gtest_internal::SameSizeTuplePrefixComparator<
-      tuple_size<GTEST_$(nx)_TUPLE_(T) >::value,
-      tuple_size<GTEST_$(nx)_TUPLE_(U) >::value>::Eq(t, u);
+      tuple_size<GTEST_$(nx_1)_TUPLE_(T) >::value,
+      tuple_size<GTEST_$(nx_1)_TUPLE_(U) >::value>::Eq(t, u);
 }
 
-template <GTEST_$(nx)_TYPENAMES_(T), GTEST_$(nx)_TYPENAMES_(U)>
-inline bool operator!=(const GTEST_$(nx)_TUPLE_(T)& t,
-                       const GTEST_$(nx)_TUPLE_(U)& u) { return !(t == u); }
+template <GTEST_$(nx_1)_TYPENAMES_(T), GTEST_$(nx_1)_TYPENAMES_(U)>
+inline bool operator!=(const GTEST_$(nx_1)_TUPLE_(T)& t,
+                       const GTEST_$(nx_1)_TUPLE_(U)& u) { return !(t == u); }
 
 // 6.1.4 Pairs.
 // Unimplemented.
