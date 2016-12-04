@@ -11,6 +11,7 @@
     <excludeRoots>
       <file path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles" />
       <file path="$PROJECT_DIR$/cmake-build-default/CMakeFiles" />
+      <file path="$PROJECT_DIR$/cmake-build-release/CMakeFiles" />
       <file path="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles" />
       <file path="$PROJECT_DIR$/fem/libs" />
       <file path="$PROJECT_DIR$/libs" />
