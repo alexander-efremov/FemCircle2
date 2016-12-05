@@ -37,7 +37,7 @@ public:
         double value = _g.m_vertices[v].m_property.m_value;
         out << " ["
             << " shape=point"
-            << " xlabel=\"(" << x << "," << y << "," << value <<")\""
+            << " xlabel=\"(" << x << "," << y << "," << value << ")\""
             << "pos=\"" << px << "," << t->ny_1 - py << "!\""
             << (is_corner_node(px, py, t->nx_1, t->ny_1) ? " fillcolor=\"red\" style=\"filled\"" : "")
             << (is_border_node(px, py, t->nx_1, t->ny_1) ? " fillcolor=\"blue\" style=\"filled\"" : "")
@@ -62,6 +62,14 @@ void print_graph(const char *filename, const Graph &g) {
     out.close();
 }
 
+Graph *create_graph_as_grid(const Graph &graph, double defaultValue) {
+    GraphProperty *gp = graph.m_property.get();
+    return create_graph_as_grid(gp->nx_1, gp->ny_1, gp->a, gp->b, gp->c, gp->d, gp->v, gp->u, gp->tau, gp->r_lvl,
+                                gp->hx_min, gp->hy_min, gp->hx, gp->hy, gp->ideal_square_size_nx,
+                                gp->ideal_square_size_ny,
+                                defaultValue);
+}
+
 Graph *create_graph_as_grid(
         unsigned int nx_1,
         unsigned int ny_1,
@@ -79,13 +87,12 @@ Graph *create_graph_as_grid(
         double hy,
         unsigned int ideal_square_size_nx,
         unsigned int ideal_square_size_ny,
-        unsigned int current_tl,
         double defaultValue) {
     assert(nx_1 > 0);
     assert(ny_1 > 0);
 
     Graph *g = new Graph(nx_1 * ny_1, GraphProperty(nx_1, ny_1, a, b, c, d, u, v, tau, r_lvl, hx_min, hy_min, hx, hy,
-                                                    ideal_square_size_nx,ideal_square_size_ny, current_tl));
+                                                    ideal_square_size_nx, ideal_square_size_ny));
     for (int i = 0; i < nx_1; ++i) {
         int stride = i * nx_1;
         pair<detail::adj_list_gen<boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, VertexPropertyDouble, boost::no_property, GraphProperty>, boost::vecS, boost::vecS, boost::undirectedS, VertexPropertyDouble, boost::no_property, GraphProperty, boost::listS>::config::edge_descriptor, bool> e;
