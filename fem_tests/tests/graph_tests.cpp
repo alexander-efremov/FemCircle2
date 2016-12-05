@@ -62,7 +62,6 @@ typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, boos
 
 void TestCopy(const MyGraph &g) {
     MyGraph copiedMyGraph = g;
-    // Set the 10th edge of the copied MyGraph to invisible
     unsigned int counter = 0;
     auto copyIter = boost::edges(copiedMyGraph);
     for (auto it = copyIter.first; it != copyIter.second; ++it) {

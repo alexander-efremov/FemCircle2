@@ -8,10 +8,10 @@
 using namespace boost;
 
 struct VertexPropertyDouble {
-    double m_value = 1000;
+    double m_value;
     int m_i;
     int m_j;
-    int m_level = 0;
+    int m_level;
 
     bool IsInnerPoint(int nx1, int ny1) {
         return !IsCornerPoint(nx1, ny1) && !IsBorderPoint(nx1, ny1);

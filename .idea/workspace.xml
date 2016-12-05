@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
       <config projectName="fem_circle" targetName="gtest" />
       <config projectName="fem_circle" targetName="fem" />
@@ -9,21 +9,18 @@
       <config projectName="fem_circle" targetName="gtest_main" />
     </generated>
   </component>
-  <component name="CMakeSettings">
-    <configurations>
-      <configuration CONFIG_NAME="Release" />
-    </configurations>
+  <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
+    <ADDITIONAL_GENERATION_ENVIRONMENT>
+      <envs />
+    </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88c6cf85-5bb3-471f-bccc-1bf7ae36cb16" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/common.h" afterPath="$PROJECT_DIR$/fem/common.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.cpp" afterPath="$PROJECT_DIR$/fem/graphs.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/consts.cpp" afterPath="$PROJECT_DIR$/fem/consts.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/graphs.h" afterPath="$PROJECT_DIR$/fem/graphs.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem/solver2.cpp" afterPath="$PROJECT_DIR$/fem/solver2.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt" afterPath="$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" afterPath="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp" afterPath="$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp" />
     </list>
     <ignored path="fem_circle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,8 +43,8 @@
       <file leaf-file-name="tests.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fem_tests/tests/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
+            <state relative-caret-position="-1798">
+              <caret line="115" column="43" selection-start-line="115" selection-start-column="43" selection-end-line="115" selection-end-column="43" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -55,110 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph_tests.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="119" column="6" lean-forward="false" selection-start-line="119" selection-start-column="6" selection-end-line="119" selection-end-column="6" />
-              <folding>
-                <element signature="e#46#64#0" expanded="true" />
-                <element signature="e#382#399#0" expanded="true" />
-                <element signature="e#508#525#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graphs.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem/graphs.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="solver2.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-133">
-              <caret line="1289" column="27" lean-forward="false" selection-start-line="1289" selection-start-column="27" selection-end-line="1289" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graph_bfs.dot" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph_bfs.dot">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graphs.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem/graphs.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="75" column="72" lean-forward="false" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="common.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem/common.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="1011" column="1" lean-forward="false" selection-start-line="1011" selection-start-column="1" selection-end-line="1011" selection-end-column="1" />
-              <folding>
-                <element signature="e#57#76#0" expanded="true" />
-                <marker date="1480942684499" expanded="true" signature="556:951" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="25657:25692" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="25723:25758" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="26017:26750" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="27006:27745" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="28007:28748" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="29013:29748" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="30008:30665" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="30925:31570" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="31830:32481" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="32741:33384" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="33657:34495" ph="{...}" />
-                <marker date="1480942684499" expanded="true" signature="34750:35512" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="11" column="57" lean-forward="false" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+            <state relative-caret-position="128">
+              <caret line="57" column="56" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -240,18 +138,19 @@
         <option value="$PROJECT_DIR$/fem/graphs.cpp" />
         <option value="$PROJECT_DIR$/fem/graphs.h" />
         <option value="$PROJECT_DIR$/fem/common.h" />
-        <option value="$PROJECT_DIR$/fem/solver2.cpp" />
         <option value="$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp" />
         <option value="$PROJECT_DIR$/fem_tests/tests/tests.cpp" />
+        <option value="$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp" />
+        <option value="$PROJECT_DIR$/fem/solver2.cpp" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1692" />
-    <option name="height" value="1017" />
+    <option name="x" value="-1" />
+    <option name="y" value="24" />
+    <option name="width" value="1682" />
+    <option name="height" value="1003" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -268,6 +167,16 @@
         </selected-state>
       </profile-state>
     </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -291,8 +200,14 @@
               <option name="myItemId" value="fem_circle" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
+              <option name="myItemId" value="fem_circle" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FemCircle2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -302,7 +217,7 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
+              <option name="myItemId" value="FemCircle2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -316,7 +231,7 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
+              <option name="myItemId" value="FemCircle2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -334,65 +249,11 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem_tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem_circle" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem_tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem_circle" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
+              <option name="myItemId" value="FemCircle2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem_circle" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FemCircle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graph" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -413,7 +274,7 @@
       <recent name="C:\Users\efremov_aa\ClionProjects\FemCircle\fem_tests\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Google Test.FemFixture.Graph">
+  <component name="RunManager" selected="Google Test.FemFixture.Test2">
     <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fem_circle" TARGET_NAME="fem_circle" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
@@ -633,9 +494,6 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="FemFixture_CopyGraph - 2016.12.05 at 20h 09m 44s.xml">
-      <configuration name="FemFixture.CopyGraph" configurationId="CMakeGoogleTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="FemFixture_Test2 - 2016.12.04 at 23h 49m 59s.xml">
       <configuration name="FemFixture.Test2" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
@@ -663,28 +521,31 @@
     <history-entry file="FemFixture_Test2 - 2016.12.05 at 18h 30m 33s.xml">
       <configuration name="FemFixture.Test2" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="FemFixture_Test2 - 2016.12.05 at 23h 40m 01s.xml">
+      <configuration name="FemFixture.Test2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1692" height="1017" extended-state="0" />
+    <frame x="-1" y="24" width="1682" height="1003" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17911354" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17863609" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3487242" sideWeight="0.48869047" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5763314" sideWeight="0.48869047" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3176856" sideWeight="0.49285713" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40393013" sideWeight="0.50595236" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37470996" sideWeight="0.4923321" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39171597" sideWeight="0.4923321" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40352812" sideWeight="0.4940476" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -755,21 +616,21 @@
     <entry file="file://$PROJECT_DIR$/fem_tests/lib/graph/include/gvcext.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+          <caret line="58" column="22" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/lib/graph/include/gvc.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
-          <caret line="48" column="9" lean-forward="false" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/lib/gtest-1.7.0/make/Makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="469">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -789,20 +650,13 @@
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/bits/stl_pair.h" />
     <entry file="file://C:/boost_1_62_0/boost/pending/property.hpp" />
     <entry file="file://C:/boost_1_62_0/boost/graph/adjacency_list.hpp" />
-    <entry file="file://$PROJECT_DIR$/fem_tests/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/tests/graphviz.py" />
     <entry file="file://$PROJECT_DIR$/fem_tests/test2/rho_init-all_nx=101_ny=101_hx=0.001111_hy=0.001111_t=0_x0=0.300000_y0=0.300000_tau=0.001000_u=1.000000_v=1.000000_a=0.000000_c=0.000000.dat" />
     <entry file="file://C:/boost_1_62_0/boost/graph/property_maps/constant_property_map.hpp" />
@@ -812,7 +666,7 @@
     <entry file="file://$PROJECT_DIR$/fem/consts.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -822,34 +676,23 @@
     <entry file="file://$PROJECT_DIR$/fem/utils.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7000">
-          <caret line="350" column="1" lean-forward="false" selection-start-line="343" selection-start-column="0" selection-end-line="350" selection-end-column="1" />
+          <caret line="350" column="1" selection-start-line="343" selection-start-column="0" selection-end-line="350" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/boost_1_62_0/boost/graph/detail/adjacency_list.hpp" />
     <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph.png" />
-    <entry file="file://$PROJECT_DIR$/fem/solver1.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fem/consts.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="860">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#79#99#0" expanded="true" />
-          </folding>
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="285">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -857,103 +700,90 @@
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph_bfs.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph_bfs.dot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/boost_1_62_0/boost/property_map/property_map.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph_bfs.png" />
+    <entry file="file://$PROJECT_DIR$/fem_tests/graph/graph_bfs.dot" />
+    <entry file="file://C:/boost_1_62_0/boost/property_map/property_map.hpp" />
     <entry file="file://$PROJECT_DIR$/fem/graphs.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="75" column="72" lean-forward="false" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
+        <state relative-caret-position="1125">
+          <caret line="75" column="72" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem/common.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="1011" column="1" lean-forward="false" selection-start-line="1011" selection-start-column="1" selection-end-line="1011" selection-end-column="1" />
+        <state relative-caret-position="15165">
+          <caret line="1011" column="1" selection-start-line="1011" selection-start-column="1" selection-end-line="1011" selection-end-column="1" />
           <folding>
             <element signature="e#57#76#0" expanded="true" />
-            <marker date="1480942684499" expanded="true" signature="556:951" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="25657:25692" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="25723:25758" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="26017:26750" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="27006:27745" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="28007:28748" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="29013:29748" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="30008:30665" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="30925:31570" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="31830:32481" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="32741:33384" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="33657:34495" ph="{...}" />
-            <marker date="1480942684499" expanded="true" signature="34750:35512" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="1289" column="27" lean-forward="false" selection-start-line="1289" selection-start-column="27" selection-end-line="1289" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem/graphs.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+        <state relative-caret-position="870">
+          <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/tests/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="11" column="57" lean-forward="false" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+        <state relative-caret-position="165">
+          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem_tests/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/tests/graph_tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="119" column="6" lean-forward="false" selection-start-line="119" selection-start-column="6" selection-end-line="119" selection-end-column="6" />
+        <state relative-caret-position="152">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
-            <element signature="e#46#64#0" expanded="true" />
-            <element signature="e#382#399#0" expanded="true" />
-            <element signature="e#508#525#0" expanded="true" />
+            <element signature="e#46#64#0" expanded="false" />
+            <element signature="e#382#399#0" expanded="false" />
+            <element signature="e#508#525#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem/solver1.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="1238" column="1" selection-start-line="1238" selection-start-column="1" selection-end-line="1238" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fem/solver2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="57" column="56" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fem_tests/tests/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
+        <state relative-caret-position="-1798">
+          <caret line="115" column="43" selection-start-line="115" selection-start-column="43" selection-end-line="115" selection-end-column="43" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
