@@ -14,7 +14,11 @@ if(OPENMP_FOUND)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-set(BOOST_ROOT "C:\\boost_1_62_0")
+if (CMAKE_HOST_WIN32)
+    set(BOOST_ROOT "C:\\boost_1_62_0")
+else()
+    set(BOOST_ROOT "/home/jane/ClionProjects/boost_1_62_0")
+endif()
 
 find_package(Boost 1.62.0)
 if(Boost_FOUND)

@@ -3,9 +3,11 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 add_definitions(-std=c++0x)
 
 
-set(BOOST_ROOT "C:\\boost_1_62_0" )
-
-link_directories(${GVZ_LIB_PATH})
+if (CMAKE_HOST_WIN32)
+    set(BOOST_ROOT "C:\\boost_1_62_0")
+else()
+    set(BOOST_ROOT "/home/jane/ClionProjects/boost_1_62_0")
+endif()
 
 set(CPP_SOURCES tests.cpp)
 add_executable(runBasicFemTests ${CPP_SOURCES})
@@ -23,15 +25,7 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
-#find_library(GRAPVIZ_GVC gvc HINTS ${GVZ_LIB_PATH})
-#find_library(GRAPVIZ_CGRAPH cgraph HINTS ${GVZ_LIB_PATH})
-#find_library(GRAPVIZ_CDT cdt HINTS ${GVZ_LIB_PATH})
-#message(WARNING "GRAPVIZ_GVC is: ${GRAPVIZ_GVC}")
-#message(WARNING "GRAPVIZ_CGRAPH is: ${GRAPVIZ_CGRAPH}")
-#message(WARNING "GRAPVIZ_CDT is: ${GRAPVIZ_CDT}")
-
 target_link_libraries(runBasicFemTests gtest gtest_main )
-#target_link_libraries(runBasicFemTests gvc )
 
 if(Boost_FOUND)
     target_link_libraries(runBasicFemTests ${Boost_LIBRARIES})
