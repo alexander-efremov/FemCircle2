@@ -14,7 +14,6 @@ Demonstration: [Simulation](https://youtu.be/F00h8x3HHhQ)
  - Set up installation folder: https://yadi.sk/i/F8vm2XmhzD694
  - Choose Japan mirror for fast installation: https://yadi.sk/i/2CS94y0xzD6GJ
  - Expand GCC node and select mark OpenMP for installation: 
- - https://yadi.sk/i/2CS94y0xzD6GJ
  - https://yadi.sk/i/2qlWNqRAzD6bd
  - Click on install button
  - Set up MinGW location in CLion. 
