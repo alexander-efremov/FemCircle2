@@ -8,7 +8,7 @@ Demonstration: [Simulation](https://youtu.be/F00h8x3HHhQ)
 # Development
 
  - Download CLion from [here](https://www.jetbrains.com/clion/) and install it.
- - Download MinGW from [here](https://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-webdl.exe/download)
+ - Download [MinGW](https://ufpr.dl.sourceforge.net/project/tdm-gcc/TDM-GCC%20Installer/tdm64-gcc-5.1.0-2.exe)
  - Click on Create of first screen: https://yadi.sk/i/PKjySVidzD5kk
  - Check 64 version: https://yadi.sk/i/TS1y-x2GzD5xk
  - Set up installation folder: https://yadi.sk/i/F8vm2XmhzD694
